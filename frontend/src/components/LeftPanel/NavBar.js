@@ -1,87 +1,114 @@
 import React from "react";
-import { IconButton } from "@mui/material";
-import { Person } from "@mui/icons-material";
+import { IconButton, Tooltip, Fade } from "@mui/material";
+import {
+  Person,
+  Apartment,
+  Public,
+  Work,
+  School,
+  EmojiEvents,
+  AutoStories,
+  Redeem,
+  ShapeLine,
+  Language,
+  OutdoorGrill,
+  Groups,
+  Handshake,
+} from "@mui/icons-material";
 
 const NavBar = () => {
   // Adding all the necessary sections in an array
   const navLinks = [
     {
       id: 1,
+      title: "Basics",
       ariaLabel: "basics",
       href: "#",
       icon: <Person />,
     },
     {
       id: 2,
-      ariaLabel: "address",
+      title: "Location",
+      ariaLabel: "location",
       href: "#",
-      icon: <Person />,
+      icon: <Apartment />,
     },
     {
       id: 3,
+      title: "Socials",
       ariaLabel: "socials",
       href: "#",
-      icon: <Person />,
+      icon: <Public />,
     },
     {
       id: 4,
+      title: "Education",
       ariaLabel: "education",
       href: "#",
-      icon: <Person />,
+      icon: <School />,
     },
     {
       id: 5,
+      title: "Work Experience",
       ariaLabel: "work-experience",
       href: "#",
-      icon: <Person />,
+      icon: <Work />,
     },
     {
       id: 6,
-      ariaLabel: "skills",
+      title: "Projects",
+      ariaLabel: "projects",
       href: "#",
-      icon: <Person />,
+      icon: <Groups />,
     },
     {
       id: 7,
-      ariaLabel: "projects",
+      title: "Skills",
+      ariaLabel: "skills",
       href: "#",
-      icon: <Person />,
+      icon: <ShapeLine />,
     },
     {
       id: 8,
+      title: "Certifications",
       ariaLabel: "certifications",
       href: "#",
-      icon: <Person />,
+      icon: <Redeem />,
     },
     {
       id: 9,
+      title: "Awards",
       ariaLabel: "awards",
       href: "#",
-      icon: <Person />,
+      icon: <EmojiEvents />,
     },
     {
       id: 10,
+      title: "Interests",
       ariaLabel: "interests",
       href: "#",
-      icon: <Person />,
+      icon: <OutdoorGrill />,
     },
     {
       id: 11,
+      title: "Languages",
       ariaLabel: "languages",
       href: "#",
-      icon: <Person />,
+      icon: <Language />,
     },
     {
       id: 12,
+      title: "Publications",
       ariaLabel: "publications",
       href: "#",
-      icon: <Person />,
+      icon: <AutoStories />,
     },
     {
       id: 13,
+      title: "References",
       ariaLabel: "references",
       href: "#",
-      icon: <Person />,
+      icon: <Handshake />,
     },
   ];
 
@@ -93,10 +120,17 @@ const NavBar = () => {
         {/* TODO:  Need to provide icons for following
         Basic details, address, social media, work ex, education, awards, publications, certifications, skills, languages, interests, projects, references */}
 
-        {navLinks.map(({ id, ariaLabel, icon }) => (
-          <IconButton key={id} aria-label={ariaLabel}>
-            {icon}
-          </IconButton>
+        {navLinks.map(({ id, title, ariaLabel, icon }) => (
+          <Tooltip
+            key={id}
+            title={title}
+            placement="right"
+            arrow
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 800 }}
+          >
+            <IconButton aria-label={ariaLabel}>{icon}</IconButton>
+          </Tooltip>
         ))}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
 
-function App() {
+const App = () => {
   return (
     /* Parent of full width and height
     Divided into 2 panels
@@ -18,6 +18,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

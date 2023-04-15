@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
+import WorkExperience from "./sections/WorkExperience";
 import Basics from "./sections/Basics";
 
 const LeftPanel = () => {
@@ -12,6 +13,7 @@ const LeftPanel = () => {
         <div className="w-full h-full overflow-y-scroll">
           {/* All resume sections go here
           Each section gets its own component. To be created in the sections folder */}
+          <WorkExperience />
           <Basics />
         </div>
       </div>

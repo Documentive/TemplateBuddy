@@ -13,7 +13,7 @@ const Basics = () => {
         </div>
         <p className="text-3xl">Personal Details</p>
       </div>
-      <IconButton component="button">
+      <IconButton component="label">
         <Tooltip title="Upload Image">
           <Avatar sx={{ width: 96, height: 96 }} />
         </Tooltip>
@@ -25,11 +25,11 @@ const Basics = () => {
       <TextField fullWidth label="Portfolio Link" />
       <TextField fullWidth label="Job Title" />
       <TextField fullWidth label="Summary" multiline rows={5} />
-      <hr className="my-3 border-red-800 w-4/5 mx-auto"/>
+      <hr className="my-3 border-red-800 w-4/5 mx-auto" />
       <Location />
-      <hr className="my-3 border-red-800 w-4/5 mx-auto"/>
+      <hr className="my-3 border-red-800 w-4/5 mx-auto" />
       <Socials />
-      <hr className="my-3 border-red-800 w-4/5 mx-auto"/>
+      <hr className="my-3 border-red-800 w-4/5 mx-auto" />
     </div>
   );
 };

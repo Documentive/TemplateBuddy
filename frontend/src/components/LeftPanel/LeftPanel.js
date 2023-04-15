@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
+import Basics from "./sections/Basics";
 
 const LeftPanel = () => {
   return (
@@ -11,7 +12,7 @@ const LeftPanel = () => {
         <div className="w-full h-full">
           {/* All resume sections go here
           Each section gets its own component. To be created in the sections folder */}
-          Input
+          <Basics />
         </div>
       </div>
     </div>

@@ -4,6 +4,8 @@ import Header from "./Header";
 import WorkExperience from "./sections/WorkExperience";
 import Basics from "./sections/Basics";
 import Volunteer from "./sections/Volunteer";
+import Awards from "./sections/Awards";
+import Certifications from "./sections/Certifications";
 
 const LeftPanel = () => {
   return (
@@ -17,6 +19,8 @@ const LeftPanel = () => {
           <WorkExperience />
           <Basics />
           <Volunteer />
+          <Awards />
+          <Certifications />
         </div>
       </div>
     </div>

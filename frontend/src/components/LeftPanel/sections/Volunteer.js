@@ -1,4 +1,4 @@
-import { Language } from "@mui/icons-material";
+import { VolunteerActivism } from "@mui/icons-material";
 import { TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import React from "react";
@@ -8,9 +8,9 @@ const Volunteer = () => {
     <div>
       <div className="flex w-full items-center gap-3 mb-4">
         <div className="ml-2">
-          <Language />
+          <VolunteerActivism />
         </div>
-        <p className="text-3xl">Personal Details</p>
+        <p className="text-3xl">Volunteer Work</p>
       </div>
       <TextField fullWidth label="Organization" />
       <TextField fullWidth label="Position" />

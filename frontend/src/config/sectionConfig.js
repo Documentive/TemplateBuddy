@@ -1,4 +1,4 @@
-import { Redeem, Work } from "@mui/icons-material";
+import { Language, Redeem, Work } from "@mui/icons-material";
 
 export const workExperienceSectionConfig = {
   fieldsMap: {
@@ -57,4 +57,20 @@ export const certificationsSectionConfig = {
   fieldName: "Certifications",
   fieldIcon: <Redeem />,
   displayField: "name",
+};
+
+export const languagesSectionConfig = {
+  fieldsMap: {
+    language: {
+      type: "TextField",
+      label: "Language",
+    },
+    fluency: {
+      type: "TextField",
+      label: "Fluency",
+    },
+  },
+  fieldName: "Languages",
+  fieldIcon: <Language />,
+  displayField: "language",
 };

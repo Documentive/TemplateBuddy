@@ -6,11 +6,11 @@ import Education from "./sections/Education";
 import Skills from "./sections/Skills";
 import Volunteer from "./sections/Volunteer";
 import Awards from "./sections/Awards";
-import Certifications from "./sections/Certifications";
 import Languages from "./sections/Languages";
 import GenericSection from "./sections/GenericSection";
 import {
   certificationsSectionConfig,
+  languagesSectionConfig,
   workExperienceSectionConfig,
 } from "../../config/sectionConfig";
 
@@ -31,7 +31,7 @@ const LeftPanel = () => {
           <Volunteer />
           <Awards />
           <GenericSection {...certificationsSectionConfig} />
-          <Languages />
+          <GenericSection {...languagesSectionConfig} />
         </div>
       </div>
     </div>

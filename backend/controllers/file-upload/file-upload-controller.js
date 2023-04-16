@@ -1,5 +1,6 @@
 import multer from "multer";
 import fs from "fs";
+import path from "path";
 
 import file_utils from "../../utils/file-utils.js";
 
@@ -19,9 +20,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const FileUploadController = (app) => {
-  app.post("/upload/image", upload.single("image"), (_req, res) => {
+  app.post("/upload/image", upload.single("image"), (req, res) => {
     res.status(201).send({
       status: "Uploaded successfully",
+      path: path.join("/images", req.file.filename),
     });
   });
 };

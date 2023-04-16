@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
 import Basics from "./sections/Basics";
-import GenericSection from "./sections/GenericSection";
+import GenericSection from "./sections/GenericListSection";
 import {
   awardsSectionConfig,
   certificationsSectionConfig,

@@ -2,7 +2,7 @@ import { TextField, Avatar, IconButton, Tooltip } from "@mui/material";
 import React from "react";
 import Location from "./Location";
 import { Person } from "@mui/icons-material";
-import GenericSection from "./GenericSection";
+import GenericSection from "./GenericListSection";
 import { socialsSectionConfig } from "../../../config/sectionConfig";
 
 const Basics = () => {

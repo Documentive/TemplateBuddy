@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GenericModal from "./modals/GenericModal";
+import GenericModal from "./modals/GenericListModal";
 import { Button, List, ListItem, ListItemText } from "@mui/material";
 
 const GenericSection = ({ fieldsMap, fieldName, fieldIcon, displayField }) => {

@@ -1,5 +1,5 @@
 import { ShapeLine } from "@mui/icons-material";
-import { Button, List, ListItem, ListItemText, TextField } from "@mui/material";
+import { Button, List, ListItem, ListItemText } from "@mui/material";
 import React, { useState } from "react";
 import SkillsKeywordModal from "./modals/SkillsKeywordModal";
 
@@ -15,15 +15,13 @@ const Skills = () => {
         </div>
         <p className="text-3xl">Skills</p>
       </div>
-      <TextField fullWidth label="Name" />
-      <TextField fullWidth label="Level" />
       <Button
         variant="contained"
         onClick={() => {
           setOpenSkillsModal(true);
         }}
       >
-        Add keyword
+        Add Skill
       </Button>
       <SkillsKeywordModal
         skills={skills}
@@ -34,7 +32,7 @@ const Skills = () => {
 
       {skills.length > 0 && (
         <>
-          <div>Keywords list:</div>
+          {/* <div>Keywords list:</div> */}
           <List>
             {skills.map((skill, idx) => {
               return (
@@ -47,7 +45,7 @@ const Skills = () => {
         </>
       )}
 
-      {skills.length === 0 && <div>No keywords added yet</div>}
+      {skills.length === 0 && <div>No skills added yet</div>}
     </div>
   );
 };

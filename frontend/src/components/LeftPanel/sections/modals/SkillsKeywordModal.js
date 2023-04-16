@@ -23,16 +23,15 @@ const SkillsKeywordModal = ({
         setOpenSkillsModal(false);
       }}
     >
-      <DialogTitle>Add a keyword</DialogTitle>
+      <DialogTitle>Add a skill</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
           id="course_name"
-          label="Keyword"
+          label="Skill"
           type="text"
           fullWidth
-          variant="standard"
           onKeyUp={(e) => {
             setSkillName(e.target.value);
           }}
@@ -45,7 +44,7 @@ const SkillsKeywordModal = ({
             setOpenSkillsModal(false);
           }}
         >
-          Add Keyword
+          Add
         </Button>
       </DialogActions>
     </Dialog>

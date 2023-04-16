@@ -321,3 +321,20 @@ export const interestsSectionConfig = {
   fieldIcon: <Public />,
   displayField: "name",
 };
+
+export const referencesSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    reference: {
+      type: "TextField",
+      label: "Reference",
+      rows: 5,
+    },
+  },
+  fieldName: "References",
+  fieldIcon: <Public />,
+  displayField: "name",
+};

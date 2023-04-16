@@ -14,20 +14,53 @@ import {
 } from "../../config/sectionConfig";
 
 const LeftPanel = () => {
+  const sectionsList = [
+    {
+      type: "GenericSection",
+      config: workExperienceSectionConfig,
+    },
+    {
+      type: "Basics",
+    },
+    {
+      type: "GenericSection",
+      config: educationSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: skillsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: volunteerSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: awardsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: certificationsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: languagesSectionConfig,
+    },
+  ];
+
   return (
     <div className="w-full h-full flex flex-row">
       <NavBar />
       <div className="w-full h-full flex flex-col">
         <Header />
         <div className="w-full h-full overflow-y-scroll">
-          <GenericSection {...workExperienceSectionConfig} />
-          <Basics />
-          <GenericSection {...educationSectionConfig} />
-          <GenericSection {...skillsSectionConfig} />
-          <GenericSection {...volunteerSectionConfig} />
-          <GenericSection {...awardsSectionConfig} />
-          <GenericSection {...certificationsSectionConfig} />
-          <GenericSection {...languagesSectionConfig} />
+          {sectionsList.map((section, index) => {
+            if (section.type === "GenericSection") {
+              return <GenericSection {...section.config} />;
+            } else if (section.type === "Basics") {
+              return <Basics />;
+            }
+          })}
         </div>
       </div>
     </div>

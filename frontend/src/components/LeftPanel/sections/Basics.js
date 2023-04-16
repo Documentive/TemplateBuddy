@@ -7,7 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { uploadImageThunk } from "../../../services/upload-thunk";
 
 const Basics = () => {
-  const { imageUploading } = useSelector((state) => state.uploadImage);
+  const { imageUploading, imageURL } = useSelector(
+    (state) => state.uploadImage
+  );
   let [currentImageFile, setCurrentImageFile] = React.useState(null);
 
   const dispatch = useDispatch();
@@ -27,7 +29,14 @@ const Basics = () => {
       </div>
       <IconButton component="label">
         <Tooltip title="Upload Image">
-          <Avatar sx={{ width: 96, height: 96 }} />
+          {imageURL === "" ? (
+            <Avatar sx={{ width: 96, height: 96 }} />
+          ) : (
+            <img
+              src={imageURL}
+              style={{ width: 96, height: 96, borderRadius: "50%" }}
+            />
+          )}
         </Tooltip>
         <input
           hidden

@@ -9,8 +9,44 @@ import Volunteer from "./sections/Volunteer";
 import Awards from "./sections/Awards";
 import Certifications from "./sections/Certifications";
 import Languages from "./sections/Languages";
+import { Work } from "@mui/icons-material";
+import GenericSection from "./sections/GenericSection";
 
 const LeftPanel = () => {
+  const workExperienceSectionConfig = {
+    fieldsMap: {
+      company: {
+        type: "TextField",
+        label: "Company",
+      },
+      location: {
+        type: "TextField",
+        label: "Location",
+      },
+      role: {
+        type: "TextField",
+        label: "Role",
+      },
+      startDate: {
+        type: "Date",
+        label: "Start Date",
+      },
+      endDate: {
+        type: "Date",
+        label: "End Date",
+        helperText: "Leave blank if you are still working here",
+      },
+      summary: {
+        type: "TextField",
+        label: "Summary",
+        rows: 5,
+      },
+    },
+    fieldName: "Work Experience",
+    fieldIcon: <Work />,
+    displayField: "company",
+  };
+
   return (
     <div className="w-full h-full flex flex-row">
       <NavBar />
@@ -19,7 +55,8 @@ const LeftPanel = () => {
         <div className="w-full h-full overflow-y-scroll">
           {/* All resume sections go here
           Each section gets its own component. To be created in the sections folder */}
-          <WorkExperience />
+          {/* <WorkExperience /> */}
+          <GenericSection {...workExperienceSectionConfig} />
           <Basics />
           <Education />
           <Skills />

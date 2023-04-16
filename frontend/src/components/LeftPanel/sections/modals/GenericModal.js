@@ -4,6 +4,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  List,
+  ListItem,
+  ListItemText,
   TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -18,6 +21,8 @@ const GenericModal = ({
   fieldName,
 }) => {
   let [modalEntryObject, setModalEntryObject] = useState({});
+  let [genericList, setGenericList] = useState([]);
+  let [genericEntry, setGenericEntry] = useState("");
 
   const onInputToField = (e) => {
     let fieldName = e.target.name;
@@ -33,6 +38,18 @@ const GenericModal = ({
         [key]: `${date.getMonth() + 1}-${date.getFullYear()}`,
       });
     }
+  };
+
+  const handleAddToMultiEntryList = (field) => {
+    setGenericList([...genericList, genericEntry]);
+    if (!field in modalEntryObject) {
+      setModalEntryObject({ ...modalEntryObject, [field]: [] });
+    }
+
+    setModalEntryObject({
+      ...modalEntryObject,
+      [field]: [...genericList, genericEntry],
+    });
   };
 
   return (
@@ -90,6 +107,40 @@ const GenericModal = ({
                   />
                 );
               }
+              case "MultiEntryList": {
+                return (
+                  <div>
+                    <TextField
+                      label={value.label}
+                      name={value.label.toLowerCase()}
+                      onKeyUp={(e) => {
+                        setGenericEntry(e.target.value);
+                      }}
+                      sx={{ float: "left" }}
+                    />
+                    <Button
+                      variant="contained"
+                      onClick={(field) => handleAddToMultiEntryList(field)}
+                    >
+                      Add
+                    </Button>
+                    <br />
+                    <br />
+                    {genericList.length > 0 && (
+                      <List>
+                        {genericList.map((entry, idx) => {
+                          return (
+                            <ListItem key={idx}>
+                              <ListItemText>{entry}</ListItemText>
+                            </ListItem>
+                          );
+                        })}
+                      </List>
+                    )}
+                    {genericList.length === 0 && <div>Nothing added yet!</div>}
+                  </div>
+                );
+              }
             }
           })}
         </DialogContent>
@@ -98,6 +149,7 @@ const GenericModal = ({
             onClick={() => {
               setEntryList([...entryList, modalEntryObject]);
               setOpenModal(false);
+              setGenericList([]);
             }}
           >
             Add New {fieldName}

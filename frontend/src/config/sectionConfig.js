@@ -305,3 +305,19 @@ export const publicationsSectionConfig = {
   fieldIcon: <Public />,
   displayField: "name",
 };
+
+export const interestsSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    keywords: {
+      type: "MultiEntryList",
+      label: "Keywords",
+    },
+  },
+  fieldName: "Interests",
+  fieldIcon: <Public />,
+  displayField: "name",
+};

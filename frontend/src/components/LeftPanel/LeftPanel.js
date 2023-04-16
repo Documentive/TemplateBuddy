@@ -7,6 +7,7 @@ import {
   awardsSectionConfig,
   certificationsSectionConfig,
   educationSectionConfig,
+  interestsSectionConfig,
   languagesSectionConfig,
   projectsSectionConfig,
   publicationsSectionConfig,
@@ -17,6 +18,10 @@ import {
 
 const LeftPanel = () => {
   const sectionsList = [
+    {
+      type: "GenericSection",
+      config: interestsSectionConfig,
+    },
     {
       type: "GenericSection",
       config: publicationsSectionConfig,

@@ -1,7 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
-import WorkExperience from "./sections/WorkExperience";
 import Basics from "./sections/Basics";
 import Education from "./sections/Education";
 import Skills from "./sections/Skills";
@@ -9,44 +8,10 @@ import Volunteer from "./sections/Volunteer";
 import Awards from "./sections/Awards";
 import Certifications from "./sections/Certifications";
 import Languages from "./sections/Languages";
-import { Work } from "@mui/icons-material";
 import GenericSection from "./sections/GenericSection";
+import { workExperienceSectionConfig } from "../../config/sectionConfig";
 
 const LeftPanel = () => {
-  const workExperienceSectionConfig = {
-    fieldsMap: {
-      company: {
-        type: "TextField",
-        label: "Company",
-      },
-      location: {
-        type: "TextField",
-        label: "Location",
-      },
-      role: {
-        type: "TextField",
-        label: "Role",
-      },
-      startDate: {
-        type: "Date",
-        label: "Start Date",
-      },
-      endDate: {
-        type: "Date",
-        label: "End Date",
-        helperText: "Leave blank if you are still working here",
-      },
-      summary: {
-        type: "TextField",
-        label: "Summary",
-        rows: 5,
-      },
-    },
-    fieldName: "Work Experience",
-    fieldIcon: <Work />,
-    displayField: "company",
-  };
-
   return (
     <div className="w-full h-full flex flex-row">
       <NavBar />

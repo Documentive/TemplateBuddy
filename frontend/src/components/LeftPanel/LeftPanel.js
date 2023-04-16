@@ -3,13 +3,13 @@ import NavBar from "./NavBar";
 import Header from "./Header";
 import Basics from "./sections/Basics";
 import Skills from "./sections/Skills";
-import Volunteer from "./sections/Volunteer";
 import GenericSection from "./sections/GenericSection";
 import {
   awardsSectionConfig,
   certificationsSectionConfig,
   educationSectionConfig,
   languagesSectionConfig,
+  volunteerSectionConfig,
   workExperienceSectionConfig,
 } from "../../config/sectionConfig";
 
@@ -27,7 +27,7 @@ const LeftPanel = () => {
           <Basics />
           <GenericSection {...educationSectionConfig} />
           <Skills />
-          <Volunteer />
+          <GenericSection {...volunteerSectionConfig} />
           <GenericSection {...awardsSectionConfig} />
           <GenericSection {...certificationsSectionConfig} />
           <GenericSection {...languagesSectionConfig} />

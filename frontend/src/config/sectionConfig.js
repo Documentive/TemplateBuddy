@@ -3,6 +3,7 @@ import {
   Language,
   Redeem,
   School,
+  VolunteerActivism,
   Work,
 } from "@mui/icons-material";
 
@@ -145,4 +146,42 @@ export const educationSectionConfig = {
   fieldName: "Education",
   fieldIcon: <School />,
   displayField: "institution",
+};
+
+export const volunteerSectionConfig = {
+  fieldsMap: {
+    organization: {
+      type: "TextField",
+      label: "Organization",
+    },
+    position: {
+      type: "TextField",
+      label: "Position",
+    },
+    url: {
+      type: "TextField",
+      label: "URL",
+    },
+    startDate: {
+      type: "Date",
+      label: "Start Date",
+    },
+    endDate: {
+      type: "Date",
+      label: "End Date",
+      helperText: "Leave this field blank, if still volunteering here",
+    },
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
+    },
+    highlights: {
+      type: "MultiEntryList",
+      label: "Highlights",
+    },
+  },
+  fieldName: "Volunteer",
+  fieldIcon: <VolunteerActivism />,
+  displayField: "organization",
 };

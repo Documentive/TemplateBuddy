@@ -8,6 +8,7 @@ import Skills from "./sections/Skills";
 import Volunteer from "./sections/Volunteer";
 import Awards from "./sections/Awards";
 import Certifications from "./sections/Certifications";
+import Languages from "./sections/Languages";
 
 const LeftPanel = () => {
   return (
@@ -25,6 +26,7 @@ const LeftPanel = () => {
           <Volunteer />
           <Awards />
           <Certifications />
+          <Languages />
         </div>
       </div>
     </div>

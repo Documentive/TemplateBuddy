@@ -276,3 +276,32 @@ export const projectsSectionConfig = {
   fieldIcon: <Public />,
   displayField: "name",
 };
+
+export const publicationsSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    publisher: {
+      type: "TextField",
+      label: "Publisher",
+    },
+    releaseDate: {
+      type: "Date",
+      label: "Release Date",
+    },
+    url: {
+      type: "TextField",
+      label: "URL",
+    },
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
+    },
+  },
+  fieldName: "Publications",
+  fieldIcon: <Public />,
+  displayField: "name",
+};

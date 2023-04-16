@@ -24,10 +24,10 @@ const GenericModal = ({
   let [genericList, setGenericList] = useState([]);
   let [genericEntry, setGenericEntry] = useState("");
 
-  const onInputToField = (e) => {
+  const onInputToField = (e, key) => {
     let fieldName = e.target.name;
     let fieldValue = e.target.value;
-    setModalEntryObject({ ...modalEntryObject, [fieldName]: fieldValue });
+    setModalEntryObject({ ...modalEntryObject, [key]: fieldValue });
   };
 
   const onInputToDatePicker = (d, e, key) => {
@@ -74,7 +74,7 @@ const GenericModal = ({
                       name={value.label.toLowerCase()}
                       multiline
                       rows={value.rows}
-                      onChange={onInputToField}
+                      onChange={(e) => onInputToField(e, field)}
                     />
                   );
                 }
@@ -83,7 +83,7 @@ const GenericModal = ({
                     fullWidth
                     label={value.label}
                     name={value.label.toLowerCase()}
-                    onChange={onInputToField}
+                    onChange={(e) => onInputToField(e, field)}
                   />
                 );
               }
@@ -120,7 +120,7 @@ const GenericModal = ({
                     />
                     <Button
                       variant="contained"
-                      onClick={(field) => handleAddToMultiEntryList(field)}
+                      onClick={() => handleAddToMultiEntryList(field)}
                     >
                       Add
                     </Button>

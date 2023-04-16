@@ -1,4 +1,10 @@
-import { EmojiEvents, Language, Redeem, Work } from "@mui/icons-material";
+import {
+  EmojiEvents,
+  Language,
+  Redeem,
+  School,
+  Work,
+} from "@mui/icons-material";
 
 export const workExperienceSectionConfig = {
   fieldsMap: {
@@ -98,4 +104,45 @@ export const awardsSectionConfig = {
   fieldName: "Awards",
   fieldIcon: <EmojiEvents />,
   displayField: "title",
+};
+
+export const educationSectionConfig = {
+  fieldsMap: {
+    institution: {
+      type: "TextField",
+      label: "Institution",
+    },
+    url: {
+      type: "TextField",
+      label: "URL",
+    },
+    area: {
+      type: "TextField",
+      label: "Area of Study",
+    },
+    studyType: {
+      type: "TextField",
+      label: "Study Type",
+    },
+    startDate: {
+      type: "Date",
+      label: "Start Date",
+    },
+    endDate: {
+      type: "Date",
+      label: "End Date",
+      helperText: "Leave this field blank, if still in this institution",
+    },
+    score: {
+      type: "TextField",
+      label: "Score",
+    },
+    courses: {
+      type: "MultiEntryList",
+      label: "Courses",
+    },
+  },
+  fieldName: "Education",
+  fieldIcon: <School />,
+  displayField: "institution",
 };

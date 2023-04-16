@@ -2,13 +2,13 @@ import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
 import Basics from "./sections/Basics";
-import Education from "./sections/Education";
 import Skills from "./sections/Skills";
 import Volunteer from "./sections/Volunteer";
 import GenericSection from "./sections/GenericSection";
 import {
   awardsSectionConfig,
   certificationsSectionConfig,
+  educationSectionConfig,
   languagesSectionConfig,
   workExperienceSectionConfig,
 } from "../../config/sectionConfig";
@@ -25,7 +25,7 @@ const LeftPanel = () => {
           {/* <WorkExperience /> */}
           <GenericSection {...workExperienceSectionConfig} />
           <Basics />
-          <Education />
+          <GenericSection {...educationSectionConfig} />
           <Skills />
           <Volunteer />
           <GenericSection {...awardsSectionConfig} />

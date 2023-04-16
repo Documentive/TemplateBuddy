@@ -12,7 +12,7 @@ const uploadSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [uploadImageThunk.pending]: (state, action) => {
+    [uploadImageThunk.pending]: (state, _action) => {
       state.imageUploading = true;
     },
     [uploadImageThunk.fulfilled]: (state, action) => {
@@ -20,7 +20,7 @@ const uploadSlice = createSlice({
       state.imageURL = `${process.env.REACT_APP_API_BASE}${action.payload.data.path}`;
       console.log(state.imageURL);
     },
-    [uploadImageThunk.rejected]: (state, action) => {
+    [uploadImageThunk.rejected]: (state, _action) => {
       state.imageUploading = false;
     },
   },

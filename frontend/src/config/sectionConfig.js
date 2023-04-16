@@ -3,6 +3,7 @@ import {
   Language,
   Redeem,
   School,
+  ShapeLine,
   VolunteerActivism,
   Work,
 } from "@mui/icons-material";
@@ -184,4 +185,24 @@ export const volunteerSectionConfig = {
   fieldName: "Volunteer",
   fieldIcon: <VolunteerActivism />,
   displayField: "organization",
+};
+
+export const skillsSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    level: {
+      type: "TextField",
+      label: "Level",
+    },
+    keywords: {
+      type: "MultiEntryList",
+      label: "Keywords",
+    },
+  },
+  fieldName: "Skills",
+  fieldIcon: <ShapeLine />,
+  displayField: "name",
 };

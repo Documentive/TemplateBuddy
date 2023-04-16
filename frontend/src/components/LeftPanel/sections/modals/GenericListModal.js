@@ -21,11 +21,10 @@ const GenericModal = ({
   fieldName,
 }) => {
   let [modalEntryObject, setModalEntryObject] = useState({});
-  let [genericList, setGenericList] = useState([]);
-  let [genericEntry, setGenericEntry] = useState("");
+  let [genericListMap, setGenericListMap] = useState({});
+  let [genericEntryMap, setGenericEntryMap] = useState({});
 
   const onInputToField = (e, key) => {
-    let fieldName = e.target.name;
     let fieldValue = e.target.value;
     setModalEntryObject({ ...modalEntryObject, [key]: fieldValue });
   };
@@ -41,15 +40,17 @@ const GenericModal = ({
   };
 
   const handleAddToMultiEntryList = (field) => {
-    setGenericList([...genericList, genericEntry]);
-    if (!field in modalEntryObject) {
-      setModalEntryObject({ ...modalEntryObject, [field]: [] });
+    if (!(field in genericListMap)) {
+      setGenericListMap({
+        ...genericListMap,
+        [field]: [genericEntryMap[field]],
+      });
+    } else {
+      setGenericListMap({
+        ...genericListMap,
+        [field]: [...genericListMap[field], genericEntryMap[field]],
+      });
     }
-
-    setModalEntryObject({
-      ...modalEntryObject,
-      [field]: [...genericList, genericEntry],
-    });
   };
 
   return (
@@ -60,7 +61,7 @@ const GenericModal = ({
           setOpenModal(false);
         }}
       >
-        <DialogTitle>Add a language</DialogTitle>
+        <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
           {Object.keys(fieldsMap).map((field) => {
             let value = fieldsMap[field];
@@ -114,7 +115,10 @@ const GenericModal = ({
                       label={value.label}
                       name={value.label.toLowerCase()}
                       onKeyUp={(e) => {
-                        setGenericEntry(e.target.value);
+                        setGenericEntryMap({
+                          ...genericEntryMap,
+                          [field]: e.target.value,
+                        });
                       }}
                       sx={{ float: "left" }}
                     />
@@ -126,18 +130,21 @@ const GenericModal = ({
                     </Button>
                     <br />
                     <br />
-                    {genericList.length > 0 && (
-                      <List>
-                        {genericList.map((entry, idx) => {
-                          return (
-                            <ListItem key={idx}>
-                              <ListItemText>{entry}</ListItemText>
-                            </ListItem>
-                          );
-                        })}
-                      </List>
+                    {field in genericListMap &&
+                      genericListMap[field].length > 0 && (
+                        <List>
+                          {genericListMap[field].map((entry, idx) => {
+                            return (
+                              <ListItem key={idx}>
+                                <ListItemText>{entry}</ListItemText>
+                              </ListItem>
+                            );
+                          })}
+                        </List>
+                      )}
+                    {!(field in genericListMap) && (
+                      <div>Nothing added yet!</div>
                     )}
-                    {genericList.length === 0 && <div>Nothing added yet!</div>}
                   </div>
                 );
               }
@@ -147,9 +154,12 @@ const GenericModal = ({
         <DialogActions>
           <Button
             onClick={() => {
-              setEntryList([...entryList, modalEntryObject]);
+              setEntryList([
+                ...entryList,
+                { ...modalEntryObject, ...genericListMap },
+              ]);
               setOpenModal(false);
-              setGenericList([]);
+              setGenericListMap({});
             }}
           >
             Add New {fieldName}

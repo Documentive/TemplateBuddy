@@ -8,6 +8,7 @@ import {
   certificationsSectionConfig,
   educationSectionConfig,
   languagesSectionConfig,
+  projectsSectionConfig,
   skillsSectionConfig,
   volunteerSectionConfig,
   workExperienceSectionConfig,
@@ -15,6 +16,10 @@ import {
 
 const LeftPanel = () => {
   const sectionsList = [
+    {
+      type: "GenericSection",
+      config: projectsSectionConfig,
+    },
     {
       type: "GenericSection",
       config: workExperienceSectionConfig,

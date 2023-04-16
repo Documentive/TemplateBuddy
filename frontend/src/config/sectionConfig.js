@@ -227,3 +227,52 @@ export const socialsSectionConfig = {
   fieldIcon: <Public />,
   displayField: "platform",
 };
+
+export const projectsSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    description: {
+      type: "TextField",
+      label: "Description",
+    },
+    highlights: {
+      type: "MultiEntryList",
+      label: "Highlights",
+    },
+    keywords: {
+      type: "MultiEntryList",
+      label: "Keywords",
+    },
+    startDate: {
+      type: "Date",
+      label: "Start Date",
+    },
+    endDate: {
+      type: "Date",
+      label: "End Date",
+      helperText: "Leave this field blank, if still working on this project",
+    },
+    url: {
+      type: "TextField",
+      label: "URL",
+    },
+    roles: {
+      type: "MultiEntryList",
+      label: "Roles",
+    },
+    entity: {
+      type: "TextField",
+      label: "Entity",
+    },
+    type: {
+      type: "TextField",
+      label: "Type",
+    },
+  },
+  fieldName: "Projects",
+  fieldIcon: <Public />,
+  displayField: "name",
+};

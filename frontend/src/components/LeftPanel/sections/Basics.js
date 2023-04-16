@@ -2,7 +2,8 @@ import { TextField, Avatar, IconButton, Tooltip } from "@mui/material";
 import React from "react";
 import Location from "./Location";
 import { Person } from "@mui/icons-material";
-import Socials from "./Socials";
+import GenericSection from "./GenericSection";
+import { socialsSectionConfig } from "../../../config/sectionConfig";
 
 const Basics = () => {
   return (
@@ -28,7 +29,7 @@ const Basics = () => {
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
       <Location />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
-      <Socials />
+      <GenericSection {...socialsSectionConfig} />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
     </div>
   );

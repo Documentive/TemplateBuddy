@@ -1,6 +1,7 @@
 import {
   EmojiEvents,
   Language,
+  Public,
   Redeem,
   School,
   ShapeLine,
@@ -205,4 +206,24 @@ export const skillsSectionConfig = {
   fieldName: "Skills",
   fieldIcon: <ShapeLine />,
   displayField: "name",
+};
+
+export const socialsSectionConfig = {
+  fieldsMap: {
+    platform: {
+      type: "TextField",
+      label: "Platform",
+    },
+    username: {
+      type: "TextField",
+      label: "Username",
+    },
+    url: {
+      type: "TextField",
+      label: "URL",
+    },
+  },
+  fieldName: "Socials",
+  fieldIcon: <Public />,
+  displayField: "platform",
 };

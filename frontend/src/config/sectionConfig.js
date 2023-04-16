@@ -1,4 +1,4 @@
-import { Language, Redeem, Work } from "@mui/icons-material";
+import { EmojiEvents, Language, Redeem, Work } from "@mui/icons-material";
 
 export const workExperienceSectionConfig = {
   fieldsMap: {
@@ -73,4 +73,29 @@ export const languagesSectionConfig = {
   fieldName: "Languages",
   fieldIcon: <Language />,
   displayField: "language",
+};
+
+export const awardsSectionConfig = {
+  fieldsMap: {
+    title: {
+      type: "TextField",
+      label: "Title",
+    },
+    date: {
+      type: "Date",
+      label: "Date awarded",
+    },
+    awarder: {
+      type: "TextField",
+      label: "Awarder",
+    },
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
+    },
+  },
+  fieldName: "Awards",
+  fieldIcon: <EmojiEvents />,
+  displayField: "title",
 };

@@ -5,10 +5,9 @@ import Basics from "./sections/Basics";
 import Education from "./sections/Education";
 import Skills from "./sections/Skills";
 import Volunteer from "./sections/Volunteer";
-import Awards from "./sections/Awards";
-import Languages from "./sections/Languages";
 import GenericSection from "./sections/GenericSection";
 import {
+  awardsSectionConfig,
   certificationsSectionConfig,
   languagesSectionConfig,
   workExperienceSectionConfig,
@@ -29,7 +28,7 @@ const LeftPanel = () => {
           <Education />
           <Skills />
           <Volunteer />
-          <Awards />
+          <GenericSection {...awardsSectionConfig} />
           <GenericSection {...certificationsSectionConfig} />
           <GenericSection {...languagesSectionConfig} />
         </div>

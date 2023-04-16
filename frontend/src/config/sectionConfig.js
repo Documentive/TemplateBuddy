@@ -1,4 +1,4 @@
-import { Work } from "@mui/icons-material";
+import { Redeem, Work } from "@mui/icons-material";
 
 export const workExperienceSectionConfig = {
   fieldsMap: {
@@ -32,4 +32,29 @@ export const workExperienceSectionConfig = {
   fieldName: "Work Experience",
   fieldIcon: <Work />,
   displayField: "company",
+};
+
+export const certificationsSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    dateCertified: {
+      type: "Date",
+      label: "Date Certified",
+    },
+    awarder: {
+      type: "TextField",
+      label: "Awarder",
+    },
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
+    },
+  },
+  fieldName: "Certifications",
+  fieldIcon: <Redeem />,
+  displayField: "name",
 };

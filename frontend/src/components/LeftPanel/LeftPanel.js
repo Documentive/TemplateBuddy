@@ -9,7 +9,10 @@ import Awards from "./sections/Awards";
 import Certifications from "./sections/Certifications";
 import Languages from "./sections/Languages";
 import GenericSection from "./sections/GenericSection";
-import { workExperienceSectionConfig } from "../../config/sectionConfig";
+import {
+  certificationsSectionConfig,
+  workExperienceSectionConfig,
+} from "../../config/sectionConfig";
 
 const LeftPanel = () => {
   return (
@@ -27,7 +30,7 @@ const LeftPanel = () => {
           <Skills />
           <Volunteer />
           <Awards />
-          <Certifications />
+          <GenericSection {...certificationsSectionConfig} />
           <Languages />
         </div>
       </div>

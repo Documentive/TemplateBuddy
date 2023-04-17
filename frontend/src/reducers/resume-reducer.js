@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getResumeThunk } from "../services/resume-thunk";
 
 let initialState = {
-  resume: {},
+  resume: null,
   resumeLoading: false,
 };
 

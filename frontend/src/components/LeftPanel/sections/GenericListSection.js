@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GenericModal from "./modals/GenericListModal";
 import { Button, List, ListItem, ListItemText } from "@mui/material";
+import { useSelector } from "react-redux";
 
-const GenericSection = ({ fieldsMap, fieldName, fieldIcon, displayField }) => {
+const GenericSection = ({
+  fieldsMap,
+  fieldName,
+  fieldIcon,
+  displayField,
+  dbField,
+}) => {
+  const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [openModal, setOpenModal] = useState(false);
   let [entryList, setEntryList] = useState([]);
+
+  useEffect(() => {
+    if (!resumeLoading && resume !== null) {
+      let arrayObj = resume[dbField[0]];
+      for (let i = 1; i < dbField.length; i++) {
+        arrayObj = arrayObj[dbField[i]];
+      }
+      arrayObj.map((entry) => {
+        setEntryList([...entryList, entry]);
+      });
+    }
+  }, [resume, resumeLoading]);
 
   return (
     <div>

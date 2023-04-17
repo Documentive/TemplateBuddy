@@ -24,13 +24,17 @@ const Basics = () => {
     dispatch(uploadImageThunk(e.target.files[0]));
   };
 
+  const getBasicsValue = (key) => {
+    if (!resumeLoading && resume !== null) {
+      return resume.basics[key];
+    }
+
+    return "";
+  };
+
   useEffect(() => {
     dispatch(getResumeThunk());
   }, []);
-
-  useEffect(() => {
-    console.log(resume);
-  }, [resumeLoading]);
 
   return (
     <div>
@@ -58,12 +62,26 @@ const Basics = () => {
           onChange={handleImageChange}
         />
       </IconButton>
-      <TextField fullWidth label="Full Name" />
-      <TextField fullWidth label="Email" />
-      <TextField fullWidth label="Phone Number" />
-      <TextField fullWidth label="Portfolio Link" />
-      <TextField fullWidth label="Job Title" />
-      <TextField fullWidth label="Summary" multiline rows={5} />
+      <TextField fullWidth label="Full Name" value={getBasicsValue("name")} />
+      <TextField fullWidth label="Email" value={getBasicsValue("email")} />
+      <TextField
+        fullWidth
+        label="Phone Number"
+        value={getBasicsValue("phone")}
+      />
+      <TextField
+        fullWidth
+        label="Portfolio Link"
+        value={getBasicsValue("url")}
+      />
+      <TextField fullWidth label="Job Title" value={getBasicsValue("label")} />
+      <TextField
+        fullWidth
+        label="Summary"
+        multiline
+        rows={5}
+        value={getBasicsValue("summary")}
+      />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
       <Location />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />

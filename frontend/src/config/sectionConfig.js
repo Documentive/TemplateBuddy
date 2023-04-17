@@ -15,9 +15,9 @@ import {
 
 export const socialsSectionConfig = {
   fieldsMap: {
-    platform: {
+    network: {
       type: "TextField",
-      label: "Platform",
+      label: "Network",
     },
     username: {
       type: "TextField",
@@ -30,7 +30,8 @@ export const socialsSectionConfig = {
   },
   fieldName: "Socials",
   fieldIcon: <Public />,
-  displayField: "platform",
+  displayField: "network",
+  dbField: ["basics", "profiles"],
 };
 
 export const educationSectionConfig = {
@@ -72,13 +73,14 @@ export const educationSectionConfig = {
   fieldName: "Education",
   fieldIcon: <School />,
   displayField: "institution",
+  dbField: ["education"],
 };
 
 export const workExperienceSectionConfig = {
   fieldsMap: {
-    company: {
+    name: {
       type: "TextField",
-      label: "Company",
+      label: "Name of Company",
     },
     location: {
       type: "TextField",
@@ -105,7 +107,8 @@ export const workExperienceSectionConfig = {
   },
   fieldName: "Work Experience",
   fieldIcon: <Work />,
-  displayField: "company",
+  displayField: "name",
+  dbField: ["work"],
 };
 
 export const projectsSectionConfig = {
@@ -155,6 +158,7 @@ export const projectsSectionConfig = {
   fieldName: "Projects",
   fieldIcon: <Groups />,
   displayField: "name",
+  dbField: ["projects"],
 };
 
 export const skillsSectionConfig = {
@@ -175,6 +179,7 @@ export const skillsSectionConfig = {
   fieldName: "Skills",
   fieldIcon: <ShapeLine />,
   displayField: "name",
+  dbField: ["skills"],
 };
 
 export const certificationsSectionConfig = {
@@ -200,6 +205,7 @@ export const certificationsSectionConfig = {
   fieldName: "Certifications",
   fieldIcon: <Redeem />,
   displayField: "name",
+  dbField: ["certificates"],
 };
 
 export const languagesSectionConfig = {
@@ -216,6 +222,7 @@ export const languagesSectionConfig = {
   fieldName: "Languages",
   fieldIcon: <Language />,
   displayField: "language",
+  dbField: ["languages"],
 };
 
 export const publicationsSectionConfig = {
@@ -245,6 +252,7 @@ export const publicationsSectionConfig = {
   fieldName: "Publications",
   fieldIcon: <AutoStories />,
   displayField: "name",
+  dbField: ["publications"],
 };
 
 export const awardsSectionConfig = {
@@ -270,6 +278,7 @@ export const awardsSectionConfig = {
   fieldName: "Awards",
   fieldIcon: <EmojiEvents />,
   displayField: "title",
+  dbField: ["awards"],
 };
 
 export const interestsSectionConfig = {
@@ -286,6 +295,7 @@ export const interestsSectionConfig = {
   fieldName: "Interests",
   fieldIcon: <OutdoorGrill />,
   displayField: "name",
+  dbField: ["interests"],
 };
 
 export const volunteerSectionConfig = {
@@ -324,6 +334,7 @@ export const volunteerSectionConfig = {
   fieldName: "Volunteer",
   fieldIcon: <VolunteerActivism />,
   displayField: "organization",
+  dbField: ["volunteer"],
 };
 
 export const referencesSectionConfig = {
@@ -341,4 +352,5 @@ export const referencesSectionConfig = {
   fieldName: "References",
   fieldIcon: <Handshake />,
   displayField: "name",
+  dbField: ["references"],
 };

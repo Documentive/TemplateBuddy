@@ -7,106 +7,30 @@ import {
   ShapeLine,
   VolunteerActivism,
   Work,
+  Groups,
+  Handshake,
+  AutoStories,
+  OutdoorGrill,
 } from "@mui/icons-material";
 
-export const workExperienceSectionConfig = {
+export const socialsSectionConfig = {
   fieldsMap: {
-    company: {
+    platform: {
       type: "TextField",
-      label: "Company",
+      label: "Platform",
     },
-    location: {
+    username: {
       type: "TextField",
-      label: "Location",
+      label: "Username",
     },
-    role: {
+    url: {
       type: "TextField",
-      label: "Role",
-    },
-    startDate: {
-      type: "Date",
-      label: "Start Date",
-    },
-    endDate: {
-      type: "Date",
-      label: "End Date",
-      helperText: "Leave blank if you are still working here",
-    },
-    summary: {
-      type: "TextField",
-      label: "Summary",
-      rows: 5,
+      label: "URL",
     },
   },
-  fieldName: "Work Experience",
-  fieldIcon: <Work />,
-  displayField: "company",
-};
-
-export const certificationsSectionConfig = {
-  fieldsMap: {
-    name: {
-      type: "TextField",
-      label: "Name",
-    },
-    dateCertified: {
-      type: "Date",
-      label: "Date Certified",
-    },
-    awarder: {
-      type: "TextField",
-      label: "Awarder",
-    },
-    summary: {
-      type: "TextField",
-      label: "Summary",
-      rows: 5,
-    },
-  },
-  fieldName: "Certifications",
-  fieldIcon: <Redeem />,
-  displayField: "name",
-};
-
-export const languagesSectionConfig = {
-  fieldsMap: {
-    language: {
-      type: "TextField",
-      label: "Language",
-    },
-    fluency: {
-      type: "TextField",
-      label: "Fluency",
-    },
-  },
-  fieldName: "Languages",
-  fieldIcon: <Language />,
-  displayField: "language",
-};
-
-export const awardsSectionConfig = {
-  fieldsMap: {
-    title: {
-      type: "TextField",
-      label: "Title",
-    },
-    date: {
-      type: "Date",
-      label: "Date awarded",
-    },
-    awarder: {
-      type: "TextField",
-      label: "Awarder",
-    },
-    summary: {
-      type: "TextField",
-      label: "Summary",
-      rows: 5,
-    },
-  },
-  fieldName: "Awards",
-  fieldIcon: <EmojiEvents />,
-  displayField: "title",
+  fieldName: "Socials",
+  fieldIcon: <Public />,
+  displayField: "platform",
 };
 
 export const educationSectionConfig = {
@@ -150,19 +74,19 @@ export const educationSectionConfig = {
   displayField: "institution",
 };
 
-export const volunteerSectionConfig = {
+export const workExperienceSectionConfig = {
   fieldsMap: {
-    organization: {
+    company: {
       type: "TextField",
-      label: "Organization",
+      label: "Company",
     },
-    position: {
+    location: {
       type: "TextField",
-      label: "Position",
+      label: "Location",
     },
-    url: {
+    role: {
       type: "TextField",
-      label: "URL",
+      label: "Role",
     },
     startDate: {
       type: "Date",
@@ -171,61 +95,17 @@ export const volunteerSectionConfig = {
     endDate: {
       type: "Date",
       label: "End Date",
-      helperText: "Leave this field blank, if still volunteering here",
+      helperText: "Leave blank if you are still working here",
     },
     summary: {
       type: "TextField",
       label: "Summary",
       rows: 5,
     },
-    highlights: {
-      type: "MultiEntryList",
-      label: "Highlights",
-    },
   },
-  fieldName: "Volunteer",
-  fieldIcon: <VolunteerActivism />,
-  displayField: "organization",
-};
-
-export const skillsSectionConfig = {
-  fieldsMap: {
-    name: {
-      type: "TextField",
-      label: "Name",
-    },
-    level: {
-      type: "TextField",
-      label: "Level",
-    },
-    keywords: {
-      type: "MultiEntryList",
-      label: "Keywords",
-    },
-  },
-  fieldName: "Skills",
-  fieldIcon: <ShapeLine />,
-  displayField: "name",
-};
-
-export const socialsSectionConfig = {
-  fieldsMap: {
-    platform: {
-      type: "TextField",
-      label: "Platform",
-    },
-    username: {
-      type: "TextField",
-      label: "Username",
-    },
-    url: {
-      type: "TextField",
-      label: "URL",
-    },
-  },
-  fieldName: "Socials",
-  fieldIcon: <Public />,
-  displayField: "platform",
+  fieldName: "Work Experience",
+  fieldIcon: <Work />,
+  displayField: "company",
 };
 
 export const projectsSectionConfig = {
@@ -273,8 +153,69 @@ export const projectsSectionConfig = {
     },
   },
   fieldName: "Projects",
-  fieldIcon: <Public />,
+  fieldIcon: <Groups />,
   displayField: "name",
+};
+
+export const skillsSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    level: {
+      type: "TextField",
+      label: "Level",
+    },
+    keywords: {
+      type: "MultiEntryList",
+      label: "Keywords",
+    },
+  },
+  fieldName: "Skills",
+  fieldIcon: <ShapeLine />,
+  displayField: "name",
+};
+
+export const certificationsSectionConfig = {
+  fieldsMap: {
+    name: {
+      type: "TextField",
+      label: "Name",
+    },
+    dateCertified: {
+      type: "Date",
+      label: "Date Certified",
+    },
+    awarder: {
+      type: "TextField",
+      label: "Awarder",
+    },
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
+    },
+  },
+  fieldName: "Certifications",
+  fieldIcon: <Redeem />,
+  displayField: "name",
+};
+
+export const languagesSectionConfig = {
+  fieldsMap: {
+    language: {
+      type: "TextField",
+      label: "Language",
+    },
+    fluency: {
+      type: "TextField",
+      label: "Fluency",
+    },
+  },
+  fieldName: "Languages",
+  fieldIcon: <Language />,
+  displayField: "language",
 };
 
 export const publicationsSectionConfig = {
@@ -302,8 +243,33 @@ export const publicationsSectionConfig = {
     },
   },
   fieldName: "Publications",
-  fieldIcon: <Public />,
+  fieldIcon: <AutoStories />,
   displayField: "name",
+};
+
+export const awardsSectionConfig = {
+  fieldsMap: {
+    title: {
+      type: "TextField",
+      label: "Title",
+    },
+    date: {
+      type: "Date",
+      label: "Date awarded",
+    },
+    awarder: {
+      type: "TextField",
+      label: "Awarder",
+    },
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
+    },
+  },
+  fieldName: "Awards",
+  fieldIcon: <EmojiEvents />,
+  displayField: "title",
 };
 
 export const interestsSectionConfig = {
@@ -318,8 +284,46 @@ export const interestsSectionConfig = {
     },
   },
   fieldName: "Interests",
-  fieldIcon: <Public />,
+  fieldIcon: <OutdoorGrill />,
   displayField: "name",
+};
+
+export const volunteerSectionConfig = {
+  fieldsMap: {
+    organization: {
+      type: "TextField",
+      label: "Organization",
+    },
+    position: {
+      type: "TextField",
+      label: "Position",
+    },
+    url: {
+      type: "TextField",
+      label: "URL",
+    },
+    startDate: {
+      type: "Date",
+      label: "Start Date",
+    },
+    endDate: {
+      type: "Date",
+      label: "End Date",
+      helperText: "Leave this field blank, if still volunteering here",
+    },
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
+    },
+    highlights: {
+      type: "MultiEntryList",
+      label: "Highlights",
+    },
+  },
+  fieldName: "Volunteer",
+  fieldIcon: <VolunteerActivism />,
+  displayField: "organization",
 };
 
 export const referencesSectionConfig = {
@@ -335,6 +339,6 @@ export const referencesSectionConfig = {
     },
   },
   fieldName: "References",
-  fieldIcon: <Public />,
+  fieldIcon: <Handshake />,
   displayField: "name",
 };

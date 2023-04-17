@@ -20,26 +20,6 @@ import {
 const LeftPanel = () => {
   const sectionsList = [
     {
-      type: "GenericSection",
-      config: referencesSectionConfig,
-    },
-    {
-      type: "GenericSection",
-      config: interestsSectionConfig,
-    },
-    {
-      type: "GenericSection",
-      config: publicationsSectionConfig,
-    },
-    {
-      type: "GenericSection",
-      config: projectsSectionConfig,
-    },
-    {
-      type: "GenericSection",
-      config: workExperienceSectionConfig,
-    },
-    {
       type: "Basics",
     },
     {
@@ -48,15 +28,15 @@ const LeftPanel = () => {
     },
     {
       type: "GenericSection",
+      config: workExperienceSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: projectsSectionConfig,
+    },
+    {
+      type: "GenericSection",
       config: skillsSectionConfig,
-    },
-    {
-      type: "GenericSection",
-      config: volunteerSectionConfig,
-    },
-    {
-      type: "GenericSection",
-      config: awardsSectionConfig,
     },
     {
       type: "GenericSection",
@@ -65,6 +45,27 @@ const LeftPanel = () => {
     {
       type: "GenericSection",
       config: languagesSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: publicationsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: awardsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: interestsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: volunteerSectionConfig,
+    },
+
+    {
+      type: "GenericSection",
+      config: referencesSectionConfig,
     },
   ];
 

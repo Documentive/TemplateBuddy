@@ -9,8 +9,10 @@ const getSingletonResume = async () => {
   return resumes[0];
 };
 
-const putSection = async (req, res) => {
+const putSection = async (req, res, logger) => {
   const { section_name } = req.params;
+  logger.info(`PUT /resume/${section_name}`);
+
   const { section } = req.body;
   const resume = await getSingletonResume();
   const id = resume._id;
@@ -22,14 +24,15 @@ const putSection = async (req, res) => {
   return res.status(201).json({ updatedResume });
 };
 
-const getResume = async (_req, res) => {
+const getResume = async (_req, res, logger) => {
+  logger.info("GET /resume");
   const resume = await getSingletonResume();
   return res.status(200).json({ resume });
 };
 
-const ResumeController = (app) => {
-  app.put("/resume/:section_name", putSection);
-  app.get("/resume", getResume);
+const ResumeController = (app, logger) => {
+  app.put("/resume/:section_name", (req, res) => putSection(req, res, logger));
+  app.get("/resume", (req, res) => getResume(req, res, logger));
 };
 
 export default ResumeController;

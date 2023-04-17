@@ -46,6 +46,21 @@ const Basics = () => {
     dispatch(getResumeThunk());
   }, []);
 
+  // useEffect(() => {
+  //   if (!resumeLoading && resume !== null) {
+  //     const interval = setInterval(() => {
+  //       let resumeLocalStorage = localStorage.getItem("resume");
+  //       if (resumeLocalStorage !== JSON.stringify(resume)) {
+  //         console.log("Resume updated");
+  //       } else {
+  //         console.log("Resume not updated");
+  //       }
+  //     }, 1000);
+
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [resume, resumeLoading]);
+
   return (
     <div>
       <div className="flex w-full items-center gap-3 mb-4">

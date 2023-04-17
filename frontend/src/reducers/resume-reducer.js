@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getResumeThunk } from "../services/resume-thunk";
+import { getResumeThunk, putSectionThunk } from "../services/resume-thunk";
 
 let initialState = {
   resume: null,
@@ -24,6 +24,20 @@ const resumeSlice = createSlice({
       );
     },
     [getResumeThunk.rejected]: (state, _action) => {
+      state.resumeLoading = false;
+    },
+    [putSectionThunk.pending]: (state, _action) => {
+      state.resumeLoading = true;
+    },
+    [putSectionThunk.fulfilled]: (state, action) => {
+      state.resumeLoading = false;
+      state.resume = action.payload.data.updatedResume;
+      localStorage.setItem(
+        "resume",
+        JSON.stringify(action.payload.data.updatedResume)
+      );
+    },
+    [putSectionThunk.rejected]: (state, _action) => {
       state.resumeLoading = false;
     },
   },

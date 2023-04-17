@@ -1,5 +1,5 @@
 import { TextField, Avatar, IconButton, Tooltip } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Location from "./Location";
 import { Person } from "@mui/icons-material";
 
@@ -8,26 +8,22 @@ import { uploadImageThunk } from "../../../services/upload-thunk";
 
 import GenericSection from "./GenericListSection";
 import { socialsSectionConfig } from "../../../config/sectionConfig";
-import { getResumeThunk } from "../../../services/resume-thunk";
+import {
+  getResumeThunk,
+  putSectionThunk,
+} from "../../../services/resume-thunk";
 
 const Basics = () => {
   const { imageUploading, imageURL } = useSelector(
     (state) => state.uploadImage
   );
   const { resume, resumeLoading } = useSelector((state) => state.resume);
+  let [basicsObj, setBasicsObj] = useState({});
 
   const dispatch = useDispatch();
 
   const handleImageChange = (e) => {
     dispatch(uploadImageThunk(e.target.files[0]));
-  };
-
-  const getBasicsValue = (key) => {
-    if (!resumeLoading && resume !== null) {
-      return resume.basics[key];
-    }
-
-    return "";
   };
 
   const updateInLocalStorage = (key, value) => {
@@ -39,6 +35,7 @@ const Basics = () => {
   };
 
   const onTextFieldKeyUp = (e) => {
+    setBasicsObj({ ...basicsObj, [e.target.id]: e.target.value });
     updateInLocalStorage(e.target.id, e.target.value);
   };
 
@@ -46,20 +43,31 @@ const Basics = () => {
     dispatch(getResumeThunk());
   }, []);
 
-  // useEffect(() => {
-  //   if (!resumeLoading && resume !== null) {
-  //     const interval = setInterval(() => {
-  //       let resumeLocalStorage = localStorage.getItem("resume");
-  //       if (resumeLocalStorage !== JSON.stringify(resume)) {
-  //         console.log("Resume updated");
-  //       } else {
-  //         console.log("Resume not updated");
-  //       }
-  //     }, 1000);
+  useEffect(() => {
+    if (!resumeLoading && resume !== null) {
+      setBasicsObj(resume.basics);
+      const interval = setInterval(() => {
+        let resumeLocalStorage = localStorage.getItem("resume");
+        if (resumeLocalStorage !== JSON.stringify(resume)) {
+          const resumeLocalStorageObject = JSON.parse(resumeLocalStorage);
 
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [resume, resumeLoading]);
+          Object.keys(resumeLocalStorageObject).map((key) => {
+            if (
+              JSON.stringify(resumeLocalStorageObject[key]) !==
+              JSON.stringify(resume[key])
+            ) {
+              let section_name = key;
+              let section = {};
+              section[key] = resumeLocalStorageObject[key];
+              dispatch(putSectionThunk({ section_name, section }));
+            }
+          });
+        }
+      }, 10000);
+
+      return () => clearInterval(interval);
+    }
+  }, [resume, resumeLoading]);
 
   return (
     <div>
@@ -90,28 +98,46 @@ const Basics = () => {
       <TextField
         fullWidth
         label="Full Name"
-        value={getBasicsValue("name")}
         id="name"
-        onKeyUp={onTextFieldKeyUp}
+        value={basicsObj.name}
+        onChange={onTextFieldKeyUp}
       />
-      <TextField fullWidth label="Email" value={getBasicsValue("email")} />
+      <TextField
+        fullWidth
+        label="Email"
+        id="email"
+        value={basicsObj.email}
+        onChange={onTextFieldKeyUp}
+      />
       <TextField
         fullWidth
         label="Phone Number"
-        value={getBasicsValue("phone")}
+        id="phone"
+        value={basicsObj.phone}
+        onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Portfolio Link"
-        value={getBasicsValue("url")}
+        id="url"
+        value={basicsObj.url}
+        onChange={onTextFieldKeyUp}
       />
-      <TextField fullWidth label="Job Title" value={getBasicsValue("label")} />
+      <TextField
+        fullWidth
+        label="Job Title"
+        id="label"
+        value={basicsObj.label}
+        onChange={onTextFieldKeyUp}
+      />
       <TextField
         fullWidth
         label="Summary"
         multiline
         rows={5}
-        value={getBasicsValue("summary")}
+        id="summary"
+        value={basicsObj.summary}
+        onChange={onTextFieldKeyUp}
       />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
       <Location />

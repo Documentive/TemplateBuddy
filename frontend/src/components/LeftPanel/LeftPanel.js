@@ -1,32 +1,86 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
-import WorkExperience from "./sections/WorkExperience";
 import Basics from "./sections/Basics";
-import Education from "./sections/Education";
-import Skills from "./sections/Skills";
-import Volunteer from "./sections/Volunteer";
-import Awards from "./sections/Awards";
-import Certifications from "./sections/Certifications";
-import Languages from "./sections/Languages";
+import GenericSection from "./sections/GenericListSection";
+import {
+  awardsSectionConfig,
+  certificationsSectionConfig,
+  educationSectionConfig,
+  interestsSectionConfig,
+  languagesSectionConfig,
+  projectsSectionConfig,
+  publicationsSectionConfig,
+  referencesSectionConfig,
+  skillsSectionConfig,
+  volunteerSectionConfig,
+  workExperienceSectionConfig,
+} from "../../config/sectionConfig";
 
 const LeftPanel = () => {
+  const sectionsList = [
+    {
+      type: "GenericSection",
+      config: referencesSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: interestsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: publicationsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: projectsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: workExperienceSectionConfig,
+    },
+    {
+      type: "Basics",
+    },
+    {
+      type: "GenericSection",
+      config: educationSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: skillsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: volunteerSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: awardsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: certificationsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: languagesSectionConfig,
+    },
+  ];
+
   return (
     <div className="w-full h-full flex flex-row">
       <NavBar />
       <div className="w-full h-full flex flex-col">
         <Header />
         <div className="w-full h-full overflow-y-scroll">
-          {/* All resume sections go here
-          Each section gets its own component. To be created in the sections folder */}
-          <WorkExperience />
-          <Basics />
-          <Education />
-          <Skills />
-          <Volunteer />
-          <Awards />
-          <Certifications />
-          <Languages />
+          {sectionsList.map((section, index) => {
+            if (section.type === "GenericSection") {
+              return <GenericSection {...section.config} />;
+            } else if (section.type === "Basics") {
+              return <Basics />;
+            }
+          })}
         </div>
       </div>
     </div>

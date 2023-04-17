@@ -77,9 +77,9 @@ const LeftPanel = () => {
         <div className="w-full h-full overflow-y-scroll">
           {sectionsList.map((section, index) => {
             if (section.type === "GenericSection") {
-              return <GenericSection {...section.config} />;
+              return <GenericSection {...section.config} key={index} />;
             } else if (section.type === "Basics") {
-              return <Basics />;
+              return <Basics key={index} />;
             }
           })}
         </div>

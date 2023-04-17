@@ -15,12 +15,10 @@ const Basics = () => {
     (state) => state.uploadImage
   );
   const { resume, resumeLoading } = useSelector((state) => state.resume);
-  let [currentImageFile, setCurrentImageFile] = React.useState(null);
 
   const dispatch = useDispatch();
 
   const handleImageChange = (e) => {
-    setCurrentImageFile(e.target.files[0]);
     dispatch(uploadImageThunk(e.target.files[0]));
   };
 
@@ -30,6 +28,18 @@ const Basics = () => {
     }
 
     return "";
+  };
+
+  const updateInLocalStorage = (key, value) => {
+    if (!resumeLoading && resume !== null) {
+      let resume = JSON.parse(localStorage.getItem("resume"));
+      resume.basics[key] = value;
+      localStorage.setItem("resume", JSON.stringify(resume));
+    }
+  };
+
+  const onTextFieldKeyUp = (e) => {
+    updateInLocalStorage(e.target.id, e.target.value);
   };
 
   useEffect(() => {
@@ -46,7 +56,7 @@ const Basics = () => {
       </div>
       <IconButton component="label">
         <Tooltip title="Upload Image">
-          {imageURL === "" ? (
+          {!imageUploading && imageURL === "" ? (
             <Avatar sx={{ width: 96, height: 96 }} />
           ) : (
             <img
@@ -62,7 +72,13 @@ const Basics = () => {
           onChange={handleImageChange}
         />
       </IconButton>
-      <TextField fullWidth label="Full Name" value={getBasicsValue("name")} />
+      <TextField
+        fullWidth
+        label="Full Name"
+        value={getBasicsValue("name")}
+        id="name"
+        onKeyUp={onTextFieldKeyUp}
+      />
       <TextField fullWidth label="Email" value={getBasicsValue("email")} />
       <TextField
         fullWidth

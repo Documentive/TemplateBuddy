@@ -18,6 +18,10 @@ const resumeSlice = createSlice({
     [getResumeThunk.fulfilled]: (state, action) => {
       state.resumeLoading = false;
       state.resume = action.payload.data.resume;
+      localStorage.setItem(
+        "resume",
+        JSON.stringify(action.payload.data.resume)
+      );
     },
     [getResumeThunk.rejected]: (state, _action) => {
       state.resumeLoading = false;

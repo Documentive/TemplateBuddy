@@ -2,10 +2,20 @@ import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { configureStore } from "@reduxjs/toolkit";
+
+import uploadReducer from "./reducers/upload-reducer";
+import { Provider } from "react-redux";
+
+const store = configureStore({
+  reducer: {
+    uploadImage: uploadReducer,
+  },
+});
 
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       {/* LocalizationProvider component receives your chosen date library's adapter and makes it accessible to all the Date and Time Pickers component using React context. */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         {/* Parent of full width and height Divided into 2 panels Left Panel has
@@ -22,7 +32,7 @@ const App = () => {
           </div>
         </div>
       </LocalizationProvider>
-    </>
+    </Provider>
   );
 };
 

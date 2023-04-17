@@ -2,10 +2,27 @@ import { TextField, Avatar, IconButton, Tooltip } from "@mui/material";
 import React from "react";
 import Location from "./Location";
 import { Person } from "@mui/icons-material";
+
+import { useDispatch, useSelector } from "react-redux";
+import { uploadImageThunk } from "../../../services/upload-thunk";
+
 import GenericSection from "./GenericListSection";
 import { socialsSectionConfig } from "../../../config/sectionConfig";
 
+
 const Basics = () => {
+  const { imageUploading, imageURL } = useSelector(
+    (state) => state.uploadImage
+  );
+  let [currentImageFile, setCurrentImageFile] = React.useState(null);
+
+  const dispatch = useDispatch();
+
+  const handleImageChange = (e) => {
+    setCurrentImageFile(e.target.files[0]);
+    dispatch(uploadImageThunk(e.target.files[0]));
+  };
+
   return (
     <div>
       <div className="flex w-full items-center gap-3 mb-4">
@@ -16,9 +33,21 @@ const Basics = () => {
       </div>
       <IconButton component="label">
         <Tooltip title="Upload Image">
-          <Avatar sx={{ width: 96, height: 96 }} />
+          {imageURL === "" ? (
+            <Avatar sx={{ width: 96, height: 96 }} />
+          ) : (
+            <img
+              src={imageURL}
+              style={{ width: 96, height: 96, borderRadius: "50%" }}
+            />
+          )}
         </Tooltip>
-        <input hidden type="file" accept="image/*" />
+        <input
+          hidden
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
       </IconButton>
       <TextField fullWidth label="Full Name" />
       <TextField fullWidth label="Email" />

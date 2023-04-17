@@ -13,6 +13,10 @@ const store = configureStore({
     uploadImage: uploadReducer,
     resume: resumeReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 const App = () => {

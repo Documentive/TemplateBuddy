@@ -22,8 +22,14 @@ const putSection = async (req, res) => {
   return res.status(201).json({ updatedResume });
 };
 
+const getResume = async (_req, res) => {
+  const resume = await getSingletonResume();
+  return res.status(200).json({ resume });
+};
+
 const ResumeController = (app) => {
   app.put("/resume/:section_name", putSection);
+  app.get("/resume", getResume);
 };
 
 export default ResumeController;

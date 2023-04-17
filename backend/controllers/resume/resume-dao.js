@@ -8,12 +8,9 @@ export const getAllResumes = () => {
   return resumeModel.find();
 };
 
-export const updateBasicsById = (id, basics) => {
-  return resumeModel.findByIdAndUpdate(
-    id,
-    {
-      basics,
-    },
-    { new: true }
-  );
+export const updateSectionById = (id, section_name, value) => {
+  let updateObj = {};
+  updateObj[section_name] = value;
+
+  return resumeModel.findByIdAndUpdate(id, updateObj, { new: true });
 };

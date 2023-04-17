@@ -9,16 +9,21 @@ const getSingletonResume = async () => {
   return resumes[0];
 };
 
-const putBasics = async (req, res) => {
-  const { basics } = req.body;
+const putSection = async (req, res) => {
+  const { section_name } = req.params;
+  const { section } = req.body;
   const resume = await getSingletonResume();
   const id = resume._id;
-  const updatedResume = await resumeDao.updateBasicsById(id, basics);
+  const updatedResume = await resumeDao.updateSectionById(
+    id,
+    section_name,
+    section[section_name]
+  );
   return res.status(201).json({ updatedResume });
 };
 
 const ResumeController = (app) => {
-  app.put("/resume/basics", putBasics);
+  app.put("/resume/:section_name", putSection);
 };
 
 export default ResumeController;

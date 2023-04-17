@@ -1,7 +1,13 @@
 import express from "express";
 import cors from "cors";
+import mongoose from "mongoose";
 
 import HealthController from "./controllers/health/health-controller.js";
+import ResumeController from "./controllers/resume/resume-controller.js";
+
+const CONNECTION_STRING =
+  process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/TemplateBuddy";
+mongoose.connect(CONNECTION_STRING);
 
 const cors_options = {
   origin: "*",
@@ -13,5 +19,6 @@ app.use(cors(cors_options));
 app.use(express.json());
 
 HealthController(app);
+ResumeController(app);
 
 app.listen(process.env.PORT || 4000);

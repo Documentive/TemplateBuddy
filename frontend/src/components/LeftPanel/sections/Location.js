@@ -1,10 +1,11 @@
 import { Apartment } from "@mui/icons-material";
 import { TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Location = () => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
+  let [locationObj, setLocationObj] = useState({});
 
   const getBasicsLocationValue = (key) => {
     if (!resumeLoading && resume !== null) {
@@ -12,6 +13,25 @@ const Location = () => {
     }
 
     return "";
+  };
+
+  useEffect(() => {
+    if (!resumeLoading && resume !== null) {
+      setLocationObj(resume.basics.location);
+    }
+  }, [resume, resumeLoading]);
+
+  const updateInLocalStorage = (key, value) => {
+    if (!resumeLoading && resume !== null) {
+      let resume = JSON.parse(localStorage.getItem("resume"));
+      resume.basics.location[key] = value;
+      localStorage.setItem("resume", JSON.stringify(resume));
+    }
+  };
+
+  const onTextFieldKeyUp = (e) => {
+    setLocationObj({ ...locationObj, [e.target.id]: e.target.value });
+    updateInLocalStorage(e.target.id, e.target.value);
   };
 
   return (
@@ -25,27 +45,37 @@ const Location = () => {
       <TextField
         fullWidth
         label="Address"
-        value={getBasicsLocationValue("address")}
+        id="address"
+        value={locationObj.address}
+        onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="City"
-        value={getBasicsLocationValue("city")}
+        id="city"
+        value={locationObj.city}
+        onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Region"
-        value={getBasicsLocationValue("region")}
+        id="region"
+        value={locationObj.region}
+        onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Country"
-        value={getBasicsLocationValue("countryCode")}
+        id="countryCode"
+        value={locationObj.countryCode}
+        onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Postal Code"
-        value={getBasicsLocationValue("postalCode")}
+        id="postalCode"
+        value={locationObj.postalCode}
+        onChange={onTextFieldKeyUp}
       />
     </div>
   );

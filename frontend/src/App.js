@@ -5,11 +5,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { configureStore } from "@reduxjs/toolkit";
 
 import uploadReducer from "./reducers/upload-reducer";
+import resumeReducer from "./reducers/resume-reducer";
 import { Provider } from "react-redux";
 
 const store = configureStore({
   reducer: {
     uploadImage: uploadReducer,
+    resume: resumeReducer,
   },
 });
 

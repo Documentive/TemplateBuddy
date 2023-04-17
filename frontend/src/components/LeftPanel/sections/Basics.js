@@ -1,5 +1,5 @@
 import { TextField, Avatar, IconButton, Tooltip } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Location from "./Location";
 import { Person } from "@mui/icons-material";
 
@@ -8,12 +8,13 @@ import { uploadImageThunk } from "../../../services/upload-thunk";
 
 import GenericSection from "./GenericListSection";
 import { socialsSectionConfig } from "../../../config/sectionConfig";
-
+import { getResumeThunk } from "../../../services/resume-thunk";
 
 const Basics = () => {
   const { imageUploading, imageURL } = useSelector(
     (state) => state.uploadImage
   );
+  const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [currentImageFile, setCurrentImageFile] = React.useState(null);
 
   const dispatch = useDispatch();
@@ -22,6 +23,14 @@ const Basics = () => {
     setCurrentImageFile(e.target.files[0]);
     dispatch(uploadImageThunk(e.target.files[0]));
   };
+
+  useEffect(() => {
+    dispatch(getResumeThunk());
+  }, []);
+
+  useEffect(() => {
+    console.log(resume);
+  }, [resumeLoading]);
 
   return (
     <div>

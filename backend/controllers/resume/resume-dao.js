@@ -1,7 +1,17 @@
 import resumeModel from "./resume-model.js";
 
 export const createEmptyResume = () => {
-  return resumeModel.create({ basics: {} });
+  return resumeModel.create({
+    basics: {
+      location: {
+        address: "",
+        postalCode: "",
+        city: "",
+        countryCode: "",
+        region: "",
+      },
+    },
+  });
 };
 
 export const getAllResumes = () => {

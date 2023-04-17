@@ -2,9 +2,13 @@ import { TextField, Avatar, IconButton, Tooltip } from "@mui/material";
 import React from "react";
 import Location from "./Location";
 import { Person } from "@mui/icons-material";
-import Socials from "./Socials";
+
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImageThunk } from "../../../services/upload-thunk";
+
+import GenericSection from "./GenericListSection";
+import { socialsSectionConfig } from "../../../config/sectionConfig";
+
 
 const Basics = () => {
   const { imageUploading, imageURL } = useSelector(
@@ -54,7 +58,7 @@ const Basics = () => {
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
       <Location />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
-      <Socials />
+      <GenericSection {...socialsSectionConfig} />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
     </div>
   );

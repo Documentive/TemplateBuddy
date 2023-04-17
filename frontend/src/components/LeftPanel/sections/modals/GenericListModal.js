@@ -76,6 +76,7 @@ const GenericModal = ({
                       multiline
                       rows={value.rows}
                       onChange={(e) => onInputToField(e, field)}
+                      key={field}
                     />
                   );
                 }
@@ -85,6 +86,7 @@ const GenericModal = ({
                     label={value.label}
                     name={value.label.toLowerCase()}
                     onChange={(e) => onInputToField(e, field)}
+                    key={field}
                   />
                 );
               }
@@ -95,6 +97,7 @@ const GenericModal = ({
                     label={value.label}
                     openTo="year"
                     views={["year", "month", "day"]}
+                    key={field}
                     slotProps={
                       "helperText" in value
                         ? {
@@ -110,7 +113,7 @@ const GenericModal = ({
               }
               case "MultiEntryList": {
                 return (
-                  <div>
+                  <div key={field}>
                     <TextField
                       label={value.label}
                       name={value.label.toLowerCase()}

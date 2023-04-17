@@ -46,35 +46,35 @@ const Location = () => {
         fullWidth
         label="Address"
         id="address"
-        value={locationObj.address}
+        value={locationObj.address || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="City"
         id="city"
-        value={locationObj.city}
+        value={locationObj.city || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Region"
         id="region"
-        value={locationObj.region}
+        value={locationObj.region || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Country"
         id="countryCode"
-        value={locationObj.countryCode}
+        value={locationObj.countryCode || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Postal Code"
         id="postalCode"
-        value={locationObj.postalCode}
+        value={locationObj.postalCode || ""}
         onChange={onTextFieldKeyUp}
       />
     </div>

@@ -99,35 +99,35 @@ const Basics = () => {
         fullWidth
         label="Full Name"
         id="name"
-        value={basicsObj.name}
+        value={basicsObj.name || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Email"
         id="email"
-        value={basicsObj.email}
+        value={basicsObj.email || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Phone Number"
         id="phone"
-        value={basicsObj.phone}
+        value={basicsObj.phone || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Portfolio Link"
         id="url"
-        value={basicsObj.url}
+        value={basicsObj.url || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
         fullWidth
         label="Job Title"
         id="label"
-        value={basicsObj.label}
+        value={basicsObj.label || ""}
         onChange={onTextFieldKeyUp}
       />
       <TextField
@@ -136,7 +136,7 @@ const Basics = () => {
         multiline
         rows={5}
         id="summary"
-        value={basicsObj.summary}
+        value={basicsObj.summary || ""}
         onChange={onTextFieldKeyUp}
       />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />

@@ -18,7 +18,6 @@ const uploadSlice = createSlice({
     [uploadImageThunk.fulfilled]: (state, action) => {
       state.imageUploading = false;
       state.imageURL = `${process.env.REACT_APP_API_BASE}${action.payload.data.path}`;
-      console.log(state.imageURL);
     },
     [uploadImageThunk.rejected]: (state, _action) => {
       state.imageUploading = false;

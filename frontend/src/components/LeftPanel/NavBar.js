@@ -18,7 +18,14 @@ const NavBar = () => {
             TransitionComponent={Fade}
             TransitionProps={{ timeout: 800 }}
           >
-            <IconButton aria-label={ariaLabel}>{icon}</IconButton>
+            <IconButton
+              aria-label={ariaLabel}
+              onClick={() => {
+                window.location.href = `#${ariaLabel}`;
+              }}
+            >
+              {icon}
+            </IconButton>
           </Tooltip>
         ))}
       </div>

@@ -32,7 +32,9 @@ const GenericSection = ({
     <div>
       <div className="flex w-full items-center gap-3 mb-4">
         <div className="ml-2">{fieldIcon}</div>
-        <p className="text-3xl">{fieldName}</p>
+        <p className="text-3xl" id={dbField[dbField.length - 1]}>
+          {fieldName}
+        </p>
       </div>
       <Button
         variant="contained"

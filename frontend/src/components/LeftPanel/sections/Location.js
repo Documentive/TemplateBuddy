@@ -32,7 +32,9 @@ const Location = () => {
         <div className="ml-2">
           <Apartment />
         </div>
-        <p className="text-3xl">Location</p>
+        <p className="text-3xl" id="location">
+          Location
+        </p>
       </div>
       <TextField
         fullWidth

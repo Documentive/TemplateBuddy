@@ -75,7 +75,9 @@ const Basics = () => {
         <div className="ml-2">
           <Person />
         </div>
-        <p className="text-3xl">Personal Details</p>
+        <p className="text-3xl" id="personal-details">
+          Personal Details
+        </p>
       </div>
       <IconButton component="label">
         <Tooltip title="Upload Image">

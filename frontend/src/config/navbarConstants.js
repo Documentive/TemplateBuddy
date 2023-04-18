@@ -20,8 +20,8 @@ import {
 export const navLinks = [
   {
     id: 1,
-    title: "Basics",
-    ariaLabel: "basics",
+    title: "Personal Details",
+    ariaLabel: "personal-details",
     href: "#",
     icon: <Person />,
   },
@@ -35,7 +35,7 @@ export const navLinks = [
   {
     id: 3,
     title: "Socials",
-    ariaLabel: "socials",
+    ariaLabel: "profiles",
     href: "#",
     icon: <Public />,
   },
@@ -49,7 +49,7 @@ export const navLinks = [
   {
     id: 5,
     title: "Work Experience",
-    ariaLabel: "work-experience",
+    ariaLabel: "work",
     href: "#",
     icon: <Work />,
   },
@@ -70,7 +70,7 @@ export const navLinks = [
   {
     id: 8,
     title: "Certifications",
-    ariaLabel: "certifications",
+    ariaLabel: "certificates",
     href: "#",
     icon: <Redeem />,
   },

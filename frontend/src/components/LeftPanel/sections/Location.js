@@ -7,14 +7,6 @@ const Location = () => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [locationObj, setLocationObj] = useState({});
 
-  const getBasicsLocationValue = (key) => {
-    if (!resumeLoading && resume !== null) {
-      return resume.basics.location[key];
-    }
-
-    return "";
-  };
-
   useEffect(() => {
     if (!resumeLoading && resume !== null) {
       setLocationObj(resume.basics.location);

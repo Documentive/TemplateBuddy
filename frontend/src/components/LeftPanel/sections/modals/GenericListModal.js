@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const GenericModal = ({
   fieldsMap,
@@ -19,7 +20,9 @@ const GenericModal = ({
   entryList,
   setEntryList,
   fieldName,
+  dbField,
 }) => {
+  const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [modalEntryObject, setModalEntryObject] = useState({});
   let [genericListMap, setGenericListMap] = useState({});
   let [genericEntryMap, setGenericEntryMap] = useState({});
@@ -34,7 +37,10 @@ const GenericModal = ({
       let date = new Date(d);
       setModalEntryObject({
         ...modalEntryObject,
-        [key]: `${date.getMonth() + 1}-${date.getFullYear()}`,
+        [key]: {
+          month: date.getMonth() + 1,
+          year: date.getFullYear(),
+        },
       });
     }
   };
@@ -51,6 +57,26 @@ const GenericModal = ({
         [field]: [...genericListMap[field], genericEntryMap[field]],
       });
     }
+  };
+
+  const updateInLocalStorage = (obj) => {
+    if (!resumeLoading && resume !== null) {
+      let resume = JSON.parse(localStorage.getItem("resume"));
+      let arrayObj = resume[dbField[0]];
+      for (let i = 1; i < dbField.length; i++) {
+        arrayObj = arrayObj[dbField[i]];
+      }
+      arrayObj.push(obj);
+      localStorage.setItem("resume", JSON.stringify(resume));
+    }
+  };
+
+  const onSubmitBtnClick = () => {
+    setEntryList([...entryList, { ...modalEntryObject, ...genericListMap }]);
+    setOpenModal(false);
+    setGenericListMap({});
+    const finalMap = { ...modalEntryObject, ...genericListMap };
+    updateInLocalStorage(finalMap);
   };
 
   return (
@@ -155,18 +181,7 @@ const GenericModal = ({
           })}
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => {
-              setEntryList([
-                ...entryList,
-                { ...modalEntryObject, ...genericListMap },
-              ]);
-              setOpenModal(false);
-              setGenericListMap({});
-            }}
-          >
-            Add New {fieldName}
-          </Button>
+          <Button onClick={onSubmitBtnClick}>Add New {fieldName}</Button>
         </DialogActions>
       </Dialog>
     </>

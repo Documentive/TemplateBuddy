@@ -20,9 +20,11 @@ const GenericSection = ({
       for (let i = 1; i < dbField.length; i++) {
         arrayObj = arrayObj[dbField[i]];
       }
+      let tempEntryList = [];
       arrayObj.map((entry) => {
-        setEntryList([...entryList, entry]);
+        tempEntryList = [...tempEntryList, entry];
       });
+      setEntryList(tempEntryList);
     }
   }, [resume, resumeLoading]);
 
@@ -47,6 +49,7 @@ const GenericSection = ({
         entryList={entryList}
         setEntryList={setEntryList}
         fieldName={fieldName}
+        dbField={dbField}
       />
       {Object.keys(entryList).length > 0 && (
         <>

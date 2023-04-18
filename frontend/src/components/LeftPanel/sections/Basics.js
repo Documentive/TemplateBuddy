@@ -41,6 +41,7 @@ const Basics = () => {
 
   useEffect(() => {
     dispatch(getResumeThunk());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -61,12 +62,15 @@ const Basics = () => {
               section[key] = resumeLocalStorageObject[key];
               dispatch(putSectionThunk({ section_name, section }));
             }
+
+            return null;
           });
         }
       }, 10000);
 
       return () => clearInterval(interval);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resume, resumeLoading]);
 
   return (
@@ -86,6 +90,7 @@ const Basics = () => {
           ) : (
             <img
               src={imageURL}
+              alt="profile"
               style={{ width: 96, height: 96, borderRadius: "50%" }}
             />
           )}

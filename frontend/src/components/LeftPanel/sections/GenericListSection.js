@@ -23,9 +23,12 @@ const GenericSection = ({
       let tempEntryList = [];
       arrayObj.map((entry) => {
         tempEntryList = [...tempEntryList, entry];
+        return null;
       });
       setEntryList(tempEntryList);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resume, resumeLoading]);
 
   return (

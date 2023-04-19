@@ -73,6 +73,28 @@ const Basics = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resume, resumeLoading]);
 
+  const getImage = () => {
+    if (!imageUploading && imageURL !== "") {
+      return (
+        <img
+          src={imageURL}
+          alt="profile"
+          style={{ width: 96, height: 96, borderRadius: "50%" }}
+        />
+      );
+    } else if (Object.keys(basicsObj).length > 0 && "image" in basicsObj) {
+      return (
+        <img
+          src={`${process.env.REACT_APP_API_BASE}${basicsObj.image}`}
+          alt="profile"
+          style={{ width: 96, height: 96, borderRadius: "50%" }}
+        />
+      );
+    } else {
+      return <Avatar sx={{ width: 96, height: 96 }} />;
+    }
+  };
+
   return (
     <div>
       <div className="flex w-full items-center gap-3 mb-4">
@@ -84,17 +106,7 @@ const Basics = () => {
         </p>
       </div>
       <IconButton component="label">
-        <Tooltip title="Upload Image">
-          {!imageUploading && imageURL === "" ? (
-            <Avatar sx={{ width: 96, height: 96 }} />
-          ) : (
-            <img
-              src={imageURL}
-              alt="profile"
-              style={{ width: 96, height: 96, borderRadius: "50%" }}
-            />
-          )}
-        </Tooltip>
+        <Tooltip title="Upload Image">{getImage()}</Tooltip>
         <input
           hidden
           type="file"

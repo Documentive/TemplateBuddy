@@ -1,13 +1,5 @@
 import * as resumeDao from "./resume-dao.js";
-
-const getSingletonResume = async () => {
-  let resumes = await resumeDao.getAllResumes();
-  if (resumes.length === 0) {
-    resumes = [await resumeDao.createEmptyResume()];
-  }
-
-  return resumes[0];
-};
+import * as resumeUtils from "../utils/get-resume.js";
 
 const putSection = async (req, res, logger) => {
   const { section_name } = req.params;
@@ -15,7 +7,7 @@ const putSection = async (req, res, logger) => {
 
   const { section } = req.body;
   console.log(section);
-  const resume = await getSingletonResume();
+  const resume = await resumeUtils.getSingletonResume();
   const id = resume._id;
   const updatedResume = await resumeDao.updateSectionById(
     id,
@@ -27,7 +19,7 @@ const putSection = async (req, res, logger) => {
 
 const getResume = async (_req, res, logger) => {
   logger.info("GET /resume");
-  const resume = await getSingletonResume();
+  const resume = await resumeUtils.getSingletonResume();
   return res.status(200).json({ resume });
 };
 

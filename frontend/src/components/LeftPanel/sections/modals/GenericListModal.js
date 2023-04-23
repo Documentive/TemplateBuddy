@@ -21,6 +21,7 @@ const GenericModal = ({
   setEntryList,
   fieldName,
   dbField,
+  fieldGroups,
 }) => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [modalEntryObject, setModalEntryObject] = useState({});
@@ -79,6 +80,128 @@ const GenericModal = ({
     updateInLocalStorage(finalMap);
   };
 
+  let fieldDOM = {};
+
+  Object.keys(fieldsMap).map((field) => {
+    let value = fieldsMap[field];
+    let content;
+    switch (value.type) {
+      case "TextField": {
+        if ("rows" in value) {
+          content = (
+            <TextField
+              fullWidth
+              label={value.label}
+              name={value.label.toLowerCase()}
+              multiline
+              rows={value.rows}
+              onChange={(e) => onInputToField(e, field)}
+              key={field}
+            />
+          );
+          fieldDOM[field] = content;
+        }
+
+        content = (
+          <TextField
+            fullWidth
+            label={value.label}
+            name={value.label.toLowerCase()}
+            onChange={(e) => onInputToField(e, field)}
+            key={field}
+          />
+        );
+        fieldDOM[field] = content;
+      }
+      case "Date": {
+        content = (
+          <DatePicker
+            sx={{ width: 1 }}
+            label={value.label}
+            openTo="year"
+            views={["year", "month", "day"]}
+            key={field}
+            slotProps={
+              "helperText" in value
+                ? {
+                    textField: {
+                      helperText: value.helperText,
+                    },
+                  }
+                : {}
+            }
+            onChange={(d, e) => onInputToDatePicker(d, e, field)}
+          />
+        );
+        fieldDOM[field] = content;
+      }
+      case "MultiEntryList": {
+        content = (
+          <div key={field}>
+            <TextField
+              label={value.label}
+              name={value.label.toLowerCase()}
+              onKeyUp={(e) => {
+                setGenericEntryMap({
+                  ...genericEntryMap,
+                  [field]: e.target.value,
+                });
+              }}
+              sx={{ float: "left" }}
+            />
+            <Button
+              variant="contained"
+              onClick={() => handleAddToMultiEntryList(field)}
+            >
+              Add
+            </Button>
+            <br />
+            <br />
+            {field in genericListMap && genericListMap[field].length > 0 && (
+              <List>
+                {genericListMap[field].map((entry, idx) => {
+                  return (
+                    <ListItem key={idx}>
+                      <ListItemText>{entry}</ListItemText>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            )}
+            {!(field in genericListMap) && <div>Nothing added yet!</div>}
+          </div>
+        );
+        fieldDOM[field] = content;
+      }
+    }
+  });
+
+  let groupedFields = {};
+  // console.log(fieldGroups);
+  fieldGroups.map((group, idx) => {
+    let childElements = [];
+    let parentElement;
+    if (group.length > 1) {
+      for (let index = 0; index < group.length; index++) {
+        // console.log(group[index]);
+        // console.log(fieldDOM[group[index]]);
+        childElements.push(fieldDOM[group[index]]);
+      }
+      // console.log(childElements);
+      parentElement = React.createElement("div", childElements);
+      groupedFields[idx] = parentElement;
+      // console.log(groupedFields[idx])
+    } else {
+      // console.log(group[0]);
+      childElements.push(fieldDOM[group[0]]);
+      // console.log(childElements);
+      parentElement = React.createElement("div", childElements);
+      groupedFields[idx] = parentElement;
+      // console.log(groupedFields[idx]);
+    }
+    // console.log(groupedFields);
+  });
+
   return (
     <>
       <Dialog
@@ -89,96 +212,14 @@ const GenericModal = ({
       >
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
-          {Object.keys(fieldsMap).map((field) => {
-            let value = fieldsMap[field];
-            switch (value.type) {
-              case "TextField": {
-                if ("rows" in value) {
-                  return (
-                    <TextField
-                      fullWidth
-                      label={value.label}
-                      name={value.label.toLowerCase()}
-                      multiline
-                      rows={value.rows}
-                      onChange={(e) => onInputToField(e, field)}
-                      key={field}
-                    />
-                  );
-                }
-                return (
-                  <TextField
-                    fullWidth
-                    label={value.label}
-                    name={value.label.toLowerCase()}
-                    onChange={(e) => onInputToField(e, field)}
-                    key={field}
-                  />
-                );
-              }
-              case "Date": {
-                return (
-                  <DatePicker
-                    sx={{ width: 1 }}
-                    label={value.label}
-                    openTo="year"
-                    views={["year", "month", "day"]}
-                    key={field}
-                    slotProps={
-                      "helperText" in value
-                        ? {
-                            textField: {
-                              helperText: value.helperText,
-                            },
-                          }
-                        : {}
-                    }
-                    onChange={(d, e) => onInputToDatePicker(d, e, field)}
-                  />
-                );
-              }
-              case "MultiEntryList": {
-                return (
-                  <div key={field}>
-                    <TextField
-                      label={value.label}
-                      name={value.label.toLowerCase()}
-                      onKeyUp={(e) => {
-                        setGenericEntryMap({
-                          ...genericEntryMap,
-                          [field]: e.target.value,
-                        });
-                      }}
-                      sx={{ float: "left" }}
-                    />
-                    <Button
-                      variant="contained"
-                      onClick={() => handleAddToMultiEntryList(field)}
-                    >
-                      Add
-                    </Button>
-                    <br />
-                    <br />
-                    {field in genericListMap &&
-                      genericListMap[field].length > 0 && (
-                        <List>
-                          {genericListMap[field].map((entry, idx) => {
-                            return (
-                              <ListItem key={idx}>
-                                <ListItemText>{entry}</ListItemText>
-                              </ListItem>
-                            );
-                          })}
-                        </List>
-                      )}
-                    {!(field in genericListMap) && (
-                      <div>Nothing added yet!</div>
-                    )}
-                  </div>
-                );
-              }
-            }
-          })}
+          {
+            Object.keys(groupedFields).map((temp) => {
+              console.log(groupedFields[temp])
+              return (
+                groupedFields[temp]
+              )
+            })
+          }
         </DialogContent>
         <DialogActions>
           <Button onClick={onSubmitBtnClick}>Add New {fieldName}</Button>

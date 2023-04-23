@@ -30,6 +30,7 @@ export const socialsSectionConfig = {
   },
   fieldName: "Socials",
   fieldIcon: <Public />,
+  fieldGroups: [["network", "username"], ["url"]],
   displayField: "network",
   dbField: ["basics", "profiles"],
 };

@@ -97,7 +97,7 @@ const Basics = () => {
 
   return (
     <div>
-      <div className="flex w-full items-center gap-3 mb-4">
+      {/* <div className="flex w-full items-center gap-3 mb-4">
         <div className="ml-2">
           <Person />
         </div>
@@ -160,7 +160,7 @@ const Basics = () => {
       />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
       <Location />
-      <hr className="my-3 border-red-800 w-4/5 mx-auto" />
+      <hr className="my-3 border-red-800 w-4/5 mx-auto" /> */}
       <GenericSection {...socialsSectionConfig} />
       <hr className="my-3 border-red-800 w-4/5 mx-auto" />
     </div>

@@ -7,6 +7,7 @@ const GenericSection = ({
   fieldsMap,
   fieldName,
   fieldIcon,
+  fieldGroups,
   displayField,
   dbField,
 }) => {
@@ -55,6 +56,7 @@ const GenericSection = ({
         setEntryList={setEntryList}
         fieldName={fieldName}
         dbField={dbField}
+        fieldGroups={fieldGroups}
       />
       {Object.keys(entryList).length > 0 && (
         <>

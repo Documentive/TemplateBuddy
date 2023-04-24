@@ -73,6 +73,7 @@ export const educationSectionConfig = {
   },
   fieldName: "Education",
   fieldIcon: <School />,
+  fieldGroups: [["institution", "studyType", "area", "score", "startDate", "endDate"], ["url"], ["courses"]],
   displayField: "institution",
   dbField: ["education"],
 };
@@ -108,6 +109,7 @@ export const workExperienceSectionConfig = {
   },
   fieldName: "Work Experience",
   fieldIcon: <Work />,
+  fieldGroups: [["name", "role"], ["location"], ["startDate", "endDate"], ["summary"]],
   displayField: "name",
   dbField: ["work"],
 };
@@ -158,6 +160,7 @@ export const projectsSectionConfig = {
   },
   fieldName: "Projects",
   fieldIcon: <Groups />,
+  fieldGroups: [["name", "description", "startDate", "endDate"], ["url"], ["entity", "type"], ["highlights"], ["roles"], ["keywords"]],
   displayField: "name",
   dbField: ["projects"],
 };
@@ -179,6 +182,7 @@ export const skillsSectionConfig = {
   },
   fieldName: "Skills",
   fieldIcon: <ShapeLine />,
+  fieldGroups: [["name", "level"], ["keywords"]],
   displayField: "name",
   dbField: ["skills"],
 };
@@ -205,6 +209,7 @@ export const certificationsSectionConfig = {
   },
   fieldName: "Certifications",
   fieldIcon: <Redeem />,
+  fieldGroups: [["name", "dateCertified"], ["awarder"], ["summary"]],
   displayField: "name",
   dbField: ["certificates"],
 };
@@ -222,6 +227,7 @@ export const languagesSectionConfig = {
   },
   fieldName: "Languages",
   fieldIcon: <Language />,
+  fieldGroups: [["language", "fluency"]],
   displayField: "language",
   dbField: ["languages"],
 };
@@ -252,6 +258,7 @@ export const publicationsSectionConfig = {
   },
   fieldName: "Publications",
   fieldIcon: <AutoStories />,
+  fieldGroups: [["name", "publisher", "releaseDate", "url"], ["summary"]],
   displayField: "name",
   dbField: ["publications"],
 };
@@ -278,6 +285,7 @@ export const awardsSectionConfig = {
   },
   fieldName: "Awards",
   fieldIcon: <EmojiEvents />,
+  fieldGroups: [["title", "date"], ["awarder"], ["summary"]],
   displayField: "title",
   dbField: ["awards"],
 };
@@ -295,6 +303,7 @@ export const interestsSectionConfig = {
   },
   fieldName: "Interests",
   fieldIcon: <OutdoorGrill />,
+  fieldGroups: [["name"], ["keywords"]],
   displayField: "name",
   dbField: ["interests"],
 };
@@ -334,6 +343,7 @@ export const volunteerSectionConfig = {
   },
   fieldName: "Volunteer",
   fieldIcon: <VolunteerActivism />,
+  fieldGroups: [["organization", "position", "startDate", "endDate"],["url"],["summary"], ["highlights"]],
   displayField: "organization",
   dbField: ["volunteer"],
 };
@@ -352,6 +362,7 @@ export const referencesSectionConfig = {
   },
   fieldName: "References",
   fieldIcon: <Handshake />,
+  fieldGroups: [["name"], ["reference"]],
   displayField: "name",
   dbField: ["references"],
 };

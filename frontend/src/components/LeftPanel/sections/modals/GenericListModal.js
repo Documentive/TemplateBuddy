@@ -112,6 +112,7 @@ const GenericModal = ({
           />
         );
         fieldDOM[field] = content;
+        break;
       }
       case "Date": {
         content = (
@@ -134,6 +135,7 @@ const GenericModal = ({
           />
         );
         fieldDOM[field] = content;
+        break;
       }
       case "MultiEntryList": {
         content = (
@@ -172,6 +174,7 @@ const GenericModal = ({
           </div>
         );
         fieldDOM[field] = content;
+        break;
       }
     }
   });
@@ -202,6 +205,10 @@ const GenericModal = ({
     // console.log(groupedFields);
   });
 
+  // console.log(Object.keys(groupedFields).map((item) => {
+  //   console.log(groupedFields[item]);
+  // }));
+
   return (
     <>
       <Dialog
@@ -213,11 +220,30 @@ const GenericModal = ({
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
           {
-            Object.keys(groupedFields).map((temp) => {
-              console.log(groupedFields[temp])
-              return (
-                groupedFields[temp]
-              )
+            // Object.keys(fieldDOM).map((temp) => {
+            //   // console.log(groupedFields[temp])
+            //   return (
+            //     fieldDOM[temp]
+            //   )
+            // })
+            // Object.keys(groupedFields).map((item) => {
+            //   // console.log(groupedFields[item]);
+            //   return(
+            //     groupedFields[item]
+            //   )
+            // })
+            fieldGroups.map((group) => {
+              if (group.length > 1) {
+                return (
+                  <div>
+                    {group.map((element) => {
+                      return fieldDOM[element];
+                    })}
+                  </div>
+                );
+              } else {
+                return <div>{fieldDOM[group[0]]}</div>;
+              }
             })
           }
         </DialogContent>

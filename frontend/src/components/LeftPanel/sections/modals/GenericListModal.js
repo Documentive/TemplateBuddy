@@ -21,11 +21,15 @@ const GenericModal = ({
   setEntryList,
   fieldName,
   dbField,
+  fieldGroups,
 }) => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [modalEntryObject, setModalEntryObject] = useState({});
   let [genericListMap, setGenericListMap] = useState({});
   let [genericEntryMap, setGenericEntryMap] = useState({});
+
+  // To store the markup for all fields
+  let fieldDOM = {};
 
   const onInputToField = (e, key) => {
     let fieldValue = e.target.value;
@@ -79,6 +83,103 @@ const GenericModal = ({
     updateInLocalStorage(finalMap);
   };
 
+  // Add the markup for the fields based on the fieldtype to the fieldDOM object
+  Object.keys(fieldsMap).map((field) => {
+    let value = fieldsMap[field];
+    let content;
+    switch (value.type) {
+      case "TextField": {
+        if ("rows" in value) {
+          content = (
+            <TextField
+              fullWidth
+              label={value.label}
+              name={value.label.toLowerCase()}
+              multiline
+              rows={value.rows}
+              onChange={(e) => onInputToField(e, field)}
+              key={field}
+            />
+          );
+        } else {
+          content = (
+            <TextField
+              fullWidth
+              label={value.label}
+              name={value.label.toLowerCase()}
+              onChange={(e) => onInputToField(e, field)}
+              key={field}
+            />
+          );
+        }
+        fieldDOM[field] = content;
+        break;
+      }
+      case "Date": {
+        content = (
+          <DatePicker
+            sx={{ width: 1 }}
+            label={value.label}
+            openTo="year"
+            views={["year", "month", "day"]}
+            key={field}
+            slotProps={
+              "helperText" in value
+                ? {
+                    textField: {
+                      helperText: value.helperText,
+                    },
+                  }
+                : {}
+            }
+            onChange={(d, e) => onInputToDatePicker(d, e, field)}
+          />
+        );
+        fieldDOM[field] = content;
+        break;
+      }
+      case "MultiEntryList": {
+        content = (
+          <div key={field}>
+            <TextField
+              label={value.label}
+              name={value.label.toLowerCase()}
+              onKeyUp={(e) => {
+                setGenericEntryMap({
+                  ...genericEntryMap,
+                  [field]: e.target.value,
+                });
+              }}
+              sx={{ float: "left" }}
+            />
+            <Button
+              variant="contained"
+              onClick={() => handleAddToMultiEntryList(field)}
+            >
+              Add
+            </Button>
+            <br />
+            <br />
+            {field in genericListMap && genericListMap[field].length > 0 && (
+              <List>
+                {genericListMap[field].map((entry, idx) => {
+                  return (
+                    <ListItem key={idx}>
+                      <ListItemText>{entry}</ListItemText>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            )}
+            {!(field in genericListMap) && <div>Nothing added yet!</div>}
+          </div>
+        );
+        fieldDOM[field] = content;
+        break;
+      }
+    }
+  });
+
   return (
     <>
       <Dialog
@@ -89,94 +190,17 @@ const GenericModal = ({
       >
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
-          {Object.keys(fieldsMap).map((field) => {
-            let value = fieldsMap[field];
-            switch (value.type) {
-              case "TextField": {
-                if ("rows" in value) {
-                  return (
-                    <TextField
-                      fullWidth
-                      label={value.label}
-                      name={value.label.toLowerCase()}
-                      multiline
-                      rows={value.rows}
-                      onChange={(e) => onInputToField(e, field)}
-                      key={field}
-                    />
-                  );
-                }
-                return (
-                  <TextField
-                    fullWidth
-                    label={value.label}
-                    name={value.label.toLowerCase()}
-                    onChange={(e) => onInputToField(e, field)}
-                    key={field}
-                  />
-                );
-              }
-              case "Date": {
-                return (
-                  <DatePicker
-                    sx={{ width: 1 }}
-                    label={value.label}
-                    openTo="year"
-                    views={["year", "month", "day"]}
-                    key={field}
-                    slotProps={
-                      "helperText" in value
-                        ? {
-                            textField: {
-                              helperText: value.helperText,
-                            },
-                          }
-                        : {}
-                    }
-                    onChange={(d, e) => onInputToDatePicker(d, e, field)}
-                  />
-                );
-              }
-              case "MultiEntryList": {
-                return (
-                  <div key={field}>
-                    <TextField
-                      label={value.label}
-                      name={value.label.toLowerCase()}
-                      onKeyUp={(e) => {
-                        setGenericEntryMap({
-                          ...genericEntryMap,
-                          [field]: e.target.value,
-                        });
-                      }}
-                      sx={{ float: "left" }}
-                    />
-                    <Button
-                      variant="contained"
-                      onClick={() => handleAddToMultiEntryList(field)}
-                    >
-                      Add
-                    </Button>
-                    <br />
-                    <br />
-                    {field in genericListMap &&
-                      genericListMap[field].length > 0 && (
-                        <List>
-                          {genericListMap[field].map((entry, idx) => {
-                            return (
-                              <ListItem key={idx}>
-                                <ListItemText>{entry}</ListItemText>
-                              </ListItem>
-                            );
-                          })}
-                        </List>
-                      )}
-                    {!(field in genericListMap) && (
-                      <div>Nothing added yet!</div>
-                    )}
-                  </div>
-                );
-              }
+          {fieldGroups.map((group) => {
+            if (group.length > 1) {
+              return (
+                <div className="grid grid-cols-2 my-3 gap-4">
+                  {group.map((element) => {
+                    return fieldDOM[element];
+                  })}
+                </div>
+              );
+            } else {
+              return <div>{fieldDOM[group[0]]}</div>;
             }
           })}
         </DialogContent>

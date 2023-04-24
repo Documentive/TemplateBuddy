@@ -28,6 +28,9 @@ const GenericModal = ({
   let [genericListMap, setGenericListMap] = useState({});
   let [genericEntryMap, setGenericEntryMap] = useState({});
 
+  // To store the markup for all fields
+  let fieldDOM = {};
+
   const onInputToField = (e, key) => {
     let fieldValue = e.target.value;
     setModalEntryObject({ ...modalEntryObject, [key]: fieldValue });
@@ -80,14 +83,14 @@ const GenericModal = ({
     updateInLocalStorage(finalMap);
   };
 
-  let fieldDOM = {};
-
+  // Add the markup for the fields based on the fieldtype to the fieldDOM object
   Object.keys(fieldsMap).map((field) => {
     let value = fieldsMap[field];
     let content;
     switch (value.type) {
       case "TextField": {
         if ("rows" in value) {
+          console.log(value.rows);
           content = (
             <TextField
               fullWidth
@@ -99,18 +102,17 @@ const GenericModal = ({
               key={field}
             />
           );
-          fieldDOM[field] = content;
+        } else {
+          content = (
+            <TextField
+              fullWidth
+              label={value.label}
+              name={value.label.toLowerCase()}
+              onChange={(e) => onInputToField(e, field)}
+              key={field}
+            />
+          );
         }
-
-        content = (
-          <TextField
-            fullWidth
-            label={value.label}
-            name={value.label.toLowerCase()}
-            onChange={(e) => onInputToField(e, field)}
-            key={field}
-          />
-        );
         fieldDOM[field] = content;
         break;
       }
@@ -179,36 +181,6 @@ const GenericModal = ({
     }
   });
 
-  let groupedFields = {};
-  // console.log(fieldGroups);
-  fieldGroups.map((group, idx) => {
-    let childElements = [];
-    let parentElement;
-    if (group.length > 1) {
-      for (let index = 0; index < group.length; index++) {
-        // console.log(group[index]);
-        // console.log(fieldDOM[group[index]]);
-        childElements.push(fieldDOM[group[index]]);
-      }
-      // console.log(childElements);
-      parentElement = React.createElement("div", childElements);
-      groupedFields[idx] = parentElement;
-      // console.log(groupedFields[idx])
-    } else {
-      // console.log(group[0]);
-      childElements.push(fieldDOM[group[0]]);
-      // console.log(childElements);
-      parentElement = React.createElement("div", childElements);
-      groupedFields[idx] = parentElement;
-      // console.log(groupedFields[idx]);
-    }
-    // console.log(groupedFields);
-  });
-
-  // console.log(Object.keys(groupedFields).map((item) => {
-  //   console.log(groupedFields[item]);
-  // }));
-
   return (
     <>
       <Dialog
@@ -219,33 +191,19 @@ const GenericModal = ({
       >
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
-          {
-            // Object.keys(fieldDOM).map((temp) => {
-            //   // console.log(groupedFields[temp])
-            //   return (
-            //     fieldDOM[temp]
-            //   )
-            // })
-            // Object.keys(groupedFields).map((item) => {
-            //   // console.log(groupedFields[item]);
-            //   return(
-            //     groupedFields[item]
-            //   )
-            // })
-            fieldGroups.map((group) => {
-              if (group.length > 1) {
-                return (
-                  <div>
-                    {group.map((element) => {
-                      return fieldDOM[element];
-                    })}
-                  </div>
-                );
-              } else {
-                return <div>{fieldDOM[group[0]]}</div>;
-              }
-            })
-          }
+          {fieldGroups.map((group) => {
+            if (group.length > 1) {
+              return (
+                <div className="grid grid-cols-2 my-3 gap-4">
+                  {group.map((element) => {
+                    return fieldDOM[element];
+                  })}
+                </div>
+              );
+            } else {
+              return <div>{fieldDOM[group[0]]}</div>;
+            }
+          })}
         </DialogContent>
         <DialogActions>
           <Button onClick={onSubmitBtnClick}>Add New {fieldName}</Button>

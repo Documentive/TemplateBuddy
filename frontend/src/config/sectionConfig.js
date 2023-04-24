@@ -73,7 +73,11 @@ export const educationSectionConfig = {
   },
   fieldName: "Education",
   fieldIcon: <School />,
-  fieldGroups: [["institution", "studyType", "area", "score", "startDate", "endDate"], ["url"], ["courses"]],
+  fieldGroups: [
+    ["institution", "studyType", "area", "score", "startDate", "endDate"],
+    ["url"],
+    ["courses"],
+  ],
   displayField: "institution",
   dbField: ["education"],
 };
@@ -109,7 +113,12 @@ export const workExperienceSectionConfig = {
   },
   fieldName: "Work Experience",
   fieldIcon: <Work />,
-  fieldGroups: [["name", "role"], ["location"], ["startDate", "endDate"], ["summary"]],
+  fieldGroups: [
+    ["name", "role"],
+    ["location"],
+    ["startDate", "endDate"],
+    ["summary"],
+  ],
   displayField: "name",
   dbField: ["work"],
 };
@@ -160,7 +169,14 @@ export const projectsSectionConfig = {
   },
   fieldName: "Projects",
   fieldIcon: <Groups />,
-  fieldGroups: [["name", "description", "startDate", "endDate"], ["url"], ["entity", "type"], ["highlights"], ["roles"], ["keywords"]],
+  fieldGroups: [
+    ["name", "description", "startDate", "endDate"],
+    ["url"],
+    ["entity", "type"],
+    ["highlights"],
+    ["roles"],
+    ["keywords"],
+  ],
   displayField: "name",
   dbField: ["projects"],
 };
@@ -343,7 +359,12 @@ export const volunteerSectionConfig = {
   },
   fieldName: "Volunteer",
   fieldIcon: <VolunteerActivism />,
-  fieldGroups: [["organization", "position", "startDate", "endDate"],["url"],["summary"], ["highlights"]],
+  fieldGroups: [
+    ["organization", "position", "startDate", "endDate"],
+    ["url"],
+    ["summary"],
+    ["highlights"],
+  ],
   displayField: "organization",
   dbField: ["volunteer"],
 };

@@ -90,7 +90,6 @@ const GenericModal = ({
     switch (value.type) {
       case "TextField": {
         if ("rows" in value) {
-          console.log(value.rows);
           content = (
             <TextField
               fullWidth

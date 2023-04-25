@@ -22,51 +22,51 @@ const LeftPanel = () => {
     {
       type: "Basics",
     },
-    // {
-    //   type: "GenericSection",
-    //   config: educationSectionConfig,
-    // },
+    {
+      type: "GenericSection",
+      config: educationSectionConfig,
+    },
     {
       type: "GenericSection",
       config: workExperienceSectionConfig,
     },
-    // {
-    //   type: "GenericSection",
-    //   config: projectsSectionConfig,
-    // },
-    // {
-    //   type: "GenericSection",
-    //   config: skillsSectionConfig,
-    // },
-    // {
-    //   type: "GenericSection",
-    //   config: certificationsSectionConfig,
-    // },
-    // {
-    //   type: "GenericSection",
-    //   config: languagesSectionConfig,
-    // },
-    // {
-    //   type: "GenericSection",
-    //   config: publicationsSectionConfig,
-    // },
-    // {
-    //   type: "GenericSection",
-    //   config: awardsSectionConfig,
-    // },
-    // {
-    //   type: "GenericSection",
-    //   config: interestsSectionConfig,
-    // },
-    // {
-    //   type: "GenericSection",
-    //   config: volunteerSectionConfig,
-    // },
+    {
+      type: "GenericSection",
+      config: projectsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: skillsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: certificationsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: languagesSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: publicationsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: awardsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: interestsSectionConfig,
+    },
+    {
+      type: "GenericSection",
+      config: volunteerSectionConfig,
+    },
 
-    // {
-    //   type: "GenericSection",
-    //   config: referencesSectionConfig,
-    // },
+    {
+      type: "GenericSection",
+      config: referencesSectionConfig,
+    },
   ];
 
   return (

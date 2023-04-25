@@ -32,6 +32,8 @@ const GenericModal = ({
   let [modalEntryObject, setModalEntryObject] = useState({});
   let [genericListMap, setGenericListMap] = useState({});
   let [genericEntryMap, setGenericEntryMap] = useState({});
+  let [genericFieldEntryIdxMap, setGenericEntryFieldIdxMap] = useState({});
+  let [isEditingFieldEntryIdxMap, setIsEditingFieldEntryIdxMap] = useState({});
 
   // To store the markup for all fields
   let fieldDOM = {};
@@ -140,6 +142,64 @@ const GenericModal = ({
     return null;
   };
 
+  const editGenericListMapEntry = (field, entry, idx) => {
+    const key = `${field}-${entry}-${idx}`;
+
+    const isEditing =
+      key in isEditingFieldEntryIdxMap ? !isEditingFieldEntryIdxMap[key] : true;
+    console.log(isEditing);
+    setIsEditingFieldEntryIdxMap({
+      ...isEditingFieldEntryIdxMap,
+      [key]: isEditing,
+    });
+
+    if (!(key in genericFieldEntryIdxMap)) {
+      setGenericEntryFieldIdxMap({
+        ...genericFieldEntryIdxMap,
+        [key]: entry,
+      });
+    } else {
+      if (isEditing) {
+        setGenericEntryFieldIdxMap({
+          ...genericFieldEntryIdxMap,
+          [key]: genericFieldEntryIdxMap[key],
+        });
+      } else {
+        let tempGenericListMap = { ...genericListMap };
+        let tempGenericListMapField = [...tempGenericListMap[field]];
+        tempGenericListMapField[idx] = genericFieldEntryIdxMap[key];
+        tempGenericListMap[field] = tempGenericListMapField;
+        setGenericListMap(tempGenericListMap);
+
+        const finalMap = { ...modalEntryObject, ...tempGenericListMap };
+        updateInLocalStorage(finalMap);
+      }
+    }
+  };
+
+  const getGenericListMapField = (field, entry, idx) => {
+    const key = `${field}-${entry}-${idx}`;
+    if (key in genericFieldEntryIdxMap) {
+      if (key in isEditingFieldEntryIdxMap) {
+        return (
+          <TextField
+            value={genericFieldEntryIdxMap[key]}
+            onChange={(e) => {
+              setGenericEntryFieldIdxMap({
+                ...genericFieldEntryIdxMap,
+                [key]: e.target.value,
+              });
+            }}
+          />
+        );
+      } else {
+        return <ListItemText>{genericFieldEntryIdxMap[key]}</ListItemText>;
+      }
+    }
+
+    return <ListItemText>{entry}</ListItemText>;
+  };
+
   // Add the markup for the fields based on the fieldtype to the fieldDOM object
   Object.keys(fieldsMap).map((field) => {
     let value = fieldsMap[field];
@@ -225,7 +285,15 @@ const GenericModal = ({
                 {genericListMap[field].map((entry, idx) => {
                   return (
                     <ListItem key={idx}>
-                      <ListItemText>{entry}</ListItemText>
+                      {getGenericListMapField(field, entry, idx)}
+                      <Button
+                        variant="contained"
+                        onClick={() => {
+                          editGenericListMapEntry(field, entry, idx);
+                        }}
+                      >
+                        Edit
+                      </Button>
                     </ListItem>
                   );
                 })}
@@ -247,6 +315,8 @@ const GenericModal = ({
         onClose={() => {
           setOpenModal(false);
           setModalMode(modes.ADD);
+          setIsEditingFieldEntryIdxMap({});
+          setGenericEntryFieldIdxMap({});
         }}
       >
         <DialogTitle>Add a {fieldName}</DialogTitle>

@@ -10,8 +10,9 @@ import {
   TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { modes } from "../../constants/modes";
 
 const GenericModal = ({
   fieldsMap,
@@ -22,6 +23,9 @@ const GenericModal = ({
   fieldName,
   dbField,
   fieldGroups,
+  modalMode,
+  setModalMode,
+  currentModalIdx,
 }) => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [modalEntryObject, setModalEntryObject] = useState({});
@@ -70,17 +74,50 @@ const GenericModal = ({
       for (let i = 1; i < dbField.length; i++) {
         arrayObj = arrayObj[dbField[i]];
       }
-      arrayObj.push(obj);
+
+      if (modalMode == modes.EDIT) {
+        arrayObj[currentModalIdx] = obj;
+      } else {
+        arrayObj.push(obj);
+      }
+
       localStorage.setItem("resume", JSON.stringify(resume));
     }
   };
 
+  useEffect(() => {
+    if (modalMode == modes.EDIT && currentModalIdx !== -1) {
+      let arrayObj = resume[dbField[0]];
+      for (let i = 1; i < dbField.length; i++) {
+        arrayObj = arrayObj[dbField[i]];
+      }
+      setModalEntryObject(arrayObj[currentModalIdx]);
+    } else {
+      setModalEntryObject({});
+    }
+  }, [modalMode, currentModalIdx]);
+
   const onSubmitBtnClick = () => {
-    setEntryList([...entryList, { ...modalEntryObject, ...genericListMap }]);
+    if (modalMode == modes.EDIT) {
+      let tempEntryList = [...entryList];
+      tempEntryList[currentModalIdx] = {
+        ...modalEntryObject,
+        ...genericListMap,
+      };
+      setEntryList(tempEntryList);
+    } else {
+      setEntryList([...entryList, { ...modalEntryObject, ...genericListMap }]);
+    }
+
     setOpenModal(false);
-    setGenericListMap({});
+    setModalMode(modes.ADD);
     const finalMap = { ...modalEntryObject, ...genericListMap };
     updateInLocalStorage(finalMap);
+    setGenericListMap({});
+  };
+
+  const getValue = (fieldName) => {
+    return modalEntryObject[fieldName] ? modalEntryObject[fieldName] : "";
   };
 
   // Add the markup for the fields based on the fieldtype to the fieldDOM object
@@ -107,6 +144,7 @@ const GenericModal = ({
               fullWidth
               label={value.label}
               name={value.label.toLowerCase()}
+              value={getValue(field)}
               onChange={(e) => onInputToField(e, field)}
               key={field}
             />
@@ -186,21 +224,22 @@ const GenericModal = ({
         open={openModal}
         onClose={() => {
           setOpenModal(false);
+          setModalMode(modes.ADD);
         }}
       >
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
-          {fieldGroups.map((group) => {
+          {fieldGroups.map((group, idx) => {
             if (group.length > 1) {
               return (
-                <div className="grid grid-cols-2 my-3 gap-4">
+                <div className="grid grid-cols-2 my-3 gap-4" key={idx}>
                   {group.map((element) => {
                     return fieldDOM[element];
                   })}
                 </div>
               );
             } else {
-              return <div>{fieldDOM[group[0]]}</div>;
+              return <div key={idx}>{fieldDOM[group[0]]}</div>;
             }
           })}
         </DialogContent>

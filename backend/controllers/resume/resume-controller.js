@@ -6,7 +6,8 @@ const putSection = async (req, res, logger) => {
   logger.info(`PUT /resume/${section_name}`);
 
   const { section } = req.body;
-  console.log(section);
+
+  logger.debug(section);
   const resume = await resumeUtils.getSingletonResume();
   const id = resume._id;
   const updatedResume = await resumeDao.updateSectionById(

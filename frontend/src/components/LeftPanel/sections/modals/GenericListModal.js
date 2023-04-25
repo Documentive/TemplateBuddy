@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { modes } from "../../constants/modes";
@@ -92,6 +93,15 @@ const GenericModal = ({
         arrayObj = arrayObj[dbField[i]];
       }
       setModalEntryObject(arrayObj[currentModalIdx]);
+
+      Object.keys(fieldsMap).map((field) => {
+        if (fieldsMap[field].type === "MultiEntryList") {
+          setGenericListMap({
+            ...genericListMap,
+            [field]: arrayObj[currentModalIdx][field],
+          });
+        }
+      });
     } else {
       setModalEntryObject({});
     }
@@ -120,6 +130,16 @@ const GenericModal = ({
     return modalEntryObject[fieldName] ? modalEntryObject[fieldName] : "";
   };
 
+  const getDateValue = (fieldName) => {
+    if (modalEntryObject[fieldName]) {
+      return dayjs(
+        `${modalEntryObject[fieldName].year}-${modalEntryObject[fieldName].month}-01`
+      );
+    }
+
+    return null;
+  };
+
   // Add the markup for the fields based on the fieldtype to the fieldDOM object
   Object.keys(fieldsMap).map((field) => {
     let value = fieldsMap[field];
@@ -134,6 +154,7 @@ const GenericModal = ({
               name={value.label.toLowerCase()}
               multiline
               rows={value.rows}
+              value={getValue(field)}
               onChange={(e) => onInputToField(e, field)}
               key={field}
             />
@@ -170,6 +191,7 @@ const GenericModal = ({
                   }
                 : {}
             }
+            value={getDateValue(field)}
             onChange={(d, e) => onInputToDatePicker(d, e, field)}
           />
         );

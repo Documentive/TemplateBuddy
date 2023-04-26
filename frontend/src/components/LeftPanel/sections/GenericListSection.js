@@ -49,14 +49,6 @@ const GenericSection = ({
           {fieldName}
         </p>
       </div>
-      <Button
-        variant="contained"
-        onClick={() => {
-          setOpenModal(true);
-        }}
-      >
-        Add New {fieldName}
-      </Button>
       <GenericModal
         fieldsMap={fieldsMap}
         openModal={openModal}
@@ -71,27 +63,33 @@ const GenericSection = ({
         currentModalIdx={currentModalIdx}
       />
       {Object.keys(entryList).length > 0 && (
-        <>
-          <List>
-            {Object.keys(entryList).map((entry, idx) => {
-              return (
-                <ListItem key={idx}>
-                  <ListItemText>{entryList[entry][displayField]}</ListItemText>
-                  <Button
-                    variant="contained"
-                    onClick={() => {
-                      handleEditClick(idx);
-                    }}
-                  >
-                    Edit
-                  </Button>
-                </ListItem>
-              );
-            })}
-          </List>
-        </>
+        <List>
+          {Object.keys(entryList).map((entry, idx) => {
+            return (
+              <ListItem key={idx}>
+                <ListItemText>{entryList[entry][displayField]}</ListItemText>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    handleEditClick(idx);
+                  }}
+                >
+                  Edit
+                </Button>
+              </ListItem>
+            );
+          })}
+        </List>
       )}
       {Object.keys(entryList).length === 0 && <div>Nothing added yet!</div>}
+      <Button
+        variant="contained"
+        onClick={() => {
+          setOpenModal(true);
+        }}
+      >
+        Add New {fieldName}
+      </Button>
     </div>
   );
 };

@@ -36,41 +36,50 @@ const Location = () => {
           Location
         </p>
       </div>
-      <TextField
-        fullWidth
-        label="Address"
-        id="address"
-        value={locationObj.address || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="City"
-        id="city"
-        value={locationObj.city || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Region"
-        id="region"
-        value={locationObj.region || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Country"
-        id="countryCode"
-        value={locationObj.countryCode || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Postal Code"
-        id="postalCode"
-        value={locationObj.postalCode || ""}
-        onChange={onTextFieldKeyUp}
-      />
+      <div>
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Address"
+          id="address"
+          value={locationObj.address || ""}
+          onChange={onTextFieldKeyUp}
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-x-4">
+        <TextField
+          fullWidth
+          margin="dense"
+          label="City"
+          id="city"
+          value={locationObj.city || ""}
+          onChange={onTextFieldKeyUp}
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Region"
+          id="region"
+          value={locationObj.region || ""}
+          onChange={onTextFieldKeyUp}
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Country"
+          id="countryCode"
+          value={locationObj.countryCode || ""}
+          onChange={onTextFieldKeyUp}
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Postal Code"
+          id="postalCode"
+          value={locationObj.postalCode || ""}
+          onChange={onTextFieldKeyUp}
+        />
+      </div>
     </div>
   );
 };

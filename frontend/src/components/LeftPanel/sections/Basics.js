@@ -105,64 +105,82 @@ const Basics = () => {
           Personal Details
         </p>
       </div>
-      <IconButton component="label">
-        <Tooltip title="Upload Image">{getImage()}</Tooltip>
-        <input
-          hidden
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
+      <div className="grid grid-rows-2 grid-cols-6 gap-x-4">
+        <div className="row-span-2 col-span-1">
+          <IconButton component="label">
+            <Tooltip title="Upload Image">{getImage()}</Tooltip>
+            <input
+              hidden
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </IconButton>
+        </div>
+        <div className="row-span-1 col-span-5">
+          <TextField
+            fullWidth
+            margin="dense"
+            label="Full Name"
+            id="name"
+            value={basicsObj.name || ""}
+            onChange={onTextFieldKeyUp}
+          />
+        </div>
+        <div className="row-span-1 col-span-5">
+          <TextField
+            fullWidth
+            margin="dense"
+            label="Email"
+            id="email"
+            value={basicsObj.email || ""}
+            onChange={onTextFieldKeyUp}
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-x-4">
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Phone Number"
+          id="phone"
+          value={basicsObj.phone || ""}
+          onChange={onTextFieldKeyUp}
         />
-      </IconButton>
-      <TextField
-        fullWidth
-        label="Full Name"
-        id="name"
-        value={basicsObj.name || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Email"
-        id="email"
-        value={basicsObj.email || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Phone Number"
-        id="phone"
-        value={basicsObj.phone || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Portfolio Link"
-        id="url"
-        value={basicsObj.url || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Job Title"
-        id="label"
-        value={basicsObj.label || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Summary"
-        multiline
-        rows={5}
-        id="summary"
-        value={basicsObj.summary || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <hr className="my-3 border-red-800 w-4/5 mx-auto" />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Portfolio Link"
+          id="url"
+          value={basicsObj.url || ""}
+          onChange={onTextFieldKeyUp}
+        />
+      </div>
+      <div>
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Job Title"
+          id="label"
+          value={basicsObj.label || ""}
+          onChange={onTextFieldKeyUp}
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Summary"
+          multiline
+          rows={5}
+          id="summary"
+          value={basicsObj.summary || ""}
+          onChange={onTextFieldKeyUp}
+        />
+      </div>
+      <hr className="my-4 border-slate-400 w-full mx-auto" />
       <Location />
-      <hr className="my-3 border-red-800 w-4/5 mx-auto" />
+      <hr className="my-4 border-slate-400 w-full mx-auto" />
       <GenericSection {...socialsSectionConfig} />
-      <hr className="my-3 border-red-800 w-4/5 mx-auto" />
+      <hr className="my-4 border-slate-400 w-full mx-auto" />
     </div>
   );
 };

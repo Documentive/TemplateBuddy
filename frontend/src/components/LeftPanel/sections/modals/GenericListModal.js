@@ -200,6 +200,16 @@ const GenericModal = ({
     return <ListItemText>{entry}</ListItemText>;
   };
 
+  const getBtnName = (field, entry, idx) => {
+    const key = `${field}-${entry}-${idx}`;
+
+    if (key in isEditingFieldEntryIdxMap) {
+      return "Save";
+    } else {
+      return "Edit";
+    }
+  };
+
   // Add the markup for the fields based on the fieldtype to the fieldDOM object
   Object.keys(fieldsMap).map((field) => {
     let value = fieldsMap[field];
@@ -292,7 +302,7 @@ const GenericModal = ({
                           editGenericListMapEntry(field, entry, idx);
                         }}
                       >
-                        Edit
+                        {getBtnName(field, entry, idx)}
                       </Button>
                     </ListItem>
                   );

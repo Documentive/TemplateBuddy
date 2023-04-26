@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import GenericModal from "./modals/GenericListModal";
 import { Button, List, ListItem, ListItemText } from "@mui/material";
 import { useSelector } from "react-redux";
+import { modes } from "../constants/modes";
 
 const GenericSection = ({
   fieldsMap,
@@ -14,6 +15,8 @@ const GenericSection = ({
   const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [openModal, setOpenModal] = useState(false);
   let [entryList, setEntryList] = useState([]);
+  let [modalMode, setModalMode] = useState(modes.ADD);
+  let [currentModalIdx, setCurrentModalIdx] = useState(-1);
 
   useEffect(() => {
     if (!resumeLoading && resume !== null) {
@@ -31,6 +34,12 @@ const GenericSection = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resume, resumeLoading]);
+
+  const handleEditClick = (idx) => {
+    setOpenModal(true);
+    setCurrentModalIdx(idx);
+    setModalMode(modes.EDIT);
+  };
 
   return (
     <div>
@@ -57,6 +66,9 @@ const GenericSection = ({
         fieldName={fieldName}
         dbField={dbField}
         fieldGroups={fieldGroups}
+        modalMode={modalMode}
+        setModalMode={setModalMode}
+        currentModalIdx={currentModalIdx}
       />
       {Object.keys(entryList).length > 0 && (
         <>
@@ -65,6 +77,14 @@ const GenericSection = ({
               return (
                 <ListItem key={idx}>
                   <ListItemText>{entryList[entry][displayField]}</ListItemText>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      handleEditClick(idx);
+                    }}
+                  >
+                    Edit
+                  </Button>
                 </ListItem>
               );
             })}

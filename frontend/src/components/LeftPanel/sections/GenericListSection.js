@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import GenericModal from "./modals/GenericListModal";
 import { Button, List, ListItem, ListItemText } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modes } from "../constants/modes";
+import { deleteResumeArray } from "../../../reducers/resume-reducer";
 
 const GenericSection = ({
   fieldsMap,
@@ -17,6 +18,8 @@ const GenericSection = ({
   let [entryList, setEntryList] = useState([]);
   let [modalMode, setModalMode] = useState(modes.ADD);
   let [currentModalIdx, setCurrentModalIdx] = useState(-1);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!resumeLoading && resume !== null) {
@@ -39,6 +42,19 @@ const GenericSection = ({
     setOpenModal(true);
     setCurrentModalIdx(idx);
     setModalMode(modes.EDIT);
+  };
+
+  const handleDeleteClick = (idx) => {
+    let tempEntryList = [...entryList];
+    tempEntryList.splice(idx, 1);
+    setEntryList(tempEntryList);
+
+    dispatch(
+      deleteResumeArray({
+        sectionKeys: dbField,
+        idx: idx,
+      })
+    );
   };
 
   return (
@@ -84,6 +100,14 @@ const GenericSection = ({
                     }}
                   >
                     Edit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      handleDeleteClick(idx);
+                    }}
+                  >
+                    Delete
                   </Button>
                 </ListItem>
               );

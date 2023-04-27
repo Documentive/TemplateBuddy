@@ -8,11 +8,6 @@ import { useEffect, useState } from "react";
 
 function Resume() {
   let { resume, resumeLoading } = useSelector((state) => state.resume);
-  let [config, setConfig] = useState({});
-
-  useEffect(() => {
-    setConfig(resume);
-  }, [resume, resumeLoading]);
 
   const getKeywordAsString = (keywords) => {
     let keywordString = "";
@@ -45,40 +40,40 @@ function Resume() {
   return (
     <>
       <div className="resume">
-        <h1>{objectUtils.getKeyOrEmptyString(config, ["basics", "name"])}</h1>
+        <h1>{objectUtils.getKeyOrEmptyString(resume, ["basics", "name"])}</h1>
         <p className="no-margin-top">
-          {objectUtils.getKeyOrEmptyString(config, ["basics", "email"])} |{" "}
-          {objectUtils.getKeyOrEmptyString(config, [
+          {objectUtils.getKeyOrEmptyString(resume, ["basics", "email"])} |{" "}
+          {objectUtils.getKeyOrEmptyString(resume, [
             "basics",
             "profiles",
             0,
             "url",
           ])}{" "}
           |{" "}
-          {objectUtils.getKeyOrEmptyString(config, [
+          {objectUtils.getKeyOrEmptyString(resume, [
             "basics",
             "profiles",
             1,
             "url",
           ])}{" "}
           |{" "}
-          {objectUtils.getKeyOrEmptyString(config, [
+          {objectUtils.getKeyOrEmptyString(resume, [
             "basics",
             "location",
             "city",
           ])}
           ,{" "}
-          {objectUtils.getKeyOrEmptyString(config, [
+          {objectUtils.getKeyOrEmptyString(resume, [
             "basics",
             "location",
             "region",
           ])}{" "}
-          | {objectUtils.getKeyOrEmptyString(config, ["basics", "phone"])}
+          | {objectUtils.getKeyOrEmptyString(resume, ["basics", "phone"])}
         </p>
         <Section title="Education" />
 
         {objectUtils
-          .getKeyOrEmptyArray(config, ["education"])
+          .getKeyOrEmptyArray(resume, ["education"])
           .map((edu, idx) => {
             return (
               <div className="left" key={idx}>
@@ -126,7 +121,7 @@ function Resume() {
         <table>
           <tbody>
             {objectUtils
-              .getKeyOrEmptyArray(config, ["skills"])
+              .getKeyOrEmptyArray(resume, ["skills"])
               .map((skill, idx) => {
                 return (
                   <tr key={idx}>
@@ -147,7 +142,7 @@ function Resume() {
         </table>
 
         <YearHighlights
-          arrayObj={objectUtils.getKeyOrEmptyArray(config, ["work"])}
+          arrayObj={objectUtils.getKeyOrEmptyArray(resume, ["work"])}
           sectionTitle="Work Experience"
           getSecondaryInfo={getSecondaryInfoWork}
           getPrimaryInfo={(val) => {
@@ -156,7 +151,7 @@ function Resume() {
         />
 
         <YearHighlights
-          arrayObj={objectUtils.getKeyOrEmptyArray(config, ["projects"])}
+          arrayObj={objectUtils.getKeyOrEmptyArray(resume, ["projects"])}
           sectionTitle="Projects"
           getSecondaryInfo={getSecondaryInfoProject}
           getPrimaryInfo={(val) => {

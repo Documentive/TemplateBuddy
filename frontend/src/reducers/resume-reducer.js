@@ -10,7 +10,17 @@ let initialState = {
 const resumeSlice = createSlice({
   name: "resume",
   initialState,
-  reducers: {},
+  reducers: {
+    updateResume: (state, action) => {
+      const sectionKey = action.payload.sectionKey;
+      const key = action.payload.key;
+      const value = action.payload.value;
+      state.resume[sectionKey][key] = value;
+    },
+    getCurrentResume: (state, action) => {
+      action.payload.resume = state.resume;
+    },
+  },
   extraReducers: {
     [getResumeThunk.pending]: (state, _action) => {
       state.resumeLoading = true;
@@ -43,4 +53,5 @@ const resumeSlice = createSlice({
   },
 });
 
+export const { updateResume, getCurrentResume } = resumeSlice.actions;
 export default resumeSlice.reducer;

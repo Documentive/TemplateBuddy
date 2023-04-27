@@ -3,6 +3,7 @@ import GenericModal from "./modals/GenericListModal";
 import { Button, List, ListItem, ListItemText } from "@mui/material";
 import { useSelector } from "react-redux";
 import { modes } from "../constants/modes";
+import { Add } from "@mui/icons-material";
 
 const GenericSection = ({
   fieldsMap,
@@ -62,14 +63,18 @@ const GenericSection = ({
         setModalMode={setModalMode}
         currentModalIdx={currentModalIdx}
       />
-      {Object.keys(entryList).length > 0 && (
-        <List>
-          {Object.keys(entryList).map((entry, idx) => {
+      <div className="rounded-xl border mb-2">
+        {Object.keys(entryList).length === 0 && (
+          <div className="py-8 text-center">Nothing added yet!</div>
+        )}
+
+        {Object.keys(entryList).length > 0 &&
+          Object.keys(entryList).map((entry, idx) => {
             return (
-              <ListItem key={idx}>
+              <ListItem key={idx} className="border-b last:border-0">
                 <ListItemText>{entryList[entry][displayField]}</ListItemText>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   onClick={() => {
                     handleEditClick(idx);
                   }}
@@ -79,17 +84,18 @@ const GenericSection = ({
               </ListItem>
             );
           })}
-        </List>
-      )}
-      {Object.keys(entryList).length === 0 && <div>Nothing added yet!</div>}
-      <Button
-        variant="contained"
-        onClick={() => {
-          setOpenModal(true);
-        }}
-      >
-        Add New {fieldName}
-      </Button>
+      </div>
+      <div className="text-right">
+        <Button
+          variant="outlined"
+          startIcon={<Add />}
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        >
+          Add New {fieldName}
+        </Button>
+      </div>
     </div>
   );
 };

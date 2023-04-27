@@ -74,7 +74,7 @@ const LeftPanel = () => {
       <NavBar />
       <div className="w-full h-full flex flex-col">
         <Header />
-        <div className="w-full h-full overflow-y-scroll no-scrollbar">
+        <div className="w-full h-full overflow-y-scroll no-scrollbar bg-neutral-50 text-neutral-900">
           <div className="w-4/5 mx-auto">
             {sectionsList.map((section, index) => {
               if (section.type === "GenericSection") {

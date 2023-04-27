@@ -45,7 +45,7 @@ const GenericSection = ({
   return (
     <div>
       <div className="flex w-full items-center gap-3 mb-4">
-        <div className="ml-2">{fieldIcon}</div>
+        <div className="ml-2 opacity-50">{fieldIcon}</div>
         <p className="text-3xl" id={dbField[dbField.length - 1]}>
           {fieldName}
         </p>

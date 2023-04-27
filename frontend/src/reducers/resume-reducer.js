@@ -22,6 +22,16 @@ const resumeSlice = createSlice({
       }
       resume[key] = value;
     },
+    updateResumeArray: (state, action) => {
+      const sectionKeys = action.payload.sectionKeys;
+      const value = action.payload.value;
+
+      let resume = state.resume[sectionKeys[0]];
+      for (let i = 1; i < sectionKeys.length; i++) {
+        resume = resume[sectionKeys[i]];
+      }
+      resume.push(value);
+    },
   },
   extraReducers: {
     [getResumeThunk.pending]: (state, _action) => {
@@ -55,5 +65,5 @@ const resumeSlice = createSlice({
   },
 });
 
-export const { updateResume, getCurrentResume } = resumeSlice.actions;
+export const { updateResume, updateResumeArray } = resumeSlice.actions;
 export default resumeSlice.reducer;

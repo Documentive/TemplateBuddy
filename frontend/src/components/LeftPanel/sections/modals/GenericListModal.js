@@ -10,8 +10,10 @@ import {
   TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import React, { useState } from "react";
+import dayjs from "dayjs";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { modes } from "../../constants/modes";
 
 const GenericModal = ({
   fieldsMap,
@@ -22,11 +24,16 @@ const GenericModal = ({
   fieldName,
   dbField,
   fieldGroups,
+  modalMode,
+  setModalMode,
+  currentModalIdx,
 }) => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [modalEntryObject, setModalEntryObject] = useState({});
   let [genericListMap, setGenericListMap] = useState({});
   let [genericEntryMap, setGenericEntryMap] = useState({});
+  let [genericFieldEntryIdxMap, setGenericEntryFieldIdxMap] = useState({});
+  let [isEditingFieldEntryIdxMap, setIsEditingFieldEntryIdxMap] = useState({});
 
   // To store the markup for all fields
   let fieldDOM = {};
@@ -70,17 +77,137 @@ const GenericModal = ({
       for (let i = 1; i < dbField.length; i++) {
         arrayObj = arrayObj[dbField[i]];
       }
-      arrayObj.push(obj);
+
+      if (modalMode == modes.EDIT) {
+        arrayObj[currentModalIdx] = obj;
+      } else {
+        arrayObj.push(obj);
+      }
+
       localStorage.setItem("resume", JSON.stringify(resume));
     }
   };
 
+  useEffect(() => {
+    if (modalMode == modes.EDIT && currentModalIdx !== -1) {
+      let arrayObj = resume[dbField[0]];
+      for (let i = 1; i < dbField.length; i++) {
+        arrayObj = arrayObj[dbField[i]];
+      }
+      setModalEntryObject(arrayObj[currentModalIdx]);
+
+      Object.keys(fieldsMap).map((field) => {
+        if (fieldsMap[field].type === "MultiEntryList") {
+          setGenericListMap({
+            ...genericListMap,
+            [field]: arrayObj[currentModalIdx][field],
+          });
+        }
+      });
+    } else {
+      setModalEntryObject({});
+    }
+  }, [modalMode, currentModalIdx]);
+
   const onSubmitBtnClick = () => {
-    setEntryList([...entryList, { ...modalEntryObject, ...genericListMap }]);
+    if (modalMode == modes.EDIT) {
+      let tempEntryList = [...entryList];
+      tempEntryList[currentModalIdx] = {
+        ...modalEntryObject,
+        ...genericListMap,
+      };
+      setEntryList(tempEntryList);
+    } else {
+      setEntryList([...entryList, { ...modalEntryObject, ...genericListMap }]);
+    }
+
     setOpenModal(false);
-    setGenericListMap({});
+    setModalMode(modes.ADD);
     const finalMap = { ...modalEntryObject, ...genericListMap };
     updateInLocalStorage(finalMap);
+    setGenericListMap({});
+  };
+
+  const getValue = (fieldName) => {
+    return modalEntryObject[fieldName] ? modalEntryObject[fieldName] : "";
+  };
+
+  const getDateValue = (fieldName) => {
+    if (modalEntryObject[fieldName]) {
+      return dayjs(
+        `${modalEntryObject[fieldName].year}-${modalEntryObject[fieldName].month}-01`
+      );
+    }
+
+    return null;
+  };
+
+  const editGenericListMapEntry = (field, entry, idx) => {
+    const key = `${field}-${entry}-${idx}`;
+
+    const isEditing =
+      key in isEditingFieldEntryIdxMap ? !isEditingFieldEntryIdxMap[key] : true;
+    console.log(isEditing);
+    setIsEditingFieldEntryIdxMap({
+      ...isEditingFieldEntryIdxMap,
+      [key]: isEditing,
+    });
+
+    if (!(key in genericFieldEntryIdxMap)) {
+      setGenericEntryFieldIdxMap({
+        ...genericFieldEntryIdxMap,
+        [key]: entry,
+      });
+    } else {
+      if (isEditing) {
+        setGenericEntryFieldIdxMap({
+          ...genericFieldEntryIdxMap,
+          [key]: genericFieldEntryIdxMap[key],
+        });
+      } else {
+        let tempGenericListMap = { ...genericListMap };
+        let tempGenericListMapField = [...tempGenericListMap[field]];
+        tempGenericListMapField[idx] = genericFieldEntryIdxMap[key];
+        tempGenericListMap[field] = tempGenericListMapField;
+        setGenericListMap(tempGenericListMap);
+
+        const finalMap = { ...modalEntryObject, ...tempGenericListMap };
+        updateInLocalStorage(finalMap);
+      }
+    }
+  };
+
+  const getGenericListMapField = (field, entry, idx) => {
+    const key = `${field}-${entry}-${idx}`;
+    if (key in genericFieldEntryIdxMap) {
+      if (key in isEditingFieldEntryIdxMap) {
+        return (
+          <TextField
+            value={genericFieldEntryIdxMap[key]}
+            onChange={(e) => {
+              setGenericEntryFieldIdxMap({
+                ...genericFieldEntryIdxMap,
+                [key]: e.target.value,
+              });
+            }}
+          />
+        );
+      } else {
+        return <ListItemText>{genericFieldEntryIdxMap[key]}</ListItemText>;
+      }
+    }
+
+    return <ListItemText>{entry}</ListItemText>;
+  };
+
+  const getBtnName = (field, entry, idx) => {
+    const key = `${field}-${entry}-${idx}`;
+
+    if (key in isEditingFieldEntryIdxMap) {
+      return "Save";
+    } else {
+      return "Edit";
+    }
   };
 
   // Add the markup for the fields based on the fieldtype to the fieldDOM object
@@ -97,6 +224,7 @@ const GenericModal = ({
               name={value.label.toLowerCase()}
               multiline
               rows={value.rows}
+              value={getValue(field)}
               onChange={(e) => onInputToField(e, field)}
               key={field}
             />
@@ -107,6 +235,7 @@ const GenericModal = ({
               fullWidth
               label={value.label}
               name={value.label.toLowerCase()}
+              value={getValue(field)}
               onChange={(e) => onInputToField(e, field)}
               key={field}
             />
@@ -132,6 +261,7 @@ const GenericModal = ({
                   }
                 : {}
             }
+            value={getDateValue(field)}
             onChange={(d, e) => onInputToDatePicker(d, e, field)}
           />
         );
@@ -165,7 +295,15 @@ const GenericModal = ({
                 {genericListMap[field].map((entry, idx) => {
                   return (
                     <ListItem key={idx}>
-                      <ListItemText>{entry}</ListItemText>
+                      {getGenericListMapField(field, entry, idx)}
+                      <Button
+                        variant="contained"
+                        onClick={() => {
+                          editGenericListMapEntry(field, entry, idx);
+                        }}
+                      >
+                        {getBtnName(field, entry, idx)}
+                      </Button>
                     </ListItem>
                   );
                 })}
@@ -186,21 +324,24 @@ const GenericModal = ({
         open={openModal}
         onClose={() => {
           setOpenModal(false);
+          setModalMode(modes.ADD);
+          setIsEditingFieldEntryIdxMap({});
+          setGenericEntryFieldIdxMap({});
         }}
       >
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
-          {fieldGroups.map((group) => {
+          {fieldGroups.map((group, idx) => {
             if (group.length > 1) {
               return (
-                <div className="grid grid-cols-2 my-3 gap-4">
+                <div className="grid grid-cols-2 my-3 gap-4" key={idx}>
                   {group.map((element) => {
                     return fieldDOM[element];
                   })}
                 </div>
               );
             } else {
-              return <div>{fieldDOM[group[0]]}</div>;
+              return <div key={idx}>{fieldDOM[group[0]]}</div>;
             }
           })}
         </DialogContent>

@@ -92,7 +92,7 @@ export const workExperienceSectionConfig = {
       type: "TextField",
       label: "Location",
     },
-    role: {
+    position: {
       type: "TextField",
       label: "Role",
     },
@@ -110,14 +110,19 @@ export const workExperienceSectionConfig = {
       label: "Summary",
       rows: 5,
     },
+    highlights: {
+      type: "MultiEntryList",
+      label: "Highlights",
+    },
   },
   fieldName: "Work Experience",
   fieldIcon: <Work />,
   fieldGroups: [
-    ["name", "role"],
+    ["name", "position"],
     ["location"],
     ["startDate", "endDate"],
     ["summary"],
+    ["highlights"],
   ],
   displayField: "name",
   dbField: ["work"],

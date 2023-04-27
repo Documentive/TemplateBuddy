@@ -34,6 +34,7 @@ const Basics = new mongoose.Schema({
 const Work = new mongoose.Schema({
   name: String,
   position: String,
+  location: String,
   url: String,
   startDate: MonthYearDate,
   endDate: MonthYearDate,

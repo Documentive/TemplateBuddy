@@ -12,16 +12,15 @@ const resumeSlice = createSlice({
   initialState,
   reducers: {
     updateResume: (state, action) => {
-      const sectionKey = action.payload.sectionKey;
-      const innerSectionKey = action.payload.innerSectionKey;
+      const sectionKeys = action.payload.sectionKeys;
       const key = action.payload.key;
       const value = action.payload.value;
 
-      if (innerSectionKey) {
-        state.resume[sectionKey][innerSectionKey][key] = value;
-      } else {
-        state.resume[sectionKey][key] = value;
+      let resume = state.resume[sectionKeys[0]];
+      for (let i = 1; i < sectionKeys.length; i++) {
+        resume = resume[sectionKeys[i]];
       }
+      resume[key] = value;
     },
   },
   extraReducers: {

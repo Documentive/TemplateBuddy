@@ -20,8 +20,7 @@ const Location = () => {
     setLocationObj({ ...locationObj, [e.target.id]: e.target.value });
     dispatch(
       updateResume({
-        sectionKey: "basics",
-        innerSectionKey: "location",
+        sectionKeys: ["basics", "location"],
         key: e.target.id,
         value: e.target.value,
       })

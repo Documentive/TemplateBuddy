@@ -34,7 +34,7 @@ const Basics = () => {
     setBasicsObj({ ...basicsObj, [e.target.id]: e.target.value });
     dispatch(
       updateResume({
-        sectionKey: "basics",
+        sectionKeys: ["basics"],
         key: e.target.id,
         value: e.target.value,
       })

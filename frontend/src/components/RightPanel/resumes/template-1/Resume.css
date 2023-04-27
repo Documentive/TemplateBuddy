@@ -1,0 +1,48 @@
+.resume {
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .left {
+    text-align: left;
+  }
+  
+  .no-margin-bottom {
+    margin-bottom: 0;
+  }
+  
+  .no-margin-top {
+    margin-top: -10px;
+  }
+  
+  .float-left {
+    float: left;
+  }
+  
+  .float-right {
+    float: right;
+  }
+  
+  .padding-left {
+    padding-left: 20px;
+  }
+  
+  .clear {
+    clear: both;
+  }
+  
+  .green {
+    color: hsl(159, 83%, 28%);
+  }
+  
+  hr {
+    border: none;
+    height: 2px;
+    background-color: black;  /* Modern Browsers */
+  }
+  
+  tr {
+    text-align: left;
+  }
+  

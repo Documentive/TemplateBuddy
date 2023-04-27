@@ -1,11 +1,8 @@
 import React from "react";
+import Resume from "./resumes/template-1/Resume";
 
 const RightPanel = () => {
-  return (
-    <div className="w-full h-full border-2 border-solid border-emerald-500">
-      Resume Render
-    </div>
-  );
+  return <Resume />;
 };
 
 export default RightPanel;

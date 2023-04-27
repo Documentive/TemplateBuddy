@@ -12,8 +12,12 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modes } from "../../constants/modes";
+import {
+  updateResume,
+  updateResumeArray,
+} from "../../../../reducers/resume-reducer";
 
 const GenericModal = ({
   fieldsMap,
@@ -34,6 +38,18 @@ const GenericModal = ({
   let [genericEntryMap, setGenericEntryMap] = useState({});
   let [genericFieldEntryIdxMap, setGenericEntryFieldIdxMap] = useState({});
   let [isEditingFieldEntryIdxMap, setIsEditingFieldEntryIdxMap] = useState({});
+
+  const dispatch = useDispatch();
+
+  const cleanState = () => {
+    setModalEntryObject({});
+    setGenericListMap({});
+    setGenericEntryMap({});
+    setGenericEntryFieldIdxMap({});
+    setIsEditingFieldEntryIdxMap({});
+    setOpenModal(false);
+    setModalMode(modes.ADD);
+  };
 
   // To store the markup for all fields
   let fieldDOM = {};
@@ -121,11 +137,27 @@ const GenericModal = ({
       setEntryList([...entryList, { ...modalEntryObject, ...genericListMap }]);
     }
 
-    setOpenModal(false);
-    setModalMode(modes.ADD);
     const finalMap = { ...modalEntryObject, ...genericListMap };
-    updateInLocalStorage(finalMap);
-    setGenericListMap({});
+
+    if (modalMode == modes.EDIT) {
+      console.log(dbField, currentModalIdx);
+      dispatch(
+        updateResume({
+          sectionKeys: dbField,
+          key: currentModalIdx,
+          value: finalMap,
+        })
+      );
+    } else {
+      dispatch(
+        updateResumeArray({
+          sectionKeys: dbField,
+          value: finalMap,
+        })
+      );
+    }
+
+    cleanState();
   };
 
   const getValue = (fieldName) => {
@@ -320,15 +352,7 @@ const GenericModal = ({
 
   return (
     <>
-      <Dialog
-        open={openModal}
-        onClose={() => {
-          setOpenModal(false);
-          setModalMode(modes.ADD);
-          setIsEditingFieldEntryIdxMap({});
-          setGenericEntryFieldIdxMap({});
-        }}
-      >
+      <Dialog open={openModal} onClose={cleanState}>
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
           {fieldGroups.map((group, idx) => {

@@ -78,7 +78,7 @@ const GenericModal = ({
         arrayObj = arrayObj[dbField[i]];
       }
 
-      if (modalMode == modes.EDIT) {
+      if (modalMode === modes.EDIT) {
         arrayObj[currentModalIdx] = obj;
       } else {
         arrayObj.push(obj);
@@ -89,7 +89,7 @@ const GenericModal = ({
   };
 
   useEffect(() => {
-    if (modalMode == modes.EDIT && currentModalIdx !== -1) {
+    if (modalMode === modes.EDIT && currentModalIdx !== -1) {
       let arrayObj = resume[dbField[0]];
       for (let i = 1; i < dbField.length; i++) {
         arrayObj = arrayObj[dbField[i]];
@@ -110,7 +110,7 @@ const GenericModal = ({
   }, [modalMode, currentModalIdx]);
 
   const onSubmitBtnClick = () => {
-    if (modalMode == modes.EDIT) {
+    if (modalMode === modes.EDIT) {
       let tempEntryList = [...entryList];
       tempEntryList[currentModalIdx] = {
         ...modalEntryObject,

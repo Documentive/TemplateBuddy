@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GenericModal from "./modals/GenericListModal";
-import { Button, List, ListItem, ListItemText } from "@mui/material";
+import { Button, ListItem, ListItemText } from "@mui/material";
 import { useSelector } from "react-redux";
 import { modes } from "../constants/modes";
 import { Add } from "@mui/icons-material";

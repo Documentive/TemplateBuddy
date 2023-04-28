@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
 import Basics from "./sections/Basics";
@@ -16,8 +16,12 @@ import {
   volunteerSectionConfig,
   workExperienceSectionConfig,
 } from "../../config/sectionConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { putSectionThunk } from "../../services/resume-thunk";
 
 const LeftPanel = () => {
+  let { resume, resumeLoading } = useSelector((state) => state.resume);
+
   const sectionsList = [
     {
       type: "Basics",
@@ -68,6 +72,35 @@ const LeftPanel = () => {
       config: referencesSectionConfig,
     },
   ];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!resumeLoading && resume !== null) {
+      const interval = setInterval(() => {
+        let resumeLocalStorage = localStorage.getItem("resume");
+        if (resumeLocalStorage !== JSON.stringify(resume)) {
+          const resumeLocalStorageObject = JSON.parse(resumeLocalStorage);
+
+          Object.keys(resumeLocalStorageObject).map((key) => {
+            if (
+              JSON.stringify(resumeLocalStorageObject[key]) !==
+              JSON.stringify(resume[key])
+            ) {
+              let section_name = key;
+              let section = {};
+              section[key] = resume[key];
+              dispatch(putSectionThunk({ section_name, section }));
+            }
+
+            return null;
+          });
+        }
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [resume, resumeLoading]);
 
   return (
     <div className="w-full h-full flex flex-row">

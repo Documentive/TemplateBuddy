@@ -12,8 +12,12 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modes } from "../../constants/modes";
+import {
+  updateResume,
+  updateResumeArray,
+} from "../../../../reducers/resume-reducer";
 
 const GenericModal = ({
   fieldsMap,
@@ -34,6 +38,18 @@ const GenericModal = ({
   let [genericEntryMap, setGenericEntryMap] = useState({});
   let [genericFieldEntryIdxMap, setGenericEntryFieldIdxMap] = useState({});
   let [isEditingFieldEntryIdxMap, setIsEditingFieldEntryIdxMap] = useState({});
+
+  const dispatch = useDispatch();
+
+  const cleanState = () => {
+    setModalEntryObject({});
+    setGenericListMap({});
+    setGenericEntryMap({});
+    setGenericEntryFieldIdxMap({});
+    setIsEditingFieldEntryIdxMap({});
+    setOpenModal(false);
+    setModalMode(modes.ADD);
+  };
 
   // To store the markup for all fields
   let fieldDOM = {};
@@ -70,24 +86,6 @@ const GenericModal = ({
     }
   };
 
-  const updateInLocalStorage = (obj) => {
-    if (!resumeLoading && resume !== null) {
-      let resume = JSON.parse(localStorage.getItem("resume"));
-      let arrayObj = resume[dbField[0]];
-      for (let i = 1; i < dbField.length; i++) {
-        arrayObj = arrayObj[dbField[i]];
-      }
-
-      if (modalMode === modes.EDIT) {
-        arrayObj[currentModalIdx] = obj;
-      } else {
-        arrayObj.push(obj);
-      }
-
-      localStorage.setItem("resume", JSON.stringify(resume));
-    }
-  };
-
   useEffect(() => {
     if (modalMode === modes.EDIT && currentModalIdx !== -1) {
       let arrayObj = resume[dbField[0]];
@@ -121,11 +119,27 @@ const GenericModal = ({
       setEntryList([...entryList, { ...modalEntryObject, ...genericListMap }]);
     }
 
-    setOpenModal(false);
-    setModalMode(modes.ADD);
     const finalMap = { ...modalEntryObject, ...genericListMap };
-    updateInLocalStorage(finalMap);
-    setGenericListMap({});
+
+    if (modalMode == modes.EDIT) {
+      console.log(dbField, currentModalIdx);
+      dispatch(
+        updateResume({
+          sectionKeys: dbField,
+          key: currentModalIdx,
+          value: finalMap,
+        })
+      );
+    } else {
+      dispatch(
+        updateResumeArray({
+          sectionKeys: dbField,
+          value: finalMap,
+        })
+      );
+    }
+
+    cleanState();
   };
 
   const getValue = (fieldName) => {
@@ -147,7 +161,6 @@ const GenericModal = ({
 
     const isEditing =
       key in isEditingFieldEntryIdxMap ? !isEditingFieldEntryIdxMap[key] : true;
-    console.log(isEditing);
     setIsEditingFieldEntryIdxMap({
       ...isEditingFieldEntryIdxMap,
       [key]: isEditing,
@@ -170,11 +183,16 @@ const GenericModal = ({
         tempGenericListMapField[idx] = genericFieldEntryIdxMap[key];
         tempGenericListMap[field] = tempGenericListMapField;
         setGenericListMap(tempGenericListMap);
-
-        const finalMap = { ...modalEntryObject, ...tempGenericListMap };
-        updateInLocalStorage(finalMap);
       }
     }
+  };
+
+  const deleteGenericListMapEntry = (field, entry, idx) => {
+    let tempGenericListMap = { ...genericListMap };
+    let tempGenericListMapField = [...tempGenericListMap[field]];
+    tempGenericListMapField.splice(idx, 1);
+    tempGenericListMap[field] = tempGenericListMapField;
+    setGenericListMap(tempGenericListMap);
   };
 
   const getGenericListMapField = (field, entry, idx) => {
@@ -304,6 +322,14 @@ const GenericModal = ({
                       >
                         {getBtnName(field, entry, idx)}
                       </Button>
+                      <Button
+                        variant="contained"
+                        onClick={() =>
+                          deleteGenericListMapEntry(field, entry, idx)
+                        }
+                      >
+                        Delete
+                      </Button>
                     </ListItem>
                   );
                 })}
@@ -320,15 +346,7 @@ const GenericModal = ({
 
   return (
     <>
-      <Dialog
-        open={openModal}
-        onClose={() => {
-          setOpenModal(false);
-          setModalMode(modes.ADD);
-          setIsEditingFieldEntryIdxMap({});
-          setGenericEntryFieldIdxMap({});
-        }}
-      >
+      <Dialog open={openModal} onClose={cleanState}>
         <DialogTitle>Add a {fieldName}</DialogTitle>
         <DialogContent>
           {fieldGroups.map((group, idx) => {

@@ -1,11 +1,14 @@
 import { Apartment } from "@mui/icons-material";
 import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResume } from "../../../reducers/resume-reducer";
 
 const Location = () => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
   let [locationObj, setLocationObj] = useState({});
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!resumeLoading && resume !== null) {
@@ -13,17 +16,15 @@ const Location = () => {
     }
   }, [resume, resumeLoading]);
 
-  const updateInLocalStorage = (key, value) => {
-    if (!resumeLoading && resume !== null) {
-      let resume = JSON.parse(localStorage.getItem("resume"));
-      resume.basics.location[key] = value;
-      localStorage.setItem("resume", JSON.stringify(resume));
-    }
-  };
-
   const onTextFieldKeyUp = (e) => {
     setLocationObj({ ...locationObj, [e.target.id]: e.target.value });
-    updateInLocalStorage(e.target.id, e.target.value);
+    dispatch(
+      updateResume({
+        sectionKeys: ["basics", "location"],
+        key: e.target.id,
+        value: e.target.value,
+      })
+    );
   };
 
   return (

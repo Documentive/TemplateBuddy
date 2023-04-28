@@ -12,6 +12,10 @@ import {
   getResumeThunk,
   putSectionThunk,
 } from "../../../services/resume-thunk";
+import {
+  getCurrentResume,
+  updateResume,
+} from "../../../reducers/resume-reducer";
 
 const Basics = () => {
   const { imageUploading, imageURL } = useSelector(
@@ -26,17 +30,15 @@ const Basics = () => {
     dispatch(uploadImageThunk(e.target.files[0]));
   };
 
-  const updateInLocalStorage = (key, value) => {
-    if (!resumeLoading && resume !== null) {
-      let resume = JSON.parse(localStorage.getItem("resume"));
-      resume.basics[key] = value;
-      localStorage.setItem("resume", JSON.stringify(resume));
-    }
-  };
-
   const onTextFieldKeyUp = (e) => {
     setBasicsObj({ ...basicsObj, [e.target.id]: e.target.value });
-    updateInLocalStorage(e.target.id, e.target.value);
+    dispatch(
+      updateResume({
+        sectionKeys: ["basics"],
+        key: e.target.id,
+        value: e.target.value,
+      })
+    );
   };
 
   useEffect(() => {
@@ -47,28 +49,6 @@ const Basics = () => {
   useEffect(() => {
     if (!resumeLoading && resume !== null) {
       setBasicsObj(resume.basics);
-      const interval = setInterval(() => {
-        let resumeLocalStorage = localStorage.getItem("resume");
-        if (resumeLocalStorage !== JSON.stringify(resume)) {
-          const resumeLocalStorageObject = JSON.parse(resumeLocalStorage);
-
-          Object.keys(resumeLocalStorageObject).map((key) => {
-            if (
-              JSON.stringify(resumeLocalStorageObject[key]) !==
-              JSON.stringify(resume[key])
-            ) {
-              let section_name = key;
-              let section = {};
-              section[key] = resumeLocalStorageObject[key];
-              dispatch(putSectionThunk({ section_name, section }));
-            }
-
-            return null;
-          });
-        }
-      }, 10000);
-
-      return () => clearInterval(interval);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resume, resumeLoading]);

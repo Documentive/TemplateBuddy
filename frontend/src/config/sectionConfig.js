@@ -41,9 +41,9 @@ export const educationSectionConfig = {
       type: "TextField",
       label: "Institution",
     },
-    url: {
+    location: {
       type: "TextField",
-      label: "URL",
+      label: "Location",
     },
     area: {
       type: "TextField",
@@ -51,7 +51,7 @@ export const educationSectionConfig = {
     },
     studyType: {
       type: "TextField",
-      label: "Study Type",
+      label: "Degree",
     },
     startDate: {
       type: "Date",
@@ -75,7 +75,7 @@ export const educationSectionConfig = {
   fieldIcon: <School />,
   fieldGroups: [
     ["institution", "studyType", "area", "score", "startDate", "endDate"],
-    ["url"],
+    ["location"],
     ["courses"],
   ],
   displayField: "institution",
@@ -110,10 +110,6 @@ export const workExperienceSectionConfig = {
       label: "Summary",
       rows: 5,
     },
-    highlights: {
-      type: "MultiEntryList",
-      label: "Highlights",
-    },
   },
   fieldName: "Work Experience",
   fieldIcon: <Work />,
@@ -122,7 +118,6 @@ export const workExperienceSectionConfig = {
     ["location"],
     ["startDate", "endDate"],
     ["summary"],
-    ["highlights"],
   ],
   displayField: "name",
   dbField: ["work"],
@@ -138,9 +133,10 @@ export const projectsSectionConfig = {
       type: "TextField",
       label: "Description",
     },
-    highlights: {
-      type: "MultiEntryList",
-      label: "Highlights",
+    summary: {
+      type: "TextField",
+      label: "Summary",
+      rows: 5,
     },
     keywords: {
       type: "MultiEntryList",
@@ -159,27 +155,13 @@ export const projectsSectionConfig = {
       type: "TextField",
       label: "URL",
     },
-    roles: {
-      type: "MultiEntryList",
-      label: "Roles",
-    },
-    entity: {
-      type: "TextField",
-      label: "Entity",
-    },
-    type: {
-      type: "TextField",
-      label: "Type",
-    },
   },
   fieldName: "Projects",
   fieldIcon: <Groups />,
   fieldGroups: [
     ["name", "description", "startDate", "endDate"],
     ["url"],
-    ["entity", "type"],
-    ["highlights"],
-    ["roles"],
+    ["summary"],
     ["keywords"],
   ],
   displayField: "name",
@@ -214,13 +196,17 @@ export const certificationsSectionConfig = {
       type: "TextField",
       label: "Name",
     },
-    dateCertified: {
+    date: {
       type: "Date",
       label: "Date Certified",
     },
-    awarder: {
+    issuer: {
       type: "TextField",
       label: "Awarder",
+    },
+    url: {
+      type: "TextField",
+      label: "URL",
     },
     summary: {
       type: "TextField",
@@ -230,7 +216,7 @@ export const certificationsSectionConfig = {
   },
   fieldName: "Certifications",
   fieldIcon: <Redeem />,
-  fieldGroups: [["name", "dateCertified"], ["awarder"], ["summary"]],
+  fieldGroups: [["name", "date"], ["issuer", "url"], ["summary"]],
   displayField: "name",
   dbField: ["certificates"],
 };
@@ -317,14 +303,10 @@ export const interestsSectionConfig = {
       type: "TextField",
       label: "Name",
     },
-    keywords: {
-      type: "MultiEntryList",
-      label: "Keywords",
-    },
   },
   fieldName: "Interests",
   fieldIcon: <OutdoorGrill />,
-  fieldGroups: [["name"], ["keywords"]],
+  fieldGroups: [["name"]],
   displayField: "name",
   dbField: ["interests"],
 };
@@ -357,10 +339,6 @@ export const volunteerSectionConfig = {
       label: "Summary",
       rows: 5,
     },
-    highlights: {
-      type: "MultiEntryList",
-      label: "Highlights",
-    },
   },
   fieldName: "Volunteer",
   fieldIcon: <VolunteerActivism />,
@@ -368,7 +346,6 @@ export const volunteerSectionConfig = {
     ["organization", "position", "startDate", "endDate"],
     ["url"],
     ["summary"],
-    ["highlights"],
   ],
   displayField: "organization",
   dbField: ["volunteer"],
@@ -380,6 +357,14 @@ export const referencesSectionConfig = {
       type: "TextField",
       label: "Name",
     },
+    position: {
+      type: "TextField",
+      label: "Position",
+    },
+    organization: {
+      type: "TextField",
+      label: "Company",
+    },
     reference: {
       type: "TextField",
       label: "Reference",
@@ -388,7 +373,7 @@ export const referencesSectionConfig = {
   },
   fieldName: "References",
   fieldIcon: <Handshake />,
-  fieldGroups: [["name"], ["reference"]],
+  fieldGroups: [["name", "position"], ["organization"], ["reference"]],
   displayField: "name",
   dbField: ["references"],
 };

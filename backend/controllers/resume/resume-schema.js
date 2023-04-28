@@ -38,8 +38,7 @@ const Work = new mongoose.Schema({
   url: String,
   startDate: MonthYearDate,
   endDate: MonthYearDate,
-  summary: [String],
-  highlights: [String],
+  summary: String,
 });
 
 const Volunteer = new mongoose.Schema({
@@ -48,13 +47,12 @@ const Volunteer = new mongoose.Schema({
   url: String,
   startDate: MonthYearDate,
   endDate: MonthYearDate,
-  summary: [String],
-  highlights: [String],
+  summary: String,
 });
 
 const Education = new mongoose.Schema({
   institution: String,
-  url: String,
+  location: String,
   area: String,
   studyType: String,
   startDate: MonthYearDate,
@@ -75,6 +73,7 @@ const Certificate = new mongoose.Schema({
   date: MonthYearDate,
   issuer: String,
   url: String,
+  summary: String,
 });
 
 const Publication = new mongoose.Schema({
@@ -98,25 +97,23 @@ const Language = new mongoose.Schema({
 
 const Interest = new mongoose.Schema({
   name: String,
-  keywords: [String],
 });
 
 const Reference = new mongoose.Schema({
   name: String,
+  position: String,
+  organization: String,
   reference: String,
 });
 
 const Project = new mongoose.Schema({
   name: String,
   description: String,
-  highlights: [String],
+  summary: String,
   keywords: [String],
   startDate: MonthYearDate,
   endDate: MonthYearDate,
   url: String,
-  roles: [String],
-  entity: String,
-  type: String,
 });
 
 const resume_schema = new mongoose.Schema(

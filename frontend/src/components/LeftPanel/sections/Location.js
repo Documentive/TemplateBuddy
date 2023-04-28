@@ -30,48 +30,57 @@ const Location = () => {
   return (
     <div>
       <div className="flex w-full items-center gap-3 mb-4">
-        <div className="ml-2">
+        <div className="ml-2 opacity-50">
           <Apartment />
         </div>
         <p className="text-3xl" id="location">
           Location
         </p>
       </div>
-      <TextField
-        fullWidth
-        label="Address"
-        id="address"
-        value={locationObj.address || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="City"
-        id="city"
-        value={locationObj.city || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Region"
-        id="region"
-        value={locationObj.region || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Country"
-        id="countryCode"
-        value={locationObj.countryCode || ""}
-        onChange={onTextFieldKeyUp}
-      />
-      <TextField
-        fullWidth
-        label="Postal Code"
-        id="postalCode"
-        value={locationObj.postalCode || ""}
-        onChange={onTextFieldKeyUp}
-      />
+      <div>
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Address"
+          id="address"
+          value={locationObj.address || ""}
+          onChange={onTextFieldKeyUp}
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-x-4">
+        <TextField
+          fullWidth
+          margin="dense"
+          label="City"
+          id="city"
+          value={locationObj.city || ""}
+          onChange={onTextFieldKeyUp}
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Region"
+          id="region"
+          value={locationObj.region || ""}
+          onChange={onTextFieldKeyUp}
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Country"
+          id="countryCode"
+          value={locationObj.countryCode || ""}
+          onChange={onTextFieldKeyUp}
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Postal Code"
+          id="postalCode"
+          value={locationObj.postalCode || ""}
+          onChange={onTextFieldKeyUp}
+        />
+      </div>
     </div>
   );
 };

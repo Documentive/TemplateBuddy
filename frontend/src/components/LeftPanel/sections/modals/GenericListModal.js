@@ -87,7 +87,7 @@ const GenericModal = ({
   };
 
   useEffect(() => {
-    if (modalMode == modes.EDIT && currentModalIdx !== -1) {
+    if (modalMode === modes.EDIT && currentModalIdx !== -1) {
       let arrayObj = resume[dbField[0]];
       for (let i = 1; i < dbField.length; i++) {
         arrayObj = arrayObj[dbField[i]];
@@ -108,7 +108,7 @@ const GenericModal = ({
   }, [modalMode, currentModalIdx]);
 
   const onSubmitBtnClick = () => {
-    if (modalMode == modes.EDIT) {
+    if (modalMode === modes.EDIT) {
       let tempEntryList = [...entryList];
       tempEntryList[currentModalIdx] = {
         ...modalEntryObject,
@@ -301,7 +301,7 @@ const GenericModal = ({
               sx={{ float: "left" }}
             />
             <Button
-              variant="contained"
+              variant="outlined"
               onClick={() => handleAddToMultiEntryList(field)}
             >
               Add
@@ -315,7 +315,7 @@ const GenericModal = ({
                     <ListItem key={idx}>
                       {getGenericListMapField(field, entry, idx)}
                       <Button
-                        variant="contained"
+                        variant="outlined"
                         onClick={() => {
                           editGenericListMapEntry(field, entry, idx);
                         }}
@@ -364,7 +364,7 @@ const GenericModal = ({
           })}
         </DialogContent>
         <DialogActions>
-          <Button onClick={onSubmitBtnClick}>Add New {fieldName}</Button>
+          <Button variant="outlined" onClick={onSubmitBtnClick}>Add New {fieldName}</Button>
         </DialogActions>
       </Dialog>
     </>

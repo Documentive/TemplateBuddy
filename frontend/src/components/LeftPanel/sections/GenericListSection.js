@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GenericModal from "./modals/GenericListModal";
-import { Button, List, ListItem, ListItemText } from "@mui/material";
+import { Button, ListItem, ListItemText } from "@mui/material";
+import { Add } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { modes } from "../constants/modes";
 import { deleteResumeArray } from "../../../reducers/resume-reducer";
@@ -60,19 +61,11 @@ const GenericSection = ({
   return (
     <div>
       <div className="flex w-full items-center gap-3 mb-4">
-        <div className="ml-2">{fieldIcon}</div>
+        <div className="ml-2 opacity-50">{fieldIcon}</div>
         <p className="text-3xl" id={dbField[dbField.length - 1]}>
           {fieldName}
         </p>
       </div>
-      <Button
-        variant="contained"
-        onClick={() => {
-          setOpenModal(true);
-        }}
-      >
-        Add New {fieldName}
-      </Button>
       <GenericModal
         fieldsMap={fieldsMap}
         openModal={openModal}
@@ -86,10 +79,13 @@ const GenericSection = ({
         setModalMode={setModalMode}
         currentModalIdx={currentModalIdx}
       />
-      {Object.keys(entryList).length > 0 && (
-        <>
-          <List>
-            {Object.keys(entryList).map((entry, idx) => {
+      <div className="rounded-xl border mb-2">
+        {Object.keys(entryList).length === 0 && (
+          <div className="py-8 text-center">Nothing added yet!</div>
+        )}
+
+        {Object.keys(entryList).length > 0 &&
+          Object.keys(entryList).map((entry, idx) => {
               return (
                 <ListItem key={idx}>
                   <ListItemText>{entryList[entry][displayField]}</ListItemText>
@@ -112,10 +108,18 @@ const GenericSection = ({
                 </ListItem>
               );
             })}
-          </List>
-        </>
-      )}
-      {Object.keys(entryList).length === 0 && <div>Nothing added yet!</div>}
+      </div>
+      <div className="text-right">
+        <Button
+          variant="outlined"
+          startIcon={<Add />}
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        >
+          Add New {fieldName}
+        </Button>
+      </div>
     </div>
   );
 };

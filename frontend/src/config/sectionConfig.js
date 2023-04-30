@@ -11,6 +11,7 @@ import {
   Handshake,
   AutoStories,
   OutdoorGrill,
+  AlternateEmail,
 } from "@mui/icons-material";
 
 export const socialsSectionConfig = {
@@ -18,17 +19,22 @@ export const socialsSectionConfig = {
     network: {
       type: "TextField",
       label: "Network",
+      required: true,
     },
     username: {
       type: "TextField",
       label: "Username",
+      required: true,
+      innerFieldIcon: <AlternateEmail className="mr-2" />,
     },
     url: {
       type: "TextField",
       label: "URL",
+      required: false,
     },
   },
   fieldName: "Socials",
+  modalHeading: "Social Profile",
   fieldIcon: <Public />,
   fieldGroups: [["network", "username"], ["url"]],
   displayField: "network",
@@ -40,6 +46,7 @@ export const educationSectionConfig = {
     institution: {
       type: "TextField",
       label: "Institution",
+      required: true,
     },
     location: {
       type: "TextField",
@@ -72,6 +79,7 @@ export const educationSectionConfig = {
     },
   },
   fieldName: "Education",
+  modalHeading: "Education",
   fieldIcon: <School />,
   fieldGroups: [
     ["institution", "studyType", "area", "score", "startDate", "endDate"],
@@ -112,6 +120,7 @@ export const workExperienceSectionConfig = {
     },
   },
   fieldName: "Work Experience",
+  modalHeading: "Work Experience",
   fieldIcon: <Work />,
   fieldGroups: [
     ["name", "position"],
@@ -157,6 +166,7 @@ export const projectsSectionConfig = {
     },
   },
   fieldName: "Projects",
+  modalHeading: "Project",
   fieldIcon: <Groups />,
   fieldGroups: [
     ["name", "description", "startDate", "endDate"],
@@ -184,6 +194,7 @@ export const skillsSectionConfig = {
     },
   },
   fieldName: "Skills",
+  modalHeading: "Skill",
   fieldIcon: <ShapeLine />,
   fieldGroups: [["name", "level"], ["keywords"]],
   displayField: "name",
@@ -215,6 +226,7 @@ export const certificationsSectionConfig = {
     },
   },
   fieldName: "Certifications",
+  modalHeading: "Certification",
   fieldIcon: <Redeem />,
   fieldGroups: [["name", "date"], ["issuer", "url"], ["summary"]],
   displayField: "name",
@@ -233,6 +245,7 @@ export const languagesSectionConfig = {
     },
   },
   fieldName: "Languages",
+  modalHeading: "Language",
   fieldIcon: <Language />,
   fieldGroups: [["language", "fluency"]],
   displayField: "language",
@@ -264,6 +277,7 @@ export const publicationsSectionConfig = {
     },
   },
   fieldName: "Publications",
+  modalHeading: "Publication",
   fieldIcon: <AutoStories />,
   fieldGroups: [["name", "publisher", "releaseDate", "url"], ["summary"]],
   displayField: "name",
@@ -291,6 +305,7 @@ export const awardsSectionConfig = {
     },
   },
   fieldName: "Awards",
+  modalHeading: "Award",
   fieldIcon: <EmojiEvents />,
   fieldGroups: [["title", "date"], ["awarder"], ["summary"]],
   displayField: "title",
@@ -305,6 +320,7 @@ export const interestsSectionConfig = {
     },
   },
   fieldName: "Interests",
+  modalHeading: "Interest",
   fieldIcon: <OutdoorGrill />,
   fieldGroups: [["name"]],
   displayField: "name",
@@ -341,6 +357,7 @@ export const volunteerSectionConfig = {
     },
   },
   fieldName: "Volunteer",
+  modalHeading: "Volunteer Experience",
   fieldIcon: <VolunteerActivism />,
   fieldGroups: [
     ["organization", "position", "startDate", "endDate"],
@@ -372,6 +389,7 @@ export const referencesSectionConfig = {
     },
   },
   fieldName: "References",
+  modalHeading: "Reference",
   fieldIcon: <Handshake />,
   fieldGroups: [["name", "position"], ["organization"], ["reference"]],
   displayField: "name",

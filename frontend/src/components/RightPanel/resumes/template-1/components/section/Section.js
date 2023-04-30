@@ -8,7 +8,7 @@ const Section = ({ title }) => {
       <p className="left no-margin-bottom">
         <strong>{title.toUpperCase()}</strong>
       </p>
-      <hr />
+      <hr className="hrClass" />
     </>
   );
 };

@@ -36,10 +36,10 @@
     color: hsl(159, 83%, 28%);
   }
   
-  hr {
+  .hrClass {
     border: none;
     height: 2px;
-    background-color: black;  /* Modern Browsers */
+    background-color: black;
   }
   
   tr {

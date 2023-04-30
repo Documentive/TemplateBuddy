@@ -85,8 +85,8 @@ const Basics = () => {
           Personal Details
         </p>
       </div>
-      <div className="grid grid-rows-2 grid-cols-6 gap-x-4">
-        <div className="row-span-2 col-span-1">
+      <div className="grid grid-rows-2 grid-cols-4 gap-x-4">
+        <div className="row-span-2 col-span-1 text-center">
           <IconButton component="label">
             <Tooltip title="Upload Image">{getImage()}</Tooltip>
             <input
@@ -97,7 +97,7 @@ const Basics = () => {
             />
           </IconButton>
         </div>
-        <div className="row-span-1 col-span-5">
+        <div className="row-span-1 col-span-3">
           <TextField
             fullWidth
             margin="dense"
@@ -107,7 +107,7 @@ const Basics = () => {
             onChange={onTextFieldKeyUp}
           />
         </div>
-        <div className="row-span-1 col-span-5">
+        <div className="row-span-1 col-span-3">
           <TextField
             fullWidth
             margin="dense"

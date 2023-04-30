@@ -26,6 +26,7 @@ const GenericModal = ({
   entryList,
   setEntryList,
   fieldName,
+  modalHeading,
   dbField,
   fieldGroups,
   modalMode,
@@ -202,6 +203,7 @@ const GenericModal = ({
         return (
           <TextField
             value={genericFieldEntryIdxMap[key]}
+            margin="dense"
             onChange={(e) => {
               setGenericEntryFieldIdxMap({
                 ...genericFieldEntryIdxMap,
@@ -237,7 +239,9 @@ const GenericModal = ({
         if ("rows" in value) {
           content = (
             <TextField
+              required={!!value.required}
               fullWidth
+              margin="dense"
               label={value.label}
               name={value.label.toLowerCase()}
               multiline
@@ -247,10 +251,28 @@ const GenericModal = ({
               key={field}
             />
           );
+        } else if ("innerFieldIcon" in value) {
+          content = (
+            <TextField
+              required={!!value.required}
+              fullWidth
+              margin="dense"
+              label={value.label}
+              name={value.label.toLowerCase()}
+              value={getValue(field)}
+              onChange={(e) => onInputToField(e, field)}
+              key={field}
+              InputProps={{
+                startAdornment: value.innerFieldIcon,
+              }}
+            />
+          );
         } else {
           content = (
             <TextField
+              required={!!value.required}
               fullWidth
+              margin="dense"
               label={value.label}
               name={value.label.toLowerCase()}
               value={getValue(field)}
@@ -265,6 +287,7 @@ const GenericModal = ({
       case "Date": {
         content = (
           <DatePicker
+            required={!!value.required}
             sx={{ width: 1 }}
             label={value.label}
             openTo="year"
@@ -291,6 +314,7 @@ const GenericModal = ({
           <div key={field}>
             <TextField
               label={value.label}
+              margin="dense"
               name={value.label.toLowerCase()}
               onKeyUp={(e) => {
                 setGenericEntryMap({
@@ -323,7 +347,7 @@ const GenericModal = ({
                         {getBtnName(field, entry, idx)}
                       </Button>
                       <Button
-                        variant="contained"
+                        variant="outlined"
                         onClick={() =>
                           deleteGenericListMapEntry(field, entry, idx)
                         }
@@ -347,7 +371,7 @@ const GenericModal = ({
   return (
     <>
       <Dialog open={openModal} onClose={cleanState}>
-        <DialogTitle>Add a {fieldName}</DialogTitle>
+        <DialogTitle>Add a new {modalHeading}</DialogTitle>
         <DialogContent>
           {fieldGroups.map((group, idx) => {
             if (group.length > 1) {
@@ -364,7 +388,9 @@ const GenericModal = ({
           })}
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={onSubmitBtnClick}>Add New {fieldName}</Button>
+          <Button variant="outlined" onClick={onSubmitBtnClick}>
+            Add New {modalHeading}
+          </Button>
         </DialogActions>
       </Dialog>
     </>

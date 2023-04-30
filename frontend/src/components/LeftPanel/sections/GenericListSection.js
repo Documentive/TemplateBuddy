@@ -10,6 +10,7 @@ const GenericSection = ({
   fieldsMap,
   fieldName,
   fieldIcon,
+  modalHeading,
   fieldGroups,
   displayField,
   dbField,
@@ -73,6 +74,7 @@ const GenericSection = ({
         entryList={entryList}
         setEntryList={setEntryList}
         fieldName={fieldName}
+        modalHeading={modalHeading}
         dbField={dbField}
         fieldGroups={fieldGroups}
         modalMode={modalMode}
@@ -87,10 +89,10 @@ const GenericSection = ({
         {Object.keys(entryList).length > 0 &&
           Object.keys(entryList).map((entry, idx) => {
               return (
-                <ListItem key={idx}>
+                <ListItem key={idx} className="border-b last:border-0">
                   <ListItemText>{entryList[entry][displayField]}</ListItemText>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     onClick={() => {
                       handleEditClick(idx);
                     }}
@@ -98,7 +100,7 @@ const GenericSection = ({
                     Edit
                   </Button>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     onClick={() => {
                       handleDeleteClick(idx);
                     }}
@@ -117,7 +119,7 @@ const GenericSection = ({
             setOpenModal(true);
           }}
         >
-          Add New {fieldName}
+          Add New {modalHeading}
         </Button>
       </div>
     </div>

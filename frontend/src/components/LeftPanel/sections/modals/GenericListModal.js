@@ -1,12 +1,10 @@
 import {
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
+  Fade,
   List,
   ListItem,
   ListItemText,
+  Modal,
   TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -18,6 +16,8 @@ import {
   updateResume,
   updateResumeArray,
 } from "../../../../reducers/resume-reducer";
+
+import styles from "./GenericListModal.module.scss";
 
 const GenericModal = ({
   fieldsMap,
@@ -369,31 +369,35 @@ const GenericModal = ({
   });
 
   return (
-    <>
-      <Dialog open={openModal} onClose={cleanState}>
-        <DialogTitle>Add a new {modalHeading}</DialogTitle>
-        <DialogContent>
-          {fieldGroups.map((group, idx) => {
-            if (group.length > 1) {
-              return (
-                <div className="grid grid-cols-2 my-3 gap-4" key={idx}>
-                  {group.map((element) => {
-                    return fieldDOM[element];
-                  })}
-                </div>
-              );
-            } else {
-              return <div key={idx}>{fieldDOM[group[0]]}</div>;
-            }
-          })}
-        </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" onClick={onSubmitBtnClick}>
-            Add New {modalHeading}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
+    <Modal open={openModal} onClose={cleanState} aria-labelledby={modalHeading}>
+      <Fade in={openModal}>
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <h1>Add a new {modalHeading}</h1>
+          </div>
+          <div>
+            {fieldGroups.map((group, idx) => {
+              if (group.length > 1) {
+                return (
+                  <div className="grid grid-cols-2 my-3 gap-4" key={idx}>
+                    {group.map((element) => {
+                      return fieldDOM[element];
+                    })}
+                  </div>
+                );
+              } else {
+                return <div key={idx}>{fieldDOM[group[0]]}</div>;
+              }
+            })}
+          </div>
+          <div className={styles.footer}>
+            <Button variant="outlined" onClick={onSubmitBtnClick}>
+              Add New {modalHeading}
+            </Button>
+          </div>
+        </div>
+      </Fade>
+    </Modal>
   );
 };
 

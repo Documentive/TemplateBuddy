@@ -1,0 +1,22 @@
+.content {
+  @apply bg-neutral-50 absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2;
+  @apply rounded px-6 text-sm shadow lg:w-1/2 xl:w-2/5;
+  @apply overflow-scroll lg:overflow-auto;
+  @apply max-h-[90vh] min-h-fit;
+}
+
+.header {
+  @apply sticky top-0 left-0 right-0 z-50 bg-neutral-50 pt-6;
+  @apply flex items-center justify-between;
+  @apply w-full border-b pb-5;
+
+  h1 {
+    @apply text-xl font-medium;
+  }
+}
+
+.footer {
+    @apply sticky bottom-0 left-0 right-0 z-50 bg-neutral-50 pb-6;
+    @apply flex items-center justify-end gap-x-4;
+    @apply w-full pt-5;
+  }

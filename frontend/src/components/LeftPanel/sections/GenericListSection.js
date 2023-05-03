@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import GenericModal from "./modals/GenericListModal";
-import { Button, ListItem, ListItemText } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Button, IconButton, ListItem, ListItemText } from "@mui/material";
+import {
+  Add,
+  DeleteOutline,
+  DriveFileRenameOutline,
+} from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { modes } from "../constants/modes";
 import { deleteResumeArray } from "../../../reducers/resume-reducer";
@@ -88,28 +92,30 @@ const GenericSection = ({
 
         {Object.keys(entryList).length > 0 &&
           Object.keys(entryList).map((entry, idx) => {
-              return (
-                <ListItem key={idx} className="border-b last:border-0">
-                  <ListItemText>{entryList[entry][displayField]}</ListItemText>
-                  <Button
-                    variant="outlined"
+            return (
+              <ListItem key={idx} className="border-b last:border-0">
+                <ListItemText>{entryList[entry][displayField]}</ListItemText>
+                <div>
+                  <IconButton
+                    size="small"
                     onClick={() => {
                       handleEditClick(idx);
                     }}
                   >
-                    Edit
-                  </Button>
-                  <Button
-                    variant="outlined"
+                    <DriveFileRenameOutline sx={{ fontSize: 18 }} />
+                  </IconButton>
+                  <IconButton
+                    size="small"
                     onClick={() => {
                       handleDeleteClick(idx);
                     }}
                   >
-                    Delete
-                  </Button>
-                </ListItem>
-              );
-            })}
+                    <DeleteOutline sx={{ fontSize: 18 }} />
+                  </IconButton>
+                </div>
+              </ListItem>
+            );
+          })}
       </div>
       <div className="text-right">
         <Button

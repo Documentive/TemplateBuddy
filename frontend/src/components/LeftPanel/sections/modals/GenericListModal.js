@@ -1,12 +1,19 @@
 import {
   Button,
   Fade,
+  IconButton,
   List,
   ListItem,
   ListItemText,
   Modal,
   TextField,
 } from "@mui/material";
+import {
+  Close as CloseIcon,
+  DeleteOutline,
+  DriveFileRenameOutline,
+  Save,
+} from "@mui/icons-material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
@@ -203,6 +210,9 @@ const GenericModal = ({
         return (
           <TextField
             value={genericFieldEntryIdxMap[key]}
+            fullWidth
+            variant="standard"
+            autoFocus
             margin="dense"
             onChange={(e) => {
               setGenericEntryFieldIdxMap({
@@ -224,9 +234,11 @@ const GenericModal = ({
     const key = `${field}-${entry}-${idx}`;
 
     if (key in isEditingFieldEntryIdxMap) {
-      return "Save";
+      // return "Save";
+      return <Save />;
     } else {
-      return "Edit";
+      // return "Edit";
+      return <DriveFileRenameOutline />;
     }
   };
 
@@ -312,54 +324,59 @@ const GenericModal = ({
       case "MultiEntryList": {
         content = (
           <div key={field}>
-            <TextField
-              label={value.label}
-              margin="dense"
-              name={value.label.toLowerCase()}
-              onKeyUp={(e) => {
-                setGenericEntryMap({
-                  ...genericEntryMap,
-                  [field]: e.target.value,
-                });
-              }}
-              sx={{ float: "left" }}
-            />
-            <Button
-              variant="outlined"
-              onClick={() => handleAddToMultiEntryList(field)}
-            >
-              Add
-            </Button>
-            <br />
-            <br />
-            {field in genericListMap && genericListMap[field].length > 0 && (
-              <List>
-                {genericListMap[field].map((entry, idx) => {
+            <div className="flex justify-between items-center pb-4">
+              <TextField
+                label={value.label}
+                margin="dense"
+                name={value.label.toLowerCase()}
+                sx={{ width: "90%" }}
+                variant="standard"
+                onKeyUp={(e) => {
+                  setGenericEntryMap({
+                    ...genericEntryMap,
+                    [field]: e.target.value,
+                  });
+                }}
+              />
+              <Button
+                variant="outlined"
+                onClick={() => handleAddToMultiEntryList(field)}
+              >
+                Add
+              </Button>
+            </div>
+            <div className="rounded-xl border mb-2">
+              {field in genericListMap &&
+                genericListMap[field].length > 0 &&
+                genericListMap[field].map((entry, idx) => {
                   return (
-                    <ListItem key={idx}>
-                      {getGenericListMapField(field, entry, idx)}
-                      <Button
-                        variant="outlined"
-                        onClick={() => {
-                          editGenericListMapEntry(field, entry, idx);
-                        }}
-                      >
-                        {getBtnName(field, entry, idx)}
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() =>
-                          deleteGenericListMapEntry(field, entry, idx)
-                        }
-                      >
-                        Delete
-                      </Button>
+                    <ListItem key={idx} className="border-b last:border-0">
+                      <p className="w-11/12 break-words mr-4">
+                        {getGenericListMapField(field, entry, idx)}
+                      </p>
+                      <div className="flex justify-center items-center">
+                        <IconButton
+                          onClick={() => {
+                            editGenericListMapEntry(field, entry, idx);
+                          }}
+                        >
+                          {getBtnName(field, entry, idx)}
+                        </IconButton>
+                        <IconButton
+                          onClick={() =>
+                            deleteGenericListMapEntry(field, entry, idx)
+                          }
+                        >
+                          <DeleteOutline />
+                        </IconButton>
+                      </div>
                     </ListItem>
                   );
                 })}
-              </List>
-            )}
-            {!(field in genericListMap) && <div>Nothing added yet!</div>}
+              {!(field in genericListMap) && (
+                <div className="py-8 text-center">Nothing added yet!</div>
+              )}
+            </div>
           </div>
         );
         fieldDOM[field] = content;
@@ -374,6 +391,9 @@ const GenericModal = ({
         <div className={styles.content}>
           <div className={styles.header}>
             <h1>Add a new {modalHeading}</h1>
+            <IconButton size="small" onClick={cleanState}>
+              <CloseIcon sx={{ fontSize: 18 }} />
+            </IconButton>
           </div>
           <div>
             {fieldGroups.map((group, idx) => {

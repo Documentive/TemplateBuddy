@@ -21,7 +21,6 @@ const store = configureStore({
 });
 
 const App = () => {
-
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -34,7 +33,7 @@ const App = () => {
 
   const handleThemeToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
-  }
+  };
 
   return (
     <Provider store={store}>
@@ -46,7 +45,7 @@ const App = () => {
         <div className="w-screen h-screen flex">
           {/* Left side of screen for the navigation and data entry */}
           <div className="flex-none w-1/2">
-            <LeftPanel handleThemeToggle={handleThemeToggle} />
+            <LeftPanel theme={theme} handleThemeToggle={handleThemeToggle} />
           </div>
           {/* Right side of screen for showing the rendered resume and template selection */}
           <div className="flex-none w-1/2">

@@ -7,6 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import uploadReducer from "./reducers/upload-reducer";
 import resumeReducer from "./reducers/resume-reducer";
 import { Provider } from "react-redux";
+import { useEffect, useState } from "react";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,21 @@ const store = configureStore({
 });
 
 const App = () => {
+
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const handleThemeToggle = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  }
+
   return (
     <Provider store={store}>
       {/* LocalizationProvider component receives your chosen date library's adapter and makes it accessible to all the Date and Time Pickers component using React context. */}
@@ -30,7 +46,7 @@ const App = () => {
         <div className="w-screen h-screen flex">
           {/* Left side of screen for the navigation and data entry */}
           <div className="flex-none w-1/2">
-            <LeftPanel />
+            <LeftPanel handleThemeToggle={handleThemeToggle} />
           </div>
           {/* Right side of screen for showing the rendered resume and template selection */}
           <div className="flex-none w-1/2">

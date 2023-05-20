@@ -76,91 +76,90 @@ const Basics = () => {
   };
 
   return (
-    <div>
-      <div className="flex w-full items-center gap-3 mb-4">
-        <div className="ml-2 opacity-50">
-          <Person />
+    <div className="font-inter">
+      <div className="border-b border-slate-500 dark:border-slate-400 py-6">
+        <div className="flex w-full items-center gap-3 mb-4">
+          <div className="ml-2 opacity-50">
+            <Person />
+          </div>
+          <p className="text-3xl" id="personal-details">
+            Personal Details
+          </p>
         </div>
-        <p className="text-3xl" id="personal-details">
-          Personal Details
-        </p>
-      </div>
-      <div className="grid grid-rows-2 grid-cols-4 gap-x-4">
-        <div className="row-span-2 col-span-1 text-center">
-          <IconButton component="label">
-            <Tooltip title="Upload Image">{getImage()}</Tooltip>
-            <input
-              hidden
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
+        <div className="grid grid-rows-2 grid-cols-4 gap-x-4">
+          <div className="row-span-2 col-span-1 text-center">
+            <IconButton component="label">
+              <Tooltip title="Upload Image">{getImage()}</Tooltip>
+              <input
+                hidden
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </IconButton>
+          </div>
+          <div className="row-span-1 col-span-3">
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Full Name"
+              id="name"
+              value={basicsObj.name || ""}
+              onChange={onTextFieldKeyUp}
             />
-          </IconButton>
+          </div>
+          <div className="row-span-1 col-span-3">
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Email"
+              id="email"
+              value={basicsObj.email || ""}
+              onChange={onTextFieldKeyUp}
+            />
+          </div>
         </div>
-        <div className="row-span-1 col-span-3">
+        <div className="grid grid-cols-2 gap-x-4">
           <TextField
             fullWidth
             margin="dense"
-            label="Full Name"
-            id="name"
-            value={basicsObj.name || ""}
+            label="Phone Number"
+            id="phone"
+            value={basicsObj.phone || ""}
             onChange={onTextFieldKeyUp}
           />
-        </div>
-        <div className="row-span-1 col-span-3">
           <TextField
             fullWidth
             margin="dense"
-            label="Email"
-            id="email"
-            value={basicsObj.email || ""}
+            label="Portfolio Link"
+            id="url"
+            value={basicsObj.url || ""}
+            onChange={onTextFieldKeyUp}
+          />
+        </div>
+        <div>
+          <TextField
+            fullWidth
+            margin="dense"
+            label="Job Title"
+            id="label"
+            value={basicsObj.label || ""}
+            onChange={onTextFieldKeyUp}
+          />
+          <TextField
+            fullWidth
+            margin="dense"
+            label="Summary"
+            multiline
+            rows={5}
+            id="summary"
+            value={basicsObj.summary || ""}
             onChange={onTextFieldKeyUp}
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-x-4">
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Phone Number"
-          id="phone"
-          value={basicsObj.phone || ""}
-          onChange={onTextFieldKeyUp}
-        />
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Portfolio Link"
-          id="url"
-          value={basicsObj.url || ""}
-          onChange={onTextFieldKeyUp}
-        />
-      </div>
-      <div>
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Job Title"
-          id="label"
-          value={basicsObj.label || ""}
-          onChange={onTextFieldKeyUp}
-        />
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Summary"
-          multiline
-          rows={5}
-          id="summary"
-          value={basicsObj.summary || ""}
-          onChange={onTextFieldKeyUp}
-        />
-      </div>
-      <hr className="my-4 border-slate-400 w-full mx-auto" />
       <Location />
-      <hr className="my-4 border-slate-400 w-full mx-auto" />
       <GenericSection {...socialsSectionConfig} />
-      <hr className="my-4 border-slate-400 w-full mx-auto" />
     </div>
   );
 };

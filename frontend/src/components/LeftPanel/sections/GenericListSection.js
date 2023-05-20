@@ -16,7 +16,9 @@ const GenericSection = ({
   fieldIcon,
   modalHeading,
   fieldGroups,
-  displayField,
+  displayFieldTitle,
+  displayFieldSubtitle,
+  displayFieldExtraTitle,
   dbField,
 }) => {
   const { resume, resumeLoading } = useSelector((state) => state.resume);
@@ -64,7 +66,7 @@ const GenericSection = ({
   };
 
   return (
-    <div>
+    <div className="font-inter border-b border-slate-500 dark:border-slate-400 py-6">
       <div className="flex w-full items-center gap-3 mb-4">
         <div className="ml-2 opacity-50">{fieldIcon}</div>
         <p className="text-3xl" id={dbField[dbField.length - 1]}>
@@ -93,8 +95,11 @@ const GenericSection = ({
         {Object.keys(entryList).length > 0 &&
           Object.keys(entryList).map((entry, idx) => {
             return (
-              <ListItem key={idx} className="border-b last:border-0">
-                <ListItemText>{entryList[entry][displayField]}</ListItemText>
+              <div key={idx} className="border-b last:border-0 flex flex-row items-center justify-between p-3">
+                <div>
+                  <h1 className="font-semibold">{displayFieldExtraTitle? (entryList[entry][displayFieldTitle] + ", " + entryList[entry][displayFieldExtraTitle]) : entryList[entry][displayFieldTitle]}</h1>
+                  <h2 className="text-xs opacity-75">{entryList[entry][displayFieldSubtitle]}</h2>
+                </div>
                 <div>
                   <IconButton
                     size="small"
@@ -113,7 +118,7 @@ const GenericSection = ({
                     <DeleteOutline sx={{ fontSize: 18 }} />
                   </IconButton>
                 </div>
-              </ListItem>
+              </div>
             );
           })}
       </div>

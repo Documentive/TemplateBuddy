@@ -114,7 +114,6 @@ const LeftPanel = ({ check, handleThemeToggle }) => {
                 return (
                   <div>
                     <GenericSection {...section.config} key={index} />
-                    <hr className="my-4 border-slate-400 w-full mx-auto" />
                   </div>
                 );
               } else if (section.type === "Basics") {

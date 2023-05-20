@@ -37,7 +37,8 @@ export const socialsSectionConfig = {
   modalHeading: "Social Profile",
   fieldIcon: <Public />,
   fieldGroups: [["network", "username"], ["url"]],
-  displayField: "network",
+  displayFieldTitle: "username",
+  displayFieldSubtitle: "network",
   dbField: ["basics", "profiles"],
 };
 
@@ -93,7 +94,9 @@ export const educationSectionConfig = {
     ["location"],
     ["courses"],
   ],
-  displayField: "institution",
+  displayFieldTitle: "studyType",
+  displayFieldSubtitle: "institution",
+  displayFieldExtraTitle: "area",
   dbField: ["education"],
 };
 
@@ -141,7 +144,8 @@ export const workExperienceSectionConfig = {
     ["startDate", "endDate"],
     ["summary"],
   ],
-  displayField: "name",
+  displayFieldTitle: "name",
+  displayFieldSubtitle: "position",
   dbField: ["work"],
 };
 
@@ -194,7 +198,8 @@ export const projectsSectionConfig = {
     ["summary"],
     ["keywords"],
   ],
-  displayField: "name",
+  displayFieldTitle: "name",
+  displayFieldSubtitle: "description",
   dbField: ["projects"],
 };
 
@@ -220,7 +225,8 @@ export const skillsSectionConfig = {
   modalHeading: "Skill",
   fieldIcon: <ShapeLine />,
   fieldGroups: [["name", "level"], ["keywords"]],
-  displayField: "name",
+  displayFieldTitle: "name",
+  displayFieldSubtitle: "level",
   dbField: ["skills"],
 };
 
@@ -257,7 +263,8 @@ export const certificationsSectionConfig = {
   modalHeading: "Certification",
   fieldIcon: <Redeem />,
   fieldGroups: [["name", "date"], ["issuer", "url"], ["summary"]],
-  displayField: "name",
+  displayFieldTitle: "name",
+  displayFieldSubtitle: "issuer",
   dbField: ["certificates"],
 };
 
@@ -278,7 +285,8 @@ export const languagesSectionConfig = {
   modalHeading: "Language",
   fieldIcon: <Language />,
   fieldGroups: [["language", "fluency"]],
-  displayField: "language",
+  displayFieldTitle: "language",
+  displayFieldSubtitle: "fluency",
   dbField: ["languages"],
 };
 
@@ -315,7 +323,8 @@ export const publicationsSectionConfig = {
   modalHeading: "Publication",
   fieldIcon: <AutoStories />,
   fieldGroups: [["name", "publisher", "releaseDate", "url"], ["summary"]],
-  displayField: "name",
+  displayFieldTitle: "name",
+  displayFieldSubtitle: "publisher",
   dbField: ["publications"],
 };
 
@@ -347,7 +356,8 @@ export const awardsSectionConfig = {
   modalHeading: "Award",
   fieldIcon: <EmojiEvents />,
   fieldGroups: [["title", "date"], ["awarder"], ["summary"]],
-  displayField: "title",
+  displayFieldTitle: "title",
+  displayFieldSubtitle: "awarder",
   dbField: ["awards"],
 };
 
@@ -363,7 +373,8 @@ export const interestsSectionConfig = {
   modalHeading: "Interest",
   fieldIcon: <OutdoorGrill />,
   fieldGroups: [["name"]],
-  displayField: "name",
+  displayFieldTitle: "name",
+  displayFieldSubtitle: "",
   dbField: ["interests"],
 };
 
@@ -410,7 +421,8 @@ export const volunteerSectionConfig = {
     ["url"],
     ["summary"],
   ],
-  displayField: "organization",
+  displayFieldTitle: "organization",
+  displayFieldSubtitle: "position",
   dbField: ["volunteer"],
 };
 
@@ -442,6 +454,7 @@ export const referencesSectionConfig = {
   modalHeading: "Reference",
   fieldIcon: <Handshake />,
   fieldGroups: [["name", "position"], ["organization"], ["reference"]],
-  displayField: "name",
+  displayFieldTitle: "name",
+  displayFieldSubtitle: "position",
   dbField: ["references"],
 };

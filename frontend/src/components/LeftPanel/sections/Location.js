@@ -28,7 +28,7 @@ const Location = () => {
   };
 
   return (
-    <div>
+    <div className="font-inter border-b border-slate-500 dark:border-slate-400 py-6">
       <div className="flex w-full items-center gap-3 mb-4">
         <div className="ml-2 opacity-50">
           <Apartment />

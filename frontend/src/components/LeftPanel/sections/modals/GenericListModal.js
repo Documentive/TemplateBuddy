@@ -2,7 +2,6 @@ import {
   Button,
   Fade,
   IconButton,
-  List,
   ListItem,
   ListItemText,
   Modal,

@@ -29,7 +29,6 @@
   input,
   textarea {
     @apply rounded px-4 py-2 transition;
-    @apply bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-50;
     @apply border border-transparent border-opacity-50 focus:border-neutral-400 dark:focus:border-neutral-600;
   }
 }

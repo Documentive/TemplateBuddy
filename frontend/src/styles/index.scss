@@ -19,7 +19,7 @@
   }
 
   body {
-    @apply bg-neutral-50 text-neutral-900;
+    @apply bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100;
   }
 
   p {
@@ -29,8 +29,7 @@
   input,
   textarea {
     @apply rounded px-4 py-2 transition;
-    @apply bg-neutral-100 text-neutral-800;
-    @apply border border-transparent border-opacity-50 focus:border-neutral-400;
+    @apply border border-transparent border-opacity-50 focus:border-neutral-400 dark:focus:border-neutral-600;
   }
 }
 

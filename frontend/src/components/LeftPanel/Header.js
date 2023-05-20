@@ -1,15 +1,10 @@
 import React from "react";
-import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+import ThemeSwitch from "./ThemeSwitch";
 
-const Header = () => {
+const Header = ({ check, handleThemeToggle }) => {
   return (
     <div className="w-full h-16 flex justify-end items-center px-8">
-      {/* TODO: Need to complete the toggle theme functionality */}
-      <p>Toggle Theme</p>
-      <div className="flex ml-4">
-        <BsFillSunFill />
-        <BsFillMoonFill />
-      </div>
+      <ThemeSwitch checked={check} onClick={handleThemeToggle} />
     </div>
   );
 };

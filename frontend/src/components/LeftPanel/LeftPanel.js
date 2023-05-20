@@ -19,7 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { putSectionThunk } from "../../services/resume-thunk";
 
-const LeftPanel = () => {
+const LeftPanel = ({ check, handleThemeToggle }) => {
   let { resume, resumeLoading } = useSelector((state) => state.resume);
 
   const sectionsList = [
@@ -106,8 +106,8 @@ const LeftPanel = () => {
     <div className="w-full h-full flex flex-row">
       <NavBar />
       <div className="w-full h-full flex flex-col">
-        <Header />
-        <div className="w-full h-full overflow-y-scroll no-scrollbar bg-neutral-50 text-neutral-900">
+        <Header check={check} handleThemeToggle={handleThemeToggle} />
+        <div className="w-full h-full overflow-y-scroll no-scrollbar ">
           <div className="w-4/5 mx-auto">
             {sectionsList.map((section, index) => {
               if (section.type === "GenericSection") {

@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import Cookies from "universal-cookie";
 
 const store = configureStore({
   reducer: {
@@ -27,28 +28,40 @@ const App = () => {
   // To toggle themeswitch state
   const [darkMode, setDarkMode] = useState(false);
 
+  const cookies = new Cookies();
+
   // Set theme initially based on system preference, happens only once
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDarkMode(true);
+    let savedDarkMode = cookies.get("darkMode") === "true";
+    if (savedDarkMode !== undefined) {
+      setDarkMode(savedDarkMode);
     } else {
-      setDarkMode(false);
+      let decision = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setDarkMode(decision);
+      cookies.set("darkMode", decision, { path: "/" });
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Re-render only when theme is changed
   useEffect(() => {
     if (darkMode) {
       // Need to use data-attribute to toggle dark mode as css modules are hindering
-      document.documentElement.querySelector("body").setAttribute("data-mode", "dark");
+      document.documentElement
+        .querySelector("body")
+        .setAttribute("data-mode", "dark");
     } else {
-      document.documentElement.querySelector("body").removeAttribute("data-mode");
+      document.documentElement
+        .querySelector("body")
+        .removeAttribute("data-mode");
     }
   }, [darkMode]);
 
   // handle theme toggle
   const handleThemeToggle = () => {
     setDarkMode(!darkMode);
+    cookies.set("darkMode", !darkMode, { path: "/" });
   };
 
   const darkTheme = createTheme({

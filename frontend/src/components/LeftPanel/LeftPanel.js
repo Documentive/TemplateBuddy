@@ -139,7 +139,7 @@ const LeftPanel = ({ check, handleThemeToggle }) => {
 
       return () => clearInterval(interval);
     }
-  }, [resume, resumeLoading]);
+  }, [resume, resumeLoading, dispatch]);
 
   return (
     <div className="w-full h-full flex flex-row">
@@ -165,6 +165,8 @@ const LeftPanel = ({ check, handleThemeToggle }) => {
                 );
               } else if (section.type === "Basics") {
                 return <Basics key={index} />;
+              } else {
+                return null;
               }
             })}
           </div>

@@ -4,10 +4,9 @@ import PrimarySecondary from "./components/primary-secondary/PrimarySecondary";
 import Section from "./components/section/Section";
 import YearHighlights from "./components/year-highlights/YearHighlights";
 import * as objectUtils from "./utils/object_utils";
-import { useEffect, useState } from "react";
 
 function Resume() {
-  let { resume, resumeLoading } = useSelector((state) => state.resume);
+  let { resume } = useSelector((state) => state.resume);
 
   const getKeywordAsString = (keywords) => {
     let keywordString = "";

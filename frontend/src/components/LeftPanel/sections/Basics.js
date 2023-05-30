@@ -8,14 +8,8 @@ import { uploadImageThunk } from "../../../services/upload-thunk";
 
 import GenericSection from "./GenericListSection";
 import { socialsSectionConfig } from "../../../config/sectionConfig";
-import {
-  getResumeThunk,
-  putSectionThunk,
-} from "../../../services/resume-thunk";
-import {
-  getCurrentResume,
-  updateResume,
-} from "../../../reducers/resume-reducer";
+import { getResumeThunk } from "../../../services/resume-thunk";
+import { updateResume } from "../../../reducers/resume-reducer";
 
 const Basics = () => {
   const { imageUploading, imageURL } = useSelector(

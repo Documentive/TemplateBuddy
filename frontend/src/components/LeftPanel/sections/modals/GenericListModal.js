@@ -39,7 +39,7 @@ const GenericModal = ({
   setModalMode,
   currentModalIdx,
 }) => {
-  const { resume, resumeLoading } = useSelector((state) => state.resume);
+  const { resume } = useSelector((state) => state.resume);
   let [modalEntryObject, setModalEntryObject] = useState({});
   let [genericListMap, setGenericListMap] = useState({});
   let [genericEntryMap, setGenericEntryMap] = useState({});
@@ -108,10 +108,14 @@ const GenericModal = ({
             [field]: arrayObj[currentModalIdx][field],
           });
         }
+
+        return null;
       });
     } else {
       setModalEntryObject({});
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalMode, currentModalIdx]);
 
   const onSubmitBtnClick = () => {
@@ -128,7 +132,7 @@ const GenericModal = ({
 
     const finalMap = { ...modalEntryObject, ...genericListMap };
 
-    if (modalMode == modes.EDIT) {
+    if (modalMode === modes.EDIT) {
       console.log(dbField, currentModalIdx);
       dispatch(
         updateResume({
@@ -381,7 +385,13 @@ const GenericModal = ({
         fieldDOM[field] = content;
         break;
       }
+
+      default: {
+        return null;
+      }
     }
+
+    return null;
   });
 
   return (

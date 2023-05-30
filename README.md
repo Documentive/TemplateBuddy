@@ -37,7 +37,7 @@ user@programmer~:$ npm start
 #### For Windows (Use CMD Prompt in Administrator mode) :
 1. Start Mongo daemon:
 ```bash
-user@programmer~:$ <mongo_installation_path>/bin/mongod.exe --dbpath <db_path>
+user@programmer~:$ <mongo_installation_path>/bin/mongod.exe --dbpath=<db_path>
 ```
 2. Start the backend server:
 

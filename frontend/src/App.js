@@ -13,6 +13,11 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Cookies from "universal-cookie";
 
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import SchemaIcon from "@mui/icons-material/Schema";
+import { Tooltip, Fade } from "@mui/material";
+
 const store = configureStore({
   reducer: {
     uploadImage: uploadReducer,
@@ -88,8 +93,39 @@ const App = () => {
               />
             </div>
             {/* Right side of screen for showing the rendered resume and template selection */}
-            <div className="flex-none w-1/2">
+            <div className="flex flex-col space-y-5 justify-center items-center w-1/2 border-l">
               <RightPanel />
+
+              {/* Resume toolbar to provides options for exporting, importing and download */}
+              <div className="flex justify-center items-center dark:bg-neutral-900 bg-neutral-200/40 rounded-3xl z-20 w-1/4 p-3 space-x-5">
+                <Tooltip
+                  title="Import JSON"
+                  placement="top"
+                  arrow
+                  TransitionComponent={Fade}
+                  TransitionProps={{ timeout: 800 }}
+                >
+                  <SchemaIcon />
+                </Tooltip>
+                <Tooltip
+                  title="Export JSON"
+                  placement="top"
+                  arrow
+                  TransitionComponent={Fade}
+                  TransitionProps={{ timeout: 800 }}
+                >
+                  <FileDownloadIcon />
+                </Tooltip>
+                <Tooltip
+                  title="Download PDF"
+                  placement="top"
+                  arrow
+                  TransitionComponent={Fade}
+                  TransitionProps={{ timeout: 800 }}
+                >
+                  <PictureAsPdfIcon />
+                </Tooltip>
+              </div>
             </div>
           </div>
         </ThemeProvider>

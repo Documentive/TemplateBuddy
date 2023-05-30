@@ -13,10 +13,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Cookies from "universal-cookie";
 
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import SchemaIcon from "@mui/icons-material/Schema";
-import { Tooltip, Fade } from "@mui/material";
+import ResumeDrawer from "./components/ResumeDrawer";
 
 const store = configureStore({
   reducer: {
@@ -97,35 +94,7 @@ const App = () => {
               <RightPanel />
 
               {/* Resume toolbar to provides options for exporting, importing and download */}
-              <div className="flex justify-center items-center dark:bg-neutral-900 bg-neutral-200/40 rounded-3xl z-20 w-1/4 p-3 space-x-5">
-                <Tooltip
-                  title="Import JSON"
-                  placement="top"
-                  arrow
-                  TransitionComponent={Fade}
-                  TransitionProps={{ timeout: 800 }}
-                >
-                  <SchemaIcon />
-                </Tooltip>
-                <Tooltip
-                  title="Export JSON"
-                  placement="top"
-                  arrow
-                  TransitionComponent={Fade}
-                  TransitionProps={{ timeout: 800 }}
-                >
-                  <FileDownloadIcon />
-                </Tooltip>
-                <Tooltip
-                  title="Download PDF"
-                  placement="top"
-                  arrow
-                  TransitionComponent={Fade}
-                  TransitionProps={{ timeout: 800 }}
-                >
-                  <PictureAsPdfIcon />
-                </Tooltip>
-              </div>
+              <ResumeDrawer />
             </div>
           </div>
         </ThemeProvider>

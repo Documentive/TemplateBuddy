@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GenericModal from "./modals/GenericListModal";
-import { Button, IconButton, ListItem, ListItemText } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import {
   Add,
   DeleteOutline,
@@ -95,10 +95,21 @@ const GenericSection = ({
         {Object.keys(entryList).length > 0 &&
           Object.keys(entryList).map((entry, idx) => {
             return (
-              <div key={idx} className="border-b last:border-0 flex flex-row items-center justify-between p-3">
+              <div
+                key={idx}
+                className="border-b last:border-0 flex flex-row items-center justify-between p-3"
+              >
                 <div>
-                  <h1 className="font-semibold">{displayFieldExtraTitle? (entryList[entry][displayFieldTitle] + ", " + entryList[entry][displayFieldExtraTitle]) : entryList[entry][displayFieldTitle]}</h1>
-                  <h2 className="text-xs opacity-75">{entryList[entry][displayFieldSubtitle]}</h2>
+                  <h1 className="font-semibold">
+                    {displayFieldExtraTitle
+                      ? entryList[entry][displayFieldTitle] +
+                        ", " +
+                        entryList[entry][displayFieldExtraTitle]
+                      : entryList[entry][displayFieldTitle]}
+                  </h1>
+                  <h2 className="text-xs opacity-75">
+                    {entryList[entry][displayFieldSubtitle]}
+                  </h2>
                 </div>
                 <div>
                   <IconButton

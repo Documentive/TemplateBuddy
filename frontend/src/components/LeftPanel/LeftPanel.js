@@ -68,7 +68,7 @@ const LeftPanel = ({ check, handleThemeToggle }) => {
       config: referencesSectionConfig,
     },
   ];
-
+  
   return (
     <div className="w-full h-full flex flex-row">
       <NavBar />
@@ -85,6 +85,8 @@ const LeftPanel = ({ check, handleThemeToggle }) => {
                 );
               } else if (section.type === "Basics") {
                 return <Basics key={index} />;
+              } else {
+                return null;
               }
             })}
           </div>

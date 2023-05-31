@@ -13,6 +13,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Cookies from "universal-cookie";
 
+import ResumeDrawer from "./components/ResumeDrawer";
+
 const store = configureStore({
   reducer: {
     uploadImage: uploadReducer,
@@ -88,8 +90,11 @@ const App = () => {
               />
             </div>
             {/* Right side of screen for showing the rendered resume and template selection */}
-            <div className="flex-none w-1/2">
+            <div className="flex flex-col space-y-5 justify-center items-center w-1/2 border-l">
               <RightPanel />
+
+              {/* Resume toolbar to provides options for exporting, importing and download */}
+              <ResumeDrawer />
             </div>
           </div>
         </ThemeProvider>

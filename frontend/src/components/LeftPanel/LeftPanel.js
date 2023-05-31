@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
 import Basics from "./sections/Basics";
@@ -68,7 +68,7 @@ const LeftPanel = ({ check, handleThemeToggle }) => {
       config: referencesSectionConfig,
     },
   ];
-  
+
   return (
     <div className="w-full h-full flex flex-row">
       <NavBar />
